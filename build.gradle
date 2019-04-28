@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.grasple.open'
+group 'org.grasple.backend'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
