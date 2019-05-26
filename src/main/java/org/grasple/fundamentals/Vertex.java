@@ -7,12 +7,12 @@ import java.util.Set;
  * <p align = "justify">
  *     Vertex is a basic element in Graph Theory. Here, a Vertex is a generic class,
  *     strongly associates with a generic entity for convenience.
- *     The Vertex must have a value during initialization, and that value should
- *     be Comparable, to make other procedures on the graph become meaningful.
+ *     The Vertex must have a value during initialization, the value could be comparable
+ *     or non-comparable. Currently in this version, the Vertex is non-comparable to itself.
  * </p>
  * @author Bach Tran
  * @since 1.0
- * @param <T> any class that is Comparable
+ * @param <T> any type, could be comparable or non-comparable.
  */
 public class Vertex<T> implements Connectable {
     protected T value;
@@ -41,6 +41,10 @@ public class Vertex<T> implements Connectable {
     public void setValue(T value) {
         assert value != null;
         this.value = value;
+    }
+
+    public Set<BinaryConnection> getConnections() {
+        return connections;
     }
 
     /**
