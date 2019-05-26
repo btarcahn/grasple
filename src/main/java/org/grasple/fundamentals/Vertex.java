@@ -2,7 +2,6 @@ package org.grasple.fundamentals;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * <p align = "justify">
@@ -37,7 +36,6 @@ public class Vertex<T> implements Connectable {
 
     /**
      * Modifies the value of this vertex.
-     * @Contract value != null;
      * @param value the new value to be changed.
      */
     public void setValue(T value) {
@@ -58,11 +56,14 @@ public class Vertex<T> implements Connectable {
         other.addConnection(connection);
     }
 
+    /**
+     * Disconnects the specified vertex with this vertex.
+     * @param other The specified vertex to be disconnected from this vertex.
+     */
     public void disconnect(Vertex other) {
-        connections =
-                connections.stream()
-                        .filter((connection) -> connection.getOpposite(this) != other)
-                        .collect(Collectors.toSet());
+        connections.forEach(connection -> {
+           if (connection.getOpposite(this) == other) { removeConnection(connection); }
+        });
     }
 
     @Override

@@ -2,7 +2,10 @@ package org.grasple.fundamentals;
 
 /**
  * An interface for any BinaryConnection (such as an Edge).
- * A binary connection has two points: (start, end).
+ * A binary connection has two points: (start, end),
+ * it connects two Connectable objects.
+ * @author Bach Tran
+ * @see Connectable
  */
 public interface BinaryConnection {
     /**
