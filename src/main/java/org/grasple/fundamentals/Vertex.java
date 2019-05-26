@@ -1,8 +1,8 @@
-package org.grasple.backend.entity;
+package org.grasple.fundamentals;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p align = "justify">
@@ -15,19 +15,20 @@ import java.util.Set;
  * @since 1.0
  * @param <T> any class that is Comparable
  */
-public class Vertex<T extends Comparable<T>> {
+public class Vertex<T> implements Connectable {
     protected T value;
     /** The set of edges that this vertex has. Currently initialized
      * to be an empty HashSet.*/
-    protected Set<Edge> edges = new HashSet<>();
+    protected Set<BinaryConnection> connections = new HashSet<>();
     public Vertex(T value) {
         this.value = value;
     }
-    public boolean addEdge(Edge edge) {
-        return edges.add(edge);
+    @Override
+    public boolean addConnection(BinaryConnection connection) {
+        return connections.add(connection);
     }
-    public boolean removeEdge(Edge edge) {
-        return edges.remove(edge);
+    @Override
+    public boolean removeConnection(BinaryConnection connection) { return connections.remove(connection);
     }
 
     public T getValue() {
@@ -44,12 +45,6 @@ public class Vertex<T extends Comparable<T>> {
         this.value = value;
     }
 
-    public Set<Edge> getEdges() {
-        return edges;
-    }
-
-    public static Comparator<Vertex> valueComparator = Comparator.comparing(o -> o.value);
-
     /**
      * Connects this vertex with another vertex, by creating
      * a new, weightless edge.
@@ -58,23 +53,16 @@ public class Vertex<T extends Comparable<T>> {
      * @param other the other vertex to be connected to this vertex.
      */
     public void connect(Vertex other) {
-        Edge edge = new Edge(this, other);
-        this.edges.add(edge);
-        other.edges.add(edge);
+        BinaryConnection connection = new Edge(this, other);
+        this.addConnection(connection);
+        other.addConnection(connection);
     }
 
-    /**
-     * Connects this vertex with another vertex, by creating
-     * a new edge having a specific weight.
-     * <b>Note:</b> the edge created will be added to both
-     * this vertex, and the other vertex it connects to.
-     * @param weight weight of the edge.
-     * @param other the other vertex to be connected to this vertex.
-     */
-    public void connect(int weight, Vertex other) {
-        Edge edge = new Edge(weight, this, other);
-        this.edges.add(edge);
-        other.edges.add(edge);
+    public void disconnect(Vertex other) {
+        connections =
+                connections.stream()
+                        .filter((connection) -> connection.getOpposite(this) != other)
+                        .collect(Collectors.toSet());
     }
 
     @Override

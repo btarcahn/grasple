@@ -1,6 +1,6 @@
-package org.grasple.backend.action;
+package org.grasple.algorithms;
 
-import org.grasple.backend.entity.Vertex;
+import org.grasple.fundamentals.Vertex;
 
 /**
  * <p align="justify">This class encapsulates the basic Depth First Search
