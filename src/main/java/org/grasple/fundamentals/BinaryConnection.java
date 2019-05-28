@@ -36,15 +36,9 @@ public interface BinaryConnection {
     public void setEnd(Connectable connectable);
 
     /**
-     * Checks if this connection is a self-connection.
-     * @return true if the BinaryConnection is a self connection.
-     */
-    public boolean isSelfConnection();
-
-    /**
      * Directs to the other endpoint giving one endpoint.
      * @param connectable the current connectable
      * @return the opposite Connectable object in this Connection.
      */
-    public Connectable getOpposite(Connectable connectable) throws IllegalArgumentException;
+    public Connectable divert(Connectable connectable);
 }

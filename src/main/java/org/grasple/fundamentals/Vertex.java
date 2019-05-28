@@ -1,5 +1,7 @@
 package org.grasple.fundamentals;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,15 +21,40 @@ public class Vertex<T> implements Connectable {
     /** The set of edges that this vertex has. Currently initialized
      * to be an empty HashSet.*/
     protected Set<BinaryConnection> connections = new HashSet<>();
+    /** All vertices having connections with this vertex, excluding itself. */
+    private Set<Vertex<T>> neighbors = new HashSet<>();
+
+    /**
+     * Creates a Vertex given only a value
+     * @param value the value of the vertex
+     */
     public Vertex(T value) {
+        assert value != null;
         this.value = value;
     }
     @Override
     public boolean addConnection(BinaryConnection connection) {
+        addNeighbor(connection);
         return connections.add(connection);
     }
     @Override
-    public boolean removeConnection(BinaryConnection connection) { return connections.remove(connection);
+    public boolean removeConnection(BinaryConnection connection) {
+        removeNeighbor(connection);
+        return connections.remove(connection);
+    }
+
+    /**
+     * Adds a new neighbor to this vertex given the connection. The connection will be
+     * used to diverting to the other endpoint.
+     * The result of the .divert() method will be typecast to a Vertex.
+     * @param connection the connection to be diverted.
+     */
+    private void addNeighbor(BinaryConnection connection) {
+        this.neighbors.add((Vertex) connection.divert(this));
+    }
+
+    private void removeNeighbor(BinaryConnection connection) {
+        this.neighbors.remove(connection.divert(this));
     }
 
     public T getValue() {
@@ -66,7 +93,7 @@ public class Vertex<T> implements Connectable {
      */
     public void disconnect(Vertex other) {
         connections.forEach(connection -> {
-           if (connection.getOpposite(this) == other) { removeConnection(connection); }
+           if (connection.divert(this) == other) { removeConnection(connection); }
         });
     }
 
