@@ -1,6 +1,7 @@
 package org.grasple.fundamentals;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -42,6 +43,13 @@ public class Vertex<T> implements Connectable {
         return connections.remove(connection);
     }
 
+    /**
+     * Reads a BinaryConnection, converts the other side to a Vertex,
+     * and adds it to the list of neighbors in this Vertex.
+     * @param connection the connection to be read
+     * @return the neighbor after interpretation
+     * @deprecated auto-inferred in many other methods of this class
+     */
     public Vertex<T> getNeighbor(BinaryConnection connection) {
         return (Vertex) connection.divert(this);
     }
@@ -54,6 +62,7 @@ public class Vertex<T> implements Connectable {
      * @param connection the connection to be added
      */
     private void addNeighbor(BinaryConnection connection) {
+        // avoid adding itself as a neighbor
         if (connection.divert(this) == this) {
             return;
         }
@@ -71,6 +80,10 @@ public class Vertex<T> implements Connectable {
         this.neighbors.remove(connection.divert(this));
     }
 
+    /**
+     * Gets the value that this Vertex contains.
+     * @return the value this Vertex contains.
+     */
     public T getValue() {
         return value;
     }
@@ -88,6 +101,10 @@ public class Vertex<T> implements Connectable {
 
     public Set<BinaryConnection> getConnections() {
         return connections;
+    }
+
+    public Iterator<Vertex<T>> getNeighborIterator() {
+        return neighbors.iterator();
     }
 
     /**

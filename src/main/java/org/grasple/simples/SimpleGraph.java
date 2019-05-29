@@ -2,6 +2,7 @@ package org.grasple.simples;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.grasple.fundamentals.*;
 
@@ -13,8 +14,12 @@ import org.grasple.fundamentals.*;
  * @author Bach Tran
  */
 public class SimpleGraph<T> {
+    /** All existing vertices in the graph. The V component in G(V,E). */
     private Set<Vertex<T>> vertices;
+    /** All existing edges in the graph. The E component in G(V,E). */
     private Set<Edge> edges;
+    /** All disconnected components, represented as a Vertex */
+    private Set<Vertex<T>> disconnectedComponents = new HashSet<>();
 
     public SimpleGraph(Vertex<T> vertex) {
         vertices = new HashSet<>();
@@ -43,5 +48,19 @@ public class SimpleGraph<T> {
         edges.remove(edge);
     }
 
-    
+    /**
+     * Read in V and E data, classify all disconnected components.
+     */
+    private void classify() {
+        // TODO finish this after completed a traversal method.
+    }
+
+    /**
+     * Using depth-first-search strategy.
+     * @param vertex the starting vertex
+     * @param action the action to be applied when visiting each vertex
+     */
+    private static void vertexTraversal(Vertex vertex, Consumer action) {
+
+    }
 }
