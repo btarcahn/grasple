@@ -11,6 +11,20 @@ package org.grasple.fundamentals;
  * @author Bach Tran
  */
 public interface Connectable {
-    public boolean addConnection(BinaryConnection connection);
-    public boolean removeConnection(BinaryConnection connection);
+    /**
+     * Adds a new BinaryConnection to this Connectable.
+     * @param connection the connection to be added
+     * @return true if the method was successful, false otherwise.
+     * @see BinaryConnection
+     */
+    boolean addConnection(BinaryConnection connection);
+
+    /**
+     * Removes the given BinaryConnection in this Connectable.
+     * The operation will be ignored and still return a true even if
+     * there does not exist such BinaryConnection in this Connectable.
+     * @param connection the connection to be removed
+     * @return true if the method was successful, false otherwise.
+     */
+    boolean removeConnection(BinaryConnection connection);
 }

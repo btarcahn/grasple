@@ -1,7 +1,5 @@
 package org.grasple.fundamentals;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,19 +15,20 @@ import java.util.Set;
  * @param <T> any type, could be comparable or non-comparable.
  */
 public class Vertex<T> implements Connectable {
-    protected T value;
-    /** The set of edges that this vertex has. Currently initialized
-     * to be an empty HashSet.*/
-    protected Set<BinaryConnection> connections = new HashSet<>();
+    private T value;
+    /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
+    private Set<BinaryConnection> connections = new HashSet<>();
     /** All vertices having connections with this vertex, excluding itself. */
     private Set<Vertex<T>> neighbors = new HashSet<>();
 
     /**
-     * Creates a Vertex given only a value
+     * Creates a Vertex given only a not-null value.
      * @param value the value of the vertex
      */
     public Vertex(T value) {
-        assert value != null;
+        if (value == null) {
+            throw new IllegalArgumentException("The value of this Vertex cannot be null.");
+        }
         this.value = value;
     }
     @Override
@@ -45,12 +44,19 @@ public class Vertex<T> implements Connectable {
 
     /**
      * Adds a new neighbor to this vertex given the connection. The connection will be
-     * used to diverting to the other endpoint.
+     * used to diverting to the other endpoint. A self-connection (which connects
+     * a Vertex to itself) will be ignored.
      * The result of the .divert() method will be typecast to a Vertex.
      * @param connection the connection to be diverted.
      */
     private void addNeighbor(BinaryConnection connection) {
-        this.neighbors.add((Vertex) connection.divert(this));
+        if (connection.divert(this) == this) {
+            return;
+        }
+        if (connection.divert(this) instanceof Vertex) {
+            Vertex<T> toBeAdded = (Vertex) connection.divert(this);
+            this.neighbors.add(toBeAdded);
+        }
     }
 
     private void removeNeighbor(BinaryConnection connection) {
@@ -80,6 +86,7 @@ public class Vertex<T> implements Connectable {
      * <b>Note:</b> the edge created will be added to both
      * this vertex, and the other vertex it connects to.
      * @param other the other vertex to be connected to this vertex.
+     * @deprecated unsafe, establish a connection first.
      */
     public void connect(Vertex other) {
         BinaryConnection connection = new Edge(this, other);
@@ -88,17 +95,14 @@ public class Vertex<T> implements Connectable {
     }
 
     /**
-     * Disconnects the specified vertex with this vertex.
+     * Disconnects the specified vertex with this vertex. All connections
+     * with the specified Vertex will be lost after this operation.
      * @param other The specified vertex to be disconnected from this vertex.
+     * @deprecated unsafe, establish a connection first.
      */
     public void disconnect(Vertex other) {
         connections.forEach(connection -> {
            if (connection.divert(this) == other) { removeConnection(connection); }
         });
-    }
-
-    @Override
-    public String toString() {
-        return value.toString();
     }
 }

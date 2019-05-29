@@ -27,18 +27,18 @@ public interface BinaryConnection {
      * Sets the [start] component of the binary connection.
      * @param connectable the start component to be set.
      */
-    public void setStart(Connectable connectable);
+    void setStart(Connectable connectable);
 
     /**
      * Sets the [end] component of the binary connection.
      * @param connectable the end component to be set.
      */
-    public void setEnd(Connectable connectable);
+    void setEnd(Connectable connectable);
 
     /**
      * Directs to the other endpoint giving one endpoint.
      * @param connectable the current connectable
      * @return the opposite Connectable object in this Connection.
      */
-    public Connectable divert(Connectable connectable);
+    Connectable divert(Connectable connectable);
 }
