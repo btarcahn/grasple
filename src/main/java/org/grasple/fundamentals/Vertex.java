@@ -42,12 +42,16 @@ public class Vertex<T> implements Connectable {
         return connections.remove(connection);
     }
 
+    public Vertex<T> getNeighbor(BinaryConnection connection) {
+        return (Vertex) connection.divert(this);
+    }
+
     /**
      * Adds a new neighbor to this vertex given the connection. The connection will be
      * used to diverting to the other endpoint. A self-connection (which connects
      * a Vertex to itself) will be ignored.
      * The result of the .divert() method will be typecast to a Vertex.
-     * @param connection the connection to be diverted.
+     * @param connection the connection to be added
      */
     private void addNeighbor(BinaryConnection connection) {
         if (connection.divert(this) == this) {
@@ -59,6 +63,10 @@ public class Vertex<T> implements Connectable {
         }
     }
 
+    /**
+     * Removes the specified neighbor from this neighbor.
+     * @param connection the connection to be specified
+     */
     private void removeNeighbor(BinaryConnection connection) {
         this.neighbors.remove(connection.divert(this));
     }

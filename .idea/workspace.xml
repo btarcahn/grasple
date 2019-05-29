@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef0cf189-0c9c-44bd-8d23-b15e797c153f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/org/grasple/fundamentals/Edge.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/org/grasple/fundamentals/Edge.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/org/grasple/fundamentals/Vertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/org/grasple/fundamentals/Vertex.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -47,14 +43,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+            <state relative-caret-position="731">
+              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1622#1623#0" expanded="true" />
+                <element signature="e#1676#1677#0" expanded="true" />
                 <element signature="e#2300#2301#0" expanded="true" />
                 <element signature="e#2362#2363#0" expanded="true" />
                 <element signature="e#2389#2390#0" expanded="true" />
                 <element signature="e#2417#2418#0" expanded="true" />
+                <element signature="e#2779#2780#0" expanded="true" />
                 <element signature="e#2813#2814#0" expanded="true" />
               </folding>
             </state>
@@ -62,14 +61,56 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/BinaryConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="42" column="48" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
+            <state relative-caret-position="40">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="45" column="4" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1675#1676#0" expanded="true" />
-                <element signature="e#1737#1738#0" expanded="true" />
+                <element signature="e#825#826#0" expanded="true" />
+                <element signature="e#841#842#0" expanded="true" />
+                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#947#948#0" expanded="true" />
+                <element signature="e#992#993#0" expanded="true" />
+                <element signature="e#1013#1014#0" expanded="true" />
+                <element signature="e#1060#1061#0" expanded="true" />
+                <element signature="e#1094#1095#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,34 +135,34 @@
       <list>
         <option value="$PROJECT_DIR$/LICENSE" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/ComparableVertex.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Connectable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/BinaryConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/Application.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexString.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/BinaryConnection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="183" />
-    <option name="y" value="53" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="94" />
+    <option name="y" value="72" />
     <option name="width" value="1131" />
-    <option name="height" value="711" />
+    <option name="height" value="880" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -133,66 +174,6 @@
               <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
               <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="grasple" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="grasple" type="462c0819:PsiDirectoryNode" />
-              <item name="fundamentals" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="grasple" type="462c0819:PsiDirectoryNode" />
-              <item name="simples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fundamentals" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -312,6 +293,7 @@
       <workItem from="1558951753109" duration="349000" />
       <workItem from="1559055972624" duration="2760000" />
       <workItem from="1559100964471" duration="4441000" />
+      <workItem from="1559130160297" duration="1933000" />
     </task>
     <servers />
   </component>
@@ -334,37 +316,43 @@
     <history-entry file="StringVertexTest_getConnections - 2019.05.29 at 11h 50m 05s.xml">
       <configuration name="StringVertexTest.getConnections" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="org_grasple_fundamentals_in_grasple_test - 2019.05.29 at 18h 52m 07s.xml">
+      <configuration name="org.grasple.fundamentals in grasple.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="org_grasple_fundamentals_in_grasple_test - 2019.05.29 at 19h 15m 05s.xml">
+      <configuration name="org.grasple.fundamentals in grasple.test" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12969000" />
+    <option name="totallyTimeSpent" value="14902000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
+    <frame x="94" y="72" width="1131" height="880" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22380953" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26237163" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="CheckStyle" />
+      <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31050956" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34404284" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49916667" weight="0.14808917" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49916667" weight="0.08650519" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49916667" weight="0.3292232" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50083333" side_tool="true" weight="0.3292232" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49916667" weight="0.3292232" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32961783" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.10040161" />
+      <window_info anchor="bottom" id="CheckStyle" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -389,20 +377,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/ComparableVertex.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/BinaryConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="4" lean-forward="true" selection-start-column="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Connectable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -433,16 +407,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexString.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -463,61 +427,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Connectable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-          <folding>
-            <element signature="e#1440#1441#0" expanded="true" />
-            <element signature="e#1469#1470#0" expanded="true" />
-            <element signature="e#1510#1511#0" expanded="true" />
-            <element signature="e#1546#1547#0" expanded="true" />
-            <element signature="e#1577#1578#0" expanded="true" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1640#1641#0" expanded="true" />
-            <element signature="e#1666#1667#0" expanded="true" />
-            <element signature="e#2482#2483#0" expanded="true" />
-            <element signature="e#2529#2530#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="287">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/BinaryConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="34" column="37" lean-forward="true" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+        <state relative-caret-position="440">
+          <caret line="42" column="48" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="45" column="4" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#569#570#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#825#826#0" expanded="true" />
+            <element signature="e#841#842#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#992#993#0" expanded="true" />
+            <element signature="e#1013#1014#0" expanded="true" />
+            <element signature="e#1060#1061#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+        <state relative-caret-position="731">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1622#1623#0" expanded="true" />
+            <element signature="e#1676#1677#0" expanded="true" />
             <element signature="e#2300#2301#0" expanded="true" />
             <element signature="e#2362#2363#0" expanded="true" />
             <element signature="e#2389#2390#0" expanded="true" />
             <element signature="e#2417#2418#0" expanded="true" />
+            <element signature="e#2779#2780#0" expanded="true" />
             <element signature="e#2813#2814#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1675#1676#0" expanded="true" />
-            <element signature="e#1737#1738#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="40">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
         </state>
       </provider>
     </entry>

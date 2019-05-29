@@ -2,7 +2,6 @@ package org.grasple.simples;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
 
 import org.grasple.fundamentals.*;
 
@@ -14,12 +13,13 @@ import org.grasple.fundamentals.*;
  * @author Bach Tran
  */
 public class SimpleGraph<T> {
-    protected Set<Vertex<T>> vertices;
-    protected Set<Edge> edges;
+    private Set<Vertex<T>> vertices;
+    private Set<Edge> edges;
 
     public SimpleGraph(Vertex<T> vertex) {
         vertices = new HashSet<>();
         vertices.add(vertex);
+        edges = new HashSet<>();
     }
 
     public SimpleGraph(Set<Vertex<T>> vertices, Set<Edge> edges) {
@@ -27,8 +27,21 @@ public class SimpleGraph<T> {
         this.edges = edges;
     }
 
-    public void dfs(Vertex<T> startingVertex, Consumer<T> action) {
-        //TODO finish this
+    public void addVertex(Vertex<T> vertex) {
+        vertices.add(vertex);
     }
 
+    public void removeVertex(Vertex<T> vertex) {
+        vertices.remove(vertex);
+    }
+
+    public void addEdge(Edge edge) {
+        edges.add(edge);
+    }
+
+    public void removeEdge(Edge edge) {
+        edges.remove(edge);
+    }
+
+    
 }

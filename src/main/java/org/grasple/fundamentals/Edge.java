@@ -75,11 +75,11 @@ public class Edge implements BinaryConnection {
     }
 
     @Override
-    public Connectable divert(Connectable endpoint) {
-        if (!(endpoint == start || endpoint == end)) {
-            throw new IllegalArgumentException("The Connectable object does not exist in this edge.");
+    public Connectable divert(Connectable connectable) {
+        if (start != connectable && end != connectable) {
+            throw new IllegalArgumentException(("The Connectable object does not belong to this Edge."));
         }
-        return endpoint == start ? end : start;
+        return connectable == start ? end : start;
     }
 
     @Override
