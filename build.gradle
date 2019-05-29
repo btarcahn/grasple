@@ -13,9 +13,15 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '5.4.2'
+//    testCompile group: 'junit', name: 'junit', version: '5'
 //    compile "org.lwjgl:lwjgl:${lwjglVersion}"
 //    compile "org.lwjgl:lwjgl-platform:${lwjglVersion}:natives-windows"
 //    compile "org.lwjgl:lwjgl-platform:${lwjglVersion}:natives-linux"
 //    compile "org.lwjgl:lwjgl-platform:${lwjglVersion}:natives-osx"
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.4.2')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+}
+
+test {
+    useJUnitPlatform()
 }
