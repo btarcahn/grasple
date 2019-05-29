@@ -1,5 +1,7 @@
 package org.grasple.fundamentals;
 
+import java.util.Objects;
+
 /**
  * <p align = "justify">In Graph Theory, an edge connects <b>TWO</b> concrete vertices.
  * This class reflects exactly the same notion. An edge holds
@@ -11,13 +13,16 @@ package org.grasple.fundamentals;
  *     or weightless (also means weight 0). It is allowed to create
  *     either a weight or a weightless edge.
  * </p>
+ * <p>
+ *     Equality: two edges are equal if they connect the two exact same Connectable objects.
+ * </p>
  * @author Bach Tran
  * @since 1.0
  */
 public class Edge implements BinaryConnection {
-    protected int weight;
-    protected Connectable start;
-    protected Connectable end;
+    private int weight;
+    private Connectable start;
+    private Connectable end;
 
     /**
      * Constructs a weightless edge. The weight of this edge
@@ -51,6 +56,14 @@ public class Edge implements BinaryConnection {
         this.weight = weight;
     }
 
+    public Connectable getStart() {
+        return start;
+    }
+
+    public Connectable getEnd() {
+        return end;
+    }
+
     @Override
     public void setStart(Connectable start) {
         this.start = start;
@@ -67,5 +80,19 @@ public class Edge implements BinaryConnection {
             throw new IllegalArgumentException("The Connectable object does not exist in this edge.");
         }
         return endpoint == start ? end : start;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge edge = (Edge) o;
+        return (start.equals(edge.start) && end.equals(edge.end)) ||
+                (start.equals(edge.end) && end.equals(edge.start));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(start, end);
     }
 }

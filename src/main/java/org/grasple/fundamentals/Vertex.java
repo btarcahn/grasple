@@ -72,7 +72,9 @@ public class Vertex<T> implements Connectable {
      * @param value the new value to be changed.
      */
     public void setValue(T value) {
-        assert value != null;
+        if (value == null) {
+            throw new IllegalArgumentException("The value of this Vertex cannot be null.");
+        }
         this.value = value;
     }
 
