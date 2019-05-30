@@ -1,5 +1,7 @@
 package org.grasple.fundamentals;
 
+import java.util.Set;
+
 /**
  * <p>
  *     An interface specifies how to a Connectable should be specified.
@@ -27,4 +29,11 @@ public interface Connectable {
      * @return true if the method was successful, false otherwise.
      */
     boolean removeConnection(BinaryConnection connection);
+
+    /**
+     * Finds all adjacent Connectable objects and returns them
+     * as a Set.
+     * @return a Set contains all neighbors of this Connectable object.
+     */
+    Set<Connectable> getNeighbors();
 }

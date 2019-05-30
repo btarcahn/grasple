@@ -75,12 +75,33 @@ class StringVertexTest {
         assertEquals(4, stark.getConnections().size());
     }
 
-    @Disabled("method deprecated")
-    void connect() {
-
+    @Test
+    void getNeighbors() {
+        addConnection();
+        stark.addConnection(new Edge(stark, stark));
+        assertEquals(5, stark.getNeighbors().size());
+        assertTrue(stark.getNeighbors().containsAll(avengers));
     }
 
-    @Disabled("method deprecated")
+    @Test
+    void connect() {
+        Set<Vertex<String>> friends = new HashSet<>(avengers);
+        friends.remove(stark);
+        friends.forEach(friend -> stark.connect(friend));
+        assertTrue(stark.getNeighbors().containsAll(friends));
+        friends.forEach(friend -> assertTrue(friend.getNeighbors().contains(stark)));
+    }
+
+
+    @Test
     void disconnect() {
+        connect();
+        stark.disconnect(hulk);
+        stark.disconnect(nat);
+        stark.disconnect(cap);
+        assertFalse(stark.getNeighbors().contains(hulk));
+        assertFalse(stark.getNeighbors().contains(cap));
+        assertFalse(hulk.getNeighbors().contains(stark));
+        assertFalse(cap.getNeighbors().contains(stark));
     }
 }

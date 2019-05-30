@@ -1,7 +1,6 @@
 package org.grasple.fundamentals;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -19,8 +18,6 @@ public class Vertex<T> implements Connectable {
     private T value;
     /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
     private Set<BinaryConnection> connections = new HashSet<>();
-    /** All vertices having connections with this vertex, excluding itself. */
-    private Set<Vertex<T>> neighbors = new HashSet<>();
 
     /**
      * Creates a Vertex given only a not-null value.
@@ -34,54 +31,40 @@ public class Vertex<T> implements Connectable {
     }
     @Override
     public boolean addConnection(BinaryConnection connection) {
-        addNeighbor(connection);
         return connections.add(connection);
     }
+
+    /**
+     * Removes a specified BinaryConnection from this Vertex. <br/>
+     * <b>Warning:</b> this method uses the .remove() method of the Set interface, such methods
+     * are not thread-safe.
+     * @param connection the connection to be removed
+     * @return true if the specified connection exists in the Vertex's list of connections.
+     * @see Set
+     */
     @Override
     public boolean removeConnection(BinaryConnection connection) {
-        removeNeighbor(connection);
         return connections.remove(connection);
     }
-
-    /**
-     * Reads a BinaryConnection, converts the other side to a Vertex,
-     * and adds it to the list of neighbors in this Vertex.
-     * @param connection the connection to be read
-     * @return the neighbor after interpretation
-     * @deprecated auto-inferred in many other methods of this class
-     */
-    public Vertex<T> getNeighbor(BinaryConnection connection) {
-        return (Vertex) connection.divert(this);
+    @Override
+    public Set<Connectable> getNeighbors() {
+        Set<Connectable> neighbors = new HashSet<>();
+        // if there exists a self-connection, then the neighbor of this Vertex can be itself.
+        connections.forEach((connection) -> neighbors.add(connection.divert(this)));
+        return neighbors;
     }
 
     /**
-     * Adds a new neighbor to this vertex given the connection. The connection will be
-     * used to diverting to the other endpoint. A self-connection (which connects
-     * a Vertex to itself) will be ignored.
-     * The result of the .divert() method will be typecast to a Vertex.
-     * @param connection the connection to be added
+     * Gets all BinaryConnection of this Vertex.
+     * @return a Set of all BinaryConnections associated with this Vertex
      */
-    private void addNeighbor(BinaryConnection connection) {
-        // avoid adding itself as a neighbor
-        if (connection.divert(this) == this) {
-            return;
-        }
-        if (connection.divert(this) instanceof Vertex) {
-            Vertex<T> toBeAdded = (Vertex) connection.divert(this);
-            this.neighbors.add(toBeAdded);
-        }
+    public Set<BinaryConnection> getConnections() {
+        return connections;
     }
-
-    /**
-     * Removes the specified neighbor from this neighbor.
-     * @param connection the connection to be specified
-     */
-    private void removeNeighbor(BinaryConnection connection) {
-        this.neighbors.remove(connection.divert(this));
-    }
-
     /**
      * Gets the value that this Vertex contains.
+     * Subsequent subclasses shall choose to remove a copy, or a clone of
+     * the value to preserve encapsulation.
      * @return the value this Vertex contains.
      */
     public T getValue() {
@@ -89,8 +72,8 @@ public class Vertex<T> implements Connectable {
     }
 
     /**
-     * Modifies the value of this vertex.
-     * @param value the new value to be changed.
+     * Modifies the value of this vertex. The new value must not be null.
+     * @param value the new, not-null value.
      */
     public void setValue(T value) {
         if (value == null) {
@@ -99,37 +82,31 @@ public class Vertex<T> implements Connectable {
         this.value = value;
     }
 
-    public Set<BinaryConnection> getConnections() {
-        return connections;
-    }
-
-    public Iterator<Vertex<T>> getNeighborIterator() {
-        return neighbors.iterator();
-    }
-
     /**
-     * Connects this vertex with another vertex, by creating
-     * a new, weightless edge.
+     * Connects this vertex with other vertex, by creating
+     * a new, weightless edge. The other Vertex must be different
+     * from this Vertex.
      * <b>Note:</b> the edge created will be added to both
      * this vertex, and the other vertex it connects to.
      * @param other the other vertex to be connected to this vertex.
-     * @deprecated unsafe, establish a connection first.
+     * @return an Edge created to connect these two Vertices.
      */
-    public void connect(Vertex other) {
-        BinaryConnection connection = new Edge(this, other);
+    public Edge connect(Vertex<T> other) {
+        Edge connection = new Edge(this, other);
         this.addConnection(connection);
-        other.addConnection(connection);
+        if (this != other) { other.addConnection(connection); }
+        return connection;
     }
 
     /**
-     * Disconnects the specified vertex with this vertex. All connections
-     * with the specified Vertex will be lost after this operation.
-     * @param other The specified vertex to be disconnected from this vertex.
-     * @deprecated unsafe, establish a connection first.
+     * Disconnects the specified Vertex with this Vertex.
+     * All BinaryConnection between these two Vertices will be lost after the operation.
+     * This method uses the removeIf() method from the Collection interface, which is
+     * thread-safe.
+     * @see java.util.Collection
      */
-    public void disconnect(Vertex other) {
-        connections.forEach(connection -> {
-           if (connection.divert(this) == other) { removeConnection(connection); }
-        });
+    public void disconnect(Vertex<T> other) {
+        connections.removeIf(connection -> connection.divert(this) == other);
+        other.connections.removeIf(connection -> connection.divert(this) == other);
     }
 }
