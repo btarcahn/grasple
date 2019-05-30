@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef0cf189-0c9c-44bd-8d23-b15e797c153f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexSetIntegrityTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/org/grasple/fundamentals/StringVertexTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/classes/org/grasple/fundamentals/StringVertexTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -41,8 +39,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1300">
-              <caret line="109" column="82" lean-forward="true" selection-start-line="109" selection-start-column="82" selection-end-line="109" selection-end-column="82" />
+            <state relative-caret-position="1700">
+              <caret line="109" column="82" selection-start-line="109" selection-start-column="82" selection-end-line="109" selection-end-column="82" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexSetIntegrityTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,14 +61,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexSetIntegrityTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="43" column="66" selection-start-line="43" selection-start-column="66" selection-end-line="43" selection-end-column="66" />
+            <state relative-caret-position="335">
+              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1376#1377#0" expanded="true" />
-                <element signature="e#1429#1430#0" expanded="true" />
+                <element signature="e#1750#1751#0" expanded="true" />
+                <element signature="e#1776#1777#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            <state relative-caret-position="289">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -101,19 +111,19 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/BinaryConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/package-info.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Connectable.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Edge.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/StringVertexTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexSetIntergrityTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexSetIntegrityTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="121" />
-    <option name="y" value="46" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="71" />
+    <option name="y" value="41" />
     <option name="width" value="1131" />
     <option name="height" value="880" />
   </component>
@@ -122,7 +132,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,27 +148,28 @@
               <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
               <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
               <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
               <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="grasple" type="b2602c69:ProjectViewProjectNode" />
               <item name="grasple" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fundamentals" type="462c0819:PsiDirectoryNode" />
+              <item name="grasple" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -175,7 +185,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
@@ -200,78 +210,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.VertexSetIntegrityTest.addSameConnection">
-    <configuration name="StringVertexTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="All in grasple.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="grasple.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.grasple.fundamentals.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.grasple.fundamentals" />
-      <option name="MAIN_CLASS_NAME" value="org.grasple.fundamentals.StringVertexTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VertexSetIntegrityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="grasple.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.grasple.fundamentals.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.grasple.fundamentals" />
-      <option name="MAIN_CLASS_NAME" value="org.grasple.fundamentals.VertexSetIntegrityTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VertexSetIntegrityTest.addSameConnection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="grasple.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.grasple.fundamentals.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.grasple.fundamentals" />
-      <option name="MAIN_CLASS_NAME" value="org.grasple.fundamentals.VertexSetIntegrityTest" />
-      <option name="METHOD_NAME" value="addSameConnection" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VertexSetIntegrityTest.connectToSameVertex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="grasple.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.grasple.fundamentals.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.grasple.fundamentals" />
-      <option name="MAIN_CLASS_NAME" value="org.grasple.fundamentals.VertexSetIntegrityTest" />
-      <option name="METHOD_NAME" value="connectToSameVertex" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="org.grasple.fundamentals in grasple.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="grasple.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.grasple.fundamentals.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.grasple.fundamentals" />
+      <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -279,11 +221,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.VertexSetIntegrityTest.addSameConnection" />
-        <item itemvalue="JUnit.VertexSetIntegrityTest" />
-        <item itemvalue="JUnit.VertexSetIntegrityTest.connectToSameVertex" />
-        <item itemvalue="JUnit.org.grasple.fundamentals in grasple.test" />
-        <item itemvalue="JUnit.StringVertexTest" />
+        <item itemvalue="JUnit.All in grasple.test" />
       </list>
     </recent_temporary>
   </component>
@@ -302,17 +240,12 @@
       <workItem from="1559055972624" duration="2760000" />
       <workItem from="1559100964471" duration="4441000" />
       <workItem from="1559130160297" duration="4628000" />
-      <workItem from="1559204789077" duration="9524000" />
+      <workItem from="1559204789077" duration="9595000" />
+      <workItem from="1559227943731" duration="4396000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="StringVertexTest_disconnect - 2019.05.30 at 16h 49m 23s.xml">
-      <configuration name="StringVertexTest.disconnect" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringVertexTest_disconnect - 2019.05.30 at 16h 51m 00s.xml">
-      <configuration name="StringVertexTest.disconnect" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="StringVertexTest_disconnect - 2019.05.30 at 16h 56m 00s.xml">
       <configuration name="StringVertexTest.disconnect" configurationId="JUnit" />
     </history-entry>
@@ -337,15 +270,21 @@
     <history-entry file="VertexSetIntegrityTest_addSameConnection - 2019.05.30 at 18h 11m 12s.xml">
       <configuration name="VertexSetIntegrityTest.addSameConnection" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="VertexSetIntegrityTest_addSameConnection - 2019.05.30 at 18h 12m 19s.xml">
+      <configuration name="VertexSetIntegrityTest.addSameConnection" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_grasple_test - 2019.05.30 at 22h 04m 18s.xml">
+      <configuration name="All in grasple.test" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27121000" />
+    <option name="totallyTimeSpent" value="31588000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="121" y="46" width="1131" height="880" extended-state="0" />
+    <frame x="71" y="41" width="1131" height="880" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26704016" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2717087" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -355,7 +294,7 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.270415" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23694779" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -448,16 +387,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/Tree.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Connectable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -489,31 +418,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/fundamentals/Vertex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="109" column="82" lean-forward="true" selection-start-line="109" selection-start-column="82" selection-end-line="109" selection-end-column="82" />
+        <state relative-caret-position="1700">
+          <caret line="109" column="82" selection-start-line="109" selection-start-column="82" selection-end-line="109" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/EdgeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/grasple/fundamentals/VertexSetIntegrityTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="43" column="66" selection-start-line="43" selection-start-column="66" selection-end-line="43" selection-end-column="66" />
+        <state relative-caret-position="391">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1376#1377#0" expanded="true" />
-            <element signature="e#1429#1430#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/grasple/simples/SimpleGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1750#1751#0" expanded="true" />
+            <element signature="e#1776#1777#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -568,10 +507,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
+          <last-edited>main|grasple</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
