@@ -21,6 +21,8 @@ public class SimpleGraph {
     /** All disconnected components, represented as a Vertex */
     private Set<Vertex> disconnectedComponents = new HashSet<>();
 
+    private Set<Vertex> visited = new HashSet<>();
+
     public SimpleGraph(Vertex vertex) {
         vertices = new HashSet<>();
         vertices.add(vertex);
@@ -32,30 +34,44 @@ public class SimpleGraph {
         this.edges = edges;
     }
 
-    public void addVertex(Vertex vertex) {
-        vertices.add(vertex);
+    public boolean addVertex(Vertex vertex) {
+        return vertices.add(vertex);
     }
 
-    public void removeVertex(Vertex vertex) {
-        vertices.remove(vertex);
+    public boolean removeVertex(Vertex vertex) {
+        return vertices.remove(vertex);
     }
 
-    public void addEdge(Edge edge) {
-        edges.add(edge);
+    public boolean addEdge(Edge edge) {
+        return edges.add(edge);
     }
 
-    public void removeEdge(Edge edge) {
-        edges.remove(edge);
+    public boolean removeEdge(Edge edge) {
+        return edges.remove(edge);
     }
 
     /**
      * Read in V and E data, classify all disconnected components.
      */
-    private void classify() {
+    public void classify() {
         // TODO finish this after completed a traversal method.
+
+    }
+
+    private void traverse(Vertex root, Consumer action) {
+        if (visited.contains(root)) { return; }
+        action.accept(root);
+        root.getNeighbors().forEach(neighbor -> {
+            assert neighbor instanceof Vertex;
+            traverse((Vertex) neighbor, action);
+        });
     }
 }
 
+/**
+ * @deprecated currently under development
+ * @author Bach Tran
+ */
 class Traverser implements Runnable {
 
     private Vertex start;
@@ -76,6 +92,6 @@ class Traverser implements Runnable {
             assert neighbor instanceof Vertex;
             recursion((Vertex) neighbor);
         });
-        stack.pop();
+        recursion(stack.pop());
     }
 }

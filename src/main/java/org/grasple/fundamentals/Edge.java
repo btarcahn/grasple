@@ -3,19 +3,11 @@ package org.grasple.fundamentals;
 import java.util.Objects;
 
 /**
- * <p align = "justify">In Graph Theory, an edge connects <b>TWO</b> concrete vertices.
- * This class reflects exactly the same notion. An edge holds
- * the address to to vertices (start, end). To create an edge,
- * one must have two concrete vertices ready.
- * </p>
- * <p>
- *     An edge can also have weight (encapsulated as an integer),
- *     or weightless (also means weight 0). It is allowed to create
- *     either a weight or a weightless edge.
- * </p>
- * <p>
- *     Equality: two edges are equal if they connect the two exact same Connectable objects.
- * </p>
+ * Represents an <b>undirected</b> edge, which is a pair
+ * (u, v) of vertices. Since this Edge is undirected,
+ * (u, v) is equal to (v, u).
+ * An edge has two endpoints (start, end), which in this
+ * case are interchangeable.
  * @author Bach Tran
  * @since 1.0
  */
@@ -25,8 +17,7 @@ public class Edge implements BinaryConnection {
     private Connectable end;
 
     /**
-     * Constructs a weightless edge. The weight of this edge
-     * after construction will be 0.
+     * Creates a zero-weight, undirected edge.
      * @param start the starting vertex that the edge connects to.
      * @param end the ending vertex that the edge connects to.
      */
@@ -37,7 +28,7 @@ public class Edge implements BinaryConnection {
     }
 
     /**
-     * Constructs an edge with weight.
+     * Creates an undirected edge with weight.
      * @param weight the weight of the edge
      * @param start the starting endpoint of the edge
      * @param end the ending endpoint of the edge
@@ -48,18 +39,31 @@ public class Edge implements BinaryConnection {
         this.end = end;
     }
 
+    /**
+     * @return the weight of the edge.
+     */
     public int getWeight() {
         return weight;
     }
 
+    /**
+     * Modifies the weight of the edge with a new value.
+     * @param weight the new weight to be modified
+     */
     public void setWeight(int weight) {
         this.weight = weight;
     }
 
+    /**
+     * @return one of the endpoints of the edge.
+     */
     public Connectable getStart() {
         return start;
     }
 
+    /**
+     * @return one of the endpoints of the edge.
+     */
     public Connectable getEnd() {
         return end;
     }
