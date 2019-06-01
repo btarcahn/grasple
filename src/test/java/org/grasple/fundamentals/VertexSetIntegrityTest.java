@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VertexSetIntegrityTest {
     static final short NEIGHBORS = 6;
-    final Vertex<String> center = new Vertex("center");
+    final Vertex<String> center = new Vertex<>("center");
     final String[] strings = {"n1", "n2", "n3", "n4", "n5", "n6"};
     List<Vertex<String>> neighbors = new ArrayList<>();
 

@@ -4,7 +4,6 @@ import org.grasple.fundamentals.Vertex;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Contains the Depth First Traversal algorithm. The class

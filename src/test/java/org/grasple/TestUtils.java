@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contains constants for unit testing.
+ * Constants for unit testing
  * @author Bach Tran
  */
 public class TestUtils {
@@ -21,7 +21,7 @@ public class TestUtils {
     public static final Vertex<String> CENTRAL_VERTEX = new Vertex<>("CENTRAL_VERTEX");
     /** All neighbor vertices that <b>DIRECTLY</b> connects with the CENTRAL_VERTEX */
     public static final List<Vertex<String>> PRIMARY_NEIGHBORS = new ArrayList<>();
-    /** ALl neighbor vertices that <b>DOES NOT DIRECTLY</b> connect with the CENTRAL_VERTEX */
+    /** All neighbor vertices that <b>DOES NOT DIRECTLY</b> connect with the CENTRAL_VERTEX */
     public static final List<Vertex<String>> SECONDARY_NEIGHBORS = new ArrayList<>();
 
     static {
