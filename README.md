@@ -1,12 +1,30 @@
 # grasple [![Build Status](https://travis-ci.org/btarcahn/grasple.svg?branch=master)](https://travis-ci.org/btarcahn/grasple)
-## Update information
-<b>Update 28 May 2019:</b>
-<br/> We are currently unable to handle cycles in graph, please do not try to create cycles.
-<br/>
+
+<b>Current status:</b> API development
+
+## Quick updates
+<h3>Update 01 Jun 2019</h3>
+<p>
+Our API (and pretty much everything else) is still in development
+some features have been tested.
+</p>
+<h3>Update 28 May 2019:</h3>
+<p>
+We are currently unable to handle cycles in graph, please do not try to create cycles.
+</p>
+
 ## Brief introduction
-Grasple is a project built for experimenting computer behaviors and complexities around Graph Theory's notions.
-The project is currently open-source and is a work in progress. I mainly write this project to strengthen up my
-proficiency in Java programming and learn some cool new stuffs, so enjoy yourself while being around.
-<br/> <br/> 
-Grasple uses JDK 11.0.3, Gradle 5.4.1 and JUnit 5
-<br/><br/><i>Updated 29 May 2019 by Bach Tran</i> 
+<p>
+Grasple <i>(Graphe Simple)</i> is a project working on Graph data structures.
+I develop this project to improve my proficiency in the Java language, especially
+using lambda abstractions and other cool new features.
+</p>
+<p>
+Grasple runs on JDK11 to utilizes the most recent features of the
+Java programming language. It also uses Gradle 5.4.1 as a build tool,
+and JUnit 5 for unit testing. Therefore, make sure you have the
+appropriate Java version for this projcet to work correctly.
+</p>
+<p>
+<i>Updated 01 Jun 2019 by Bach Tran</i> 
+</p>
