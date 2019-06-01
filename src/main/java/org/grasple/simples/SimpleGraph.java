@@ -57,41 +57,5 @@ public class SimpleGraph {
         // TODO finish this after completed a traversal method.
 
     }
-
-    private void traverse(Vertex root, Consumer action) {
-        if (visited.contains(root)) { return; }
-        action.accept(root);
-        root.getNeighbors().forEach(neighbor -> {
-            assert neighbor instanceof Vertex;
-            traverse((Vertex) neighbor, action);
-        });
-    }
 }
 
-/**
- * @deprecated currently under development
- * @author Bach Tran
- */
-class Traverser implements Runnable {
-
-    private Vertex start;
-    private Stack<Vertex> stack = new Stack<>();
-    private Set<Vertex> visited = new HashSet<>();
-    public Traverser(Vertex start) { this.start = start; }
-
-    @Override
-    public void run() {
-        recursion(start);
-    }
-
-    private void recursion(Vertex vertex) {
-        if (visited.contains(vertex)) { return; }
-        visited.add(vertex);
-        stack.add(vertex);
-        vertex.getNeighbors().forEach(neighbor -> {
-            assert neighbor instanceof Vertex;
-            recursion((Vertex) neighbor);
-        });
-        recursion(stack.pop());
-    }
-}
