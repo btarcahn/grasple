@@ -5,6 +5,7 @@ import org.grasple.api.fundamentals.Vertex;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * A wrapper class of all vertices and edges to fasten traversals and ease
@@ -15,7 +16,7 @@ import java.util.Set;
  * @since 1.0
  * @author Bach Tran
  */
-public class SimpleGraph {
+public class SimpleGraph implements GraphStructure {
     /** All existing vertices in the graph. The V component in G(V,E). */
     private Set<Vertex> vertices;
     /** All existing edges in the graph. The E component in G(V,E). */
@@ -100,6 +101,14 @@ public class SimpleGraph {
 
         });
         return disconnects;
+    }
+
+    @Override
+    public void traverse() {
+    }
+
+    @Override
+    public void traverse(Consumer action) {
     }
 }
 
