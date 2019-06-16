@@ -1,4 +1,4 @@
-package org.grasple.api.simples;
+package org.grasple.api.structures;
 
 import org.grasple.api.TestUtils;
 import org.junit.jupiter.api.Test;

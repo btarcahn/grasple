@@ -1,4 +1,4 @@
-package org.grasple.api.simples;
+package org.grasple.api.structures;
 
 import org.grasple.api.fundamentals.Vertex;
 
@@ -11,7 +11,7 @@ import java.util.Set;
  * @see Runnable
  * @author Bach Tran
  */
-public class DepthFirstTraverser implements Runnable {
+public final class DepthFirstTraverser implements Runnable {
     /** The vertex where the algorithm commences. */
     private Vertex start;
     /** A list of visited vertices */

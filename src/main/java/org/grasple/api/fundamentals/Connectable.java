@@ -12,7 +12,7 @@ import java.util.Set;
  * @see BinaryConnection
  * @author Bach Tran
  */
-public interface Connectable {
+public interface Connectable<T> {
     /**
      * Adds a new BinaryConnection to this Connectable.
      * @param connection the connection to be added

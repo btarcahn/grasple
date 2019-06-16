@@ -23,7 +23,7 @@ using lambda abstractions and other cool new features.
 Grasple runs on JDK11 to utilizes the most recent features of the
 Java programming language. It also uses Gradle 5.4.1 as a build tool,
 and JUnit 5 for unit testing. Therefore, make sure you have the
-appropriate Java version for this projcet to work correctly.
+appropriate Java version for this project to work correctly.
 </p>
 <p>
 <i>Updated 01 Jun 2019 by Bach Tran</i> 

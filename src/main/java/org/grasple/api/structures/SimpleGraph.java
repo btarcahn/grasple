@@ -1,4 +1,4 @@
-package org.grasple.api.simples;
+package org.grasple.api.structures;
 
 import org.grasple.api.fundamentals.Edge;
 import org.grasple.api.fundamentals.Vertex;

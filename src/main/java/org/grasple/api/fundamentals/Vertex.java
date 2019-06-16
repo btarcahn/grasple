@@ -14,7 +14,7 @@ import java.util.Set;
  * @since 1.0
  * @param <T> any type, could be comparable or non-comparable.
  */
-public class Vertex<T> implements Connectable {
+public class Vertex<T> implements Connectable<T> {
     private T value;
     /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
     private Set<BinaryConnection> connections = new HashSet<>();
