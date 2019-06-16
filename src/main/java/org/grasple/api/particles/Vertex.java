@@ -46,9 +46,10 @@ public class Vertex<T> implements Connectable<T> {
     public boolean removeConnection(BinaryConnection connection) {
         return connections.remove(connection);
     }
+
     @Override
-    public Set<Connectable> getNeighbors() {
-        Set<Connectable> neighbors = new HashSet<>();
+    public Set<Connectable<T>> getNeighbors() {
+        Set<Connectable<T>> neighbors = new HashSet<>();
         // if there exists a self-connection, then the neighbor of this Vertex can be itself.
         connections.forEach((connection) -> neighbors.add(connection.divert(this)));
         return neighbors;
@@ -91,7 +92,8 @@ public class Vertex<T> implements Connectable<T> {
      * @param other the other vertex to be connected to this vertex.
      * @return an Edge created to connect these two Vertices.
      */
-    public Edge connect(Vertex<T> other) {
+    @Override
+    public BinaryConnection connect(Connectable<T> other) {
         Edge connection = new Edge(this, other);
         this.addConnection(connection);
         if (this != other) { other.addConnection(connection); }
@@ -104,9 +106,15 @@ public class Vertex<T> implements Connectable<T> {
      * This method uses the removeIf() method from the Collection interface, which is
      * thread-safe.
      * @see java.util.Collection
+     * @param other
      */
-    public void disconnect(Vertex<T> other) {
+    public void disconnect(Connectable<T> other) {
         connections.removeIf(connection -> connection.divert(this) == other);
-        other.connections.removeIf(connection -> connection.divert(this) == other);
+        // WARNING: the following block is fragile
+        if (other instanceof Vertex) {
+            ((Vertex<Object>) other)
+                    .getConnections()
+                    .removeIf(connection -> connection.divert(this) == other);
+        }
     }
 }
