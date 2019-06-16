@@ -1,6 +1,6 @@
 package org.grasple.api.structures.trees;
 
-import org.grasple.api.fundamentals.Connectable;
+import org.grasple.api.particles.Connectable;
 /**
  * A binary tree has a root vertex, also known as the root of
  * the tree. Each vertex in a binary tree has maximum two neighbors.
