@@ -1,6 +1,6 @@
 package org.grasple.api.structures.trees;
 
-import org.grasple.api.fundamentals.Connectable;
+import org.grasple.api.particles.Connectable;
 import org.grasple.api.structures.ConnectedGraph;
 
 /**

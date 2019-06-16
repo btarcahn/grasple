@@ -1,4 +1,4 @@
-package org.grasple.api.fundamentals;
+package org.grasple.api.particles;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

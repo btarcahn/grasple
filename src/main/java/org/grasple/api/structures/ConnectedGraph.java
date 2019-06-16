@@ -1,7 +1,6 @@
 package org.grasple.api.structures;
 
-import org.grasple.api.fundamentals.Connectable;
-import org.grasple.api.fundamentals.Vertex;
+import org.grasple.api.particles.Connectable;
 
 import java.util.function.Consumer;
 

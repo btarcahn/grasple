@@ -1,4 +1,4 @@
-package org.grasple.api.fundamentals;
+package org.grasple.api.particles;
 
 import java.util.Objects;
 

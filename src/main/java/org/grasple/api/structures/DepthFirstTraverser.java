@@ -1,6 +1,6 @@
 package org.grasple.api.structures;
 
-import org.grasple.api.fundamentals.Vertex;
+import org.grasple.api.particles.Vertex;
 
 import java.util.HashSet;
 import java.util.Set;
