@@ -1,4 +1,4 @@
-package org.grasple.fundamentals;
+package org.grasple.api.fundamentals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

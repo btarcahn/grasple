@@ -1,4 +1,4 @@
-package org.grasple.fundamentals;
+package org.grasple.api.fundamentals;
 
 import java.util.Set;
 

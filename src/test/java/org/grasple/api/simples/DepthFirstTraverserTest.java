@@ -1,6 +1,6 @@
-package org.grasple.simples;
+package org.grasple.api.simples;
 
-import org.grasple.TestUtils;
+import org.grasple.api.TestUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

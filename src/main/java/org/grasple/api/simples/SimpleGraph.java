@@ -1,7 +1,7 @@
-package org.grasple.simples;
+package org.grasple.api.simples;
 
-import org.grasple.fundamentals.Edge;
-import org.grasple.fundamentals.Vertex;
+import org.grasple.api.fundamentals.Edge;
+import org.grasple.api.fundamentals.Vertex;
 
 import java.util.HashSet;
 import java.util.Set;

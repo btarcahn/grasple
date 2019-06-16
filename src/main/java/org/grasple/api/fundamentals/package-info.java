@@ -7,4 +7,4 @@
  * @author Bach Tran
  * @version 1.0
  */
-package org.grasple.fundamentals;
+package org.grasple.api.fundamentals;

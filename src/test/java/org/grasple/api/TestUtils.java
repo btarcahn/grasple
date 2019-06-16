@@ -1,6 +1,6 @@
-package org.grasple;
+package org.grasple.api;
 
-import org.grasple.fundamentals.Vertex;
+import org.grasple.api.fundamentals.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;
