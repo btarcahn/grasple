@@ -1,7 +1,8 @@
-package org.grasple.api.structures;
+package org.grasple.api.structures.graphs;
 
 import org.grasple.api.particles.Edge;
 import org.grasple.api.particles.Vertex;
+import org.grasple.api.structures.DepthFirstTraverser;
 
 import java.util.HashSet;
 import java.util.Set;

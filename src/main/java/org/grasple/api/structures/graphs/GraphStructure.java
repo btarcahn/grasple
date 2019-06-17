@@ -1,4 +1,4 @@
-package org.grasple.api.structures;
+package org.grasple.api.structures.graphs;
 
 import org.grasple.api.particles.Connectable;
 
