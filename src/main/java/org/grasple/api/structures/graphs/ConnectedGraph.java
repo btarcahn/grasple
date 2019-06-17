@@ -64,6 +64,6 @@ public class ConnectedGraph<T> implements GraphStructure<T> {
         startVertex.getNeighbors()
                 .stream()
                 .filter(neighbor -> !visited.contains(neighbor))
-                .forEach(neighbor -> recursiveDepthFirstTraversal(neighbor, visited));
+                .forEach(neighbor -> recursiveDepthFirstTraversal(action, neighbor, visited));
     }
 }
