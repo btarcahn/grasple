@@ -3,7 +3,7 @@ package org.grasple.api.structures.graphs;
 import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.Edge;
 import org.grasple.api.particles.Vertex;
-import org.grasple.api.structures.DepthFirstTraverser;
+import org.grasple.api.structures.DefaultTraverser;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -85,9 +85,9 @@ public class SimpleGraph implements GraphStructure {
      * Finds all disconnected components in this SimpleGraph. This action
      * helps save time in reading graphs. This method utilizes the
      * depth-first-search (traversal) algorithm provided by the
-     * DepthFirstTraverser class.
+     * DefaultTraverser class.
      * @return a Set of Vertices that are fully disconnected.
-     * @see DepthFirstTraverser
+     * @see DefaultTraverser
      */
     public Set<Vertex> findDisconnectedComponents() {
         if (vertices.isEmpty()) { return vertices; }
@@ -95,7 +95,7 @@ public class SimpleGraph implements GraphStructure {
         Set<Connectable> visited = new HashSet<>();
         vertices.forEach(vertex -> {
             if (!visited.contains(vertex)) {
-                DepthFirstTraverser traverser = new DepthFirstTraverser(vertex);
+                DefaultTraverser traverser = new DefaultTraverser(vertex);
                 traverser.run();
                 visited.addAll(traverser.getVisited());
                 disconnects.add(vertex);

@@ -12,17 +12,17 @@ import java.util.Set;
  * @see Runnable
  * @author Bach Tran
  */
-public final class DepthFirstTraverser implements Runnable {
+public final class DefaultTraverser implements Runnable {
     /** The vertex where the algorithm commences. */
     private Connectable start;
     /** A list of visited vertices */
-    private Set<Connectable> visited = new HashSet<Connectable>();
+    private Set<Connectable> visited = new HashSet<>();
     /**
-     * Creates a new DepthFirstTraverser contains the
+     * Creates a new DefaultTraverser contains the
      * depth-first traversal algorithm.
      * @param start the vertex where the algorithm commences.
      * */
-    public DepthFirstTraverser(Vertex start) { this.start = start; }
+    public DefaultTraverser(Vertex start) { this.start = start; }
 
     /**
      * Returns all visited vertices by this algorithm.
