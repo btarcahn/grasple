@@ -1,5 +1,6 @@
 package org.grasple.api.structures;
 
+import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.Vertex;
 
 import java.util.HashSet;
@@ -13,9 +14,9 @@ import java.util.Set;
  */
 public final class DepthFirstTraverser implements Runnable {
     /** The vertex where the algorithm commences. */
-    private Vertex start;
+    private Connectable start;
     /** A list of visited vertices */
-    private Set<Vertex> visited = new HashSet<>();
+    private Set<Connectable> visited = new HashSet<Connectable>();
     /**
      * Creates a new DepthFirstTraverser contains the
      * depth-first traversal algorithm.
@@ -27,7 +28,7 @@ public final class DepthFirstTraverser implements Runnable {
      * Returns all visited vertices by this algorithm.
      * @return a Set of all visited vertices.
      */
-    public Set<Vertex> getVisited() {
+    public Set<Connectable> getVisited() {
         return visited;
     }
 
@@ -41,12 +42,12 @@ public final class DepthFirstTraverser implements Runnable {
      * the depth-first traversal algorithm.
      * @param vertex the starting vertex of the algorithm
      */
-    private void recursion(Vertex vertex) {
+    private void recursion(Connectable vertex) {
         visited.add(vertex);
         vertex.getNeighbors().forEach(neighbor -> {
             if (!visited.contains(neighbor)) {
-                assert neighbor instanceof Vertex;
-                recursion((Vertex) neighbor);
+                assert neighbor instanceof Connectable;
+                recursion((Connectable) neighbor);
             }
         });
     }

@@ -1,5 +1,6 @@
 package org.grasple.api.structures.graphs;
 
+import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.Edge;
 import org.grasple.api.particles.Vertex;
 import org.grasple.api.structures.DepthFirstTraverser;
@@ -91,7 +92,7 @@ public class SimpleGraph implements GraphStructure {
     public Set<Vertex> findDisconnectedComponents() {
         if (vertices.isEmpty()) { return vertices; }
         Set<Vertex> disconnects = new HashSet<>();
-        Set<Vertex> visited = new HashSet<>();
+        Set<Connectable> visited = new HashSet<>();
         vertices.forEach(vertex -> {
             if (!visited.contains(vertex)) {
                 DepthFirstTraverser traverser = new DepthFirstTraverser(vertex);
