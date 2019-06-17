@@ -50,18 +50,18 @@ class StringVertexTest {
 
     @Test
     void getValue() {
-        assertEquals(STARK, stark.getValue());
-        assertEquals(HULK, hulk.getValue());
-        assertEquals(NAT, nat.getValue());
-        assertEquals(CAP, cap.getValue());
-        assertEquals(FURY, fury.getValue());
+        assertEquals(STARK, stark.get());
+        assertEquals(HULK, hulk.get());
+        assertEquals(NAT, nat.get());
+        assertEquals(CAP, cap.get());
+        assertEquals(FURY, fury.get());
     }
 
     @Test
     void setValue() {
         stark.setValue("Anthony Stark");
-        assertNotEquals("Tony Stark", stark.getValue());
-        assertEquals("Anthony Stark", stark.getValue());
+        assertNotEquals("Tony Stark", stark.get());
+        assertEquals("Anthony Stark", stark.get());
     }
 
     @Test

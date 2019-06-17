@@ -11,6 +11,12 @@ import java.util.Set;
  */
 public interface Connectable<T> {
     /**
+     * Unwraps the value that the object contains.
+     * @return the value that the object contains.
+     */
+    T get();
+
+    /**
      * Adds a new BinaryConnection to this Connectable.
      * @param connection the connection to be added
      * @return true if the method was successful, false otherwise.

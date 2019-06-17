@@ -5,12 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 class DefaultTraverserTest {
 
     @Test
     void run() {
-        DefaultTraverser _tested_candidate = new DefaultTraverser(TestUtils.CENTRAL_VERTEX);
+        DefaultTraverser _tested_candidate = new DefaultTraverser(TestUtils.CENTRAL_VERTEX, System.out::println);
         assertEquals(0, _tested_candidate.getVisited().size());
         _tested_candidate.run();
         // ensures all vertices have been visited by the algorithm

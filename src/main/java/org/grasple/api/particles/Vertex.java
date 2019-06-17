@@ -55,6 +55,15 @@ public class Vertex<T> implements Connectable<T> {
         return neighbors;
     }
 
+    @Override
+    public T get() {
+        return value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
     /**
      * Gets all BinaryConnection of this Vertex.
      * @return a Set of all BinaryConnections associated with this Vertex
@@ -62,15 +71,8 @@ public class Vertex<T> implements Connectable<T> {
     public Set<BinaryConnection> getConnections() {
         return connections;
     }
-    /**
-     * Gets the value that this Vertex contains.
-     * Subsequent subclasses shall choose to remove a copy, or a clone of
-     * the value to preserve encapsulation.
-     * @return the value this Vertex contains.
-     */
-    public T getValue() {
-        return value;
-    }
+
+
 
     /**
      * Modifies the value of this vertex. The new value must not be null.
