@@ -1,6 +1,6 @@
 package org.grasple.api.particles;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * An interface specifies how to a Connectable should be specified.
@@ -48,5 +48,5 @@ public interface Connectable<T> {
      * as a Set.
      * @return a Set contains all neighbors of this Connectable object.
      */
-    Set<Connectable<T>> getNeighbors();
+    Collection<Connectable> getNeighbors();
 }

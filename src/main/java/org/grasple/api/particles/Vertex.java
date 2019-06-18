@@ -2,17 +2,15 @@ package org.grasple.api.particles;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * <p align = "justify">
- *     Vertex is a basic element in Graph Theory. Here, a Vertex is a generic class,
- *     strongly associates with a generic entity for convenience.
- *     The Vertex must have a value during initialization, the value could be comparable
- *     or non-comparable. Currently in this version, the Vertex is non-comparable to itself.
- * </p>
+ * Vertex is a basic element in Graph Theory. Here, a Vertex is a generic class,
+ * strongly associates with a generic entity for convenience.
+ * The Vertex must have a value during initialization.
  * @author Bach Tran
  * @since 1.0
- * @param <T> any type, could be comparable or non-comparable.
+ * @param <T> type that will not be considered of its comparability.
  */
 public class Vertex<T> implements Connectable<T> {
     private T value;
@@ -48,11 +46,11 @@ public class Vertex<T> implements Connectable<T> {
     }
 
     @Override
-    public Set<Connectable<T>> getNeighbors() {
-        Set<Connectable<T>> neighbors = new HashSet<>();
-        // if there exists a self-connection, then the neighbor of this Vertex can be itself.
-        connections.forEach((connection) -> neighbors.add(connection.divert(this)));
-        return neighbors;
+    public Set<Connectable> getNeighbors() {
+        return connections
+                .stream()
+                .map(connection -> connection.divert(this))
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -114,7 +112,7 @@ public class Vertex<T> implements Connectable<T> {
         connections.removeIf(connection -> connection.divert(this) == other);
         // WARNING: the following block is fragile
         if (other instanceof Vertex) {
-            ((Vertex<Object>) other)
+            ((Vertex<T>) other)
                     .getConnections()
                     .removeIf(connection -> connection.divert(this) == other);
         }
