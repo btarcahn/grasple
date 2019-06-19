@@ -1,7 +1,5 @@
 package org.grasple.api.structures.graphs;
 
-import org.grasple.api.particles.Connectable;
-
 import java.util.function.Consumer;
 
 /**

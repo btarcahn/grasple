@@ -19,11 +19,11 @@ class StringVertexTest {
     Vertex<String> stark, cap, nat, fury, hulk;
     @BeforeEach
     void setUp() {
-        stark = new Vertex(STARK);
-        cap = new Vertex(CAP);
-        nat = new Vertex(NAT);
-        fury = new Vertex(FURY);
-        hulk = new Vertex(HULK);
+        stark = new Vertex<>(STARK);
+        cap = new Vertex<>(CAP);
+        nat = new Vertex<>(NAT);
+        fury = new Vertex<>(FURY);
+        hulk = new Vertex<>(HULK);
         avengers.add(stark);
         avengers.add(cap);
         avengers.add(nat);

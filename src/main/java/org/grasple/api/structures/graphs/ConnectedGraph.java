@@ -25,7 +25,7 @@ public class ConnectedGraph<T> implements GraphStructure<T> {
     private Connectable<T> root;
     /**
      * Creates a connected graph with at least one root vertex.
-     * @param root
+     * @param root the root vertex of the graph
      */
     public ConnectedGraph(Connectable<T> root) {
         this.root = root;

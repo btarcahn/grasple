@@ -15,8 +15,8 @@ class EdgeTest {
     Edge sampleEdge;
     @BeforeEach
     void buildUp() {
-        vertex1 = new Vertex(SAMPLE_STRING);
-        vertex2 = new Vertex(SAMPLE_STRING + "1");
+        vertex1 = new Vertex<>(SAMPLE_STRING);
+        vertex2 = new Vertex<>(SAMPLE_STRING + "1");
         sampleEdge = new Edge(vertex1, vertex2);
     }
     @Test

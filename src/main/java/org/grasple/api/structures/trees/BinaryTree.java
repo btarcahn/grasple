@@ -13,7 +13,7 @@ public class BinaryTree<T> extends Tree<T> {
      * Creates a connected graph with at least one root vertex.
      * @param root the root vertex of the tree.
      */
-    public BinaryTree(Connectable root) {
+    public BinaryTree(Connectable<T> root) {
         super(root);
     }
 }

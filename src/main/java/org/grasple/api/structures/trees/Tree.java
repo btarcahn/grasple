@@ -13,7 +13,7 @@ public class Tree<T> extends ConnectedGraph<T> {
      * Creates a connected graph with at least one root vertex.
      * @param root the root vertex of the tree.
      */
-    public Tree(Connectable root) {
+    public Tree(Connectable<T> root) {
         super(root);
     }
 }

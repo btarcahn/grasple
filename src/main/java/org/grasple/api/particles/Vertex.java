@@ -68,10 +68,6 @@ public class Vertex<T> implements Connectable<T> {
         return getNeighbors().contains(other);
     }
 
-    public T getValue() {
-        return value;
-    }
-
     /**
      * Gets all BinaryConnection of this Vertex.
      * @return a Set of all BinaryConnections associated with this Vertex
@@ -115,7 +111,7 @@ public class Vertex<T> implements Connectable<T> {
      * This method uses the removeIf() method from the Collection interface, which is
      * thread-safe.
      * @see java.util.Collection
-     * @param other
+     * @param other the vertex to be disconnected.
      */
     public void disconnect(Connectable<T> other) {
         this.getConnections().removeIf(connection -> connection.divert(this) == other);
