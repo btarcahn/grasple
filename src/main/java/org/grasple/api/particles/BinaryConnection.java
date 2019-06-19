@@ -26,11 +26,16 @@ package org.grasple.api.particles;
  */
 public interface BinaryConnection {
     /**
+     * Retrieves the weight of the connection.
+     * @return an integer determines the weight of the connection.
+     */
+    int weight();
+
+    /**
      * Sets the [start] component of the binary connection.
      * @param connectable the start component to be set.
      */
     void setStart(Connectable connectable);
-
     /**
      * Sets the [end] component of the binary connection.
      * @param connectable the end component to be set.

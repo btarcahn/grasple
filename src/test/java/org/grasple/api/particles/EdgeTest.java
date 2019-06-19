@@ -21,13 +21,13 @@ class EdgeTest {
     }
     @Test
     void getWeight() {
-        assertEquals(0, sampleEdge.getWeight());
+        assertEquals(0, sampleEdge.weight());
     }
 
     @Test
     void setWeight() {
         sampleEdge.setWeight(500);
-        assertEquals(500, sampleEdge.getWeight());
+        assertEquals(500, sampleEdge.weight());
     }
 
     @Test

@@ -42,7 +42,8 @@ public class Edge implements BinaryConnection {
     /**
      * @return the weight of the edge.
      */
-    public int getWeight() {
+    @Override
+    public int weight() {
         return weight;
     }
 
