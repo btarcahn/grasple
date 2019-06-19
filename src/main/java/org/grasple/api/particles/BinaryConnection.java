@@ -9,8 +9,9 @@ package org.grasple.api.particles;
      is bidirectional. An Edge is a concrete class implementing this interface.
  * </p>
  * <p>
- *     An endpoint should be Connectable, i.e. it should be ready to
- *     be attached onto a Connection.
+ *     Note that two endpoints are of type Connectable, which is not generified.
+ *     User may need to specifically typecast to the desired datatype during
+ *     utilization.
  * </p>
  * <p>
  *     A BinaryConnection has <b>TWO</b> endpoints: (start, end). When declaring
@@ -19,6 +20,7 @@ package org.grasple.api.particles;
  *     can takes one endpoint and direct the user to the other endpoint.
  * </p>
  * @author Bach Tran
+ * @since 1.0
  * @see Connectable
  * @see Edge
  */

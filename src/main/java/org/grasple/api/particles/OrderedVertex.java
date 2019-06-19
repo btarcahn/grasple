@@ -1,11 +1,17 @@
 package org.grasple.api.particles;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Vertex that should be comparable of its value.
+ * An ordered-vertex can only wraps a <b>comparable</b> datatype.
+ * Unlike an unordered-vertex, which uses a Set to contain its
+ * neighbors and connections, the ordered-vertex uses a List achieve
+ * sequentially iterations. The ordered-vertex is very useful in
+ * building structures that utilizes comparison, such as a binary tree.
+ * @see Vertex
  * @param <T> a type that must be Comparable.
  * @author Bach Tran
  */
@@ -30,13 +36,29 @@ public class OrderedVertex<T extends Comparable<T>>
     }
 
     @Override
+    public boolean adjacent(Connectable<T> other) {
+        return getNeighbors().contains(other);
+    }
+
+    @Override
+    public List<BinaryConnection> getConnections() {
+        return connections;
+    }
+
+    @Override
     public boolean addConnection(BinaryConnection connection) {
-        return connections.add(connection);
+        if (!connections.contains(connection)) {
+            return connections.add(connection);
+        }
+        return false;
     }
 
     @Override
     public boolean removeConnection(BinaryConnection connection) {
-        return connections.remove(connection);
+        if (connections.contains(connection)) {
+            return connections.remove(connection);
+        }
+        return false;
     }
 
     @Override
@@ -49,18 +71,14 @@ public class OrderedVertex<T extends Comparable<T>>
 
     @Override
     public void disconnect(Connectable<T> other) {
-        connections.removeIf(connection -> connection.divert(this) == other);
-        // WARNING: the following block is fragile
-        if (other instanceof Vertex) {
-            ((Vertex<T>) other)
-                    .getConnections()
-                    .removeIf(connection -> connection.divert(this) == other);
-        }
+        this.getConnections().removeIf(connection -> connection.divert(this) == other);
+        other.getConnections().removeIf(neighbor -> neighbor.divert(other) == this);
     }
 
     @Override
     public List<Connectable> getNeighbors() {
         return connections.stream()
+                .distinct()
                 .map(connection -> connection.divert(this))
                 .collect(Collectors.toList());
     }

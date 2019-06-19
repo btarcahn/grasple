@@ -5,9 +5,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Vertex is a basic element in Graph Theory. Here, a Vertex is a generic class,
- * strongly associates with a generic entity for convenience.
- * The Vertex must have a value during initialization.
+ * <p>
+ * Represents a Vertex in graph theory. Objects of this class are
+ * non-comparable; therefore, this object is conventionally named
+ * <b>unordered-</b>vertex. An unordered-vertex has a Set of
+ * neighbors. Therefore will be randomized during traversals.
+ * </p>
+ * <p></p>
+ * @see OrderedVertex
  * @author Bach Tran
  * @since 1.0
  * @param <T> type that will not be considered of its comparability.
@@ -58,6 +63,11 @@ public class Vertex<T> implements Connectable<T> {
         return value;
     }
 
+    @Override
+    public boolean adjacent(Connectable<T> other) {
+        return getNeighbors().contains(other);
+    }
+
     public T getValue() {
         return value;
     }
@@ -66,11 +76,10 @@ public class Vertex<T> implements Connectable<T> {
      * Gets all BinaryConnection of this Vertex.
      * @return a Set of all BinaryConnections associated with this Vertex
      */
+    @Override
     public Set<BinaryConnection> getConnections() {
         return connections;
     }
-
-
 
     /**
      * Modifies the value of this vertex. The new value must not be null.
@@ -109,12 +118,7 @@ public class Vertex<T> implements Connectable<T> {
      * @param other
      */
     public void disconnect(Connectable<T> other) {
-        connections.removeIf(connection -> connection.divert(this) == other);
-        // WARNING: the following block is fragile
-        if (other instanceof Vertex) {
-            ((Vertex<T>) other)
-                    .getConnections()
-                    .removeIf(connection -> connection.divert(this) == other);
-        }
+        this.getConnections().removeIf(connection -> connection.divert(this) == other);
+        other.getConnections().removeIf(connection -> connection.divert(other) == this);
     }
 }
