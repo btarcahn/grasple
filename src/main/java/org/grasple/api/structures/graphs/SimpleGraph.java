@@ -1,9 +1,10 @@
 package org.grasple.api.structures.graphs;
 
+import org.grasple.api.particles.BinaryConnection;
 import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.Edge;
 import org.grasple.api.particles.Vertex;
-import org.grasple.api.structures.DefaultTraverser;
+import org.grasple.api.utils.DefaultTraverser;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,91 +19,104 @@ import java.util.function.Consumer;
  * @since 1.0
  * @author Bach Tran
  */
-public class SimpleGraph implements GraphStructure {
-    /** All existing vertices in the graph. The V component in G(V,E). */
-    private Set<Vertex> vertices;
-    /** All existing edges in the graph. The E component in G(V,E). */
-    private Set<Edge> edges;
+public class SimpleGraph<T> implements GraphStructure<T> {
+    private Set<Connectable<T>> vertices;
+    private Set<BinaryConnection> edges;
 
     /**
-     * Creates a SimpleGraph with just a Vertex. This is a minimum
-     * requirement for a SimpleGraph to be existed.
-     * @param vertex the only Vertex of the graph
+     * Creates a simple graph with at least one vertex.
+     * The graph created will have an empty HashSet of edges.
+     * @param vertex the only vertex to be created with this simple graph.
      */
-    public SimpleGraph(Vertex vertex) {
+    public SimpleGraph(Vertex<T> vertex) {
         vertices = new HashSet<>();
         vertices.add(vertex);
         edges = new HashSet<>();
     }
 
     /**
-     * Creates a SimpleGraph knowing a Set of Vertices and a Set of Edges.
-     * @param vertices the Set of Vertices
-     * @param edges the Set of Edges
+     * Creates a simple graph with a Set of vertices.
+     * The graph created will have an empty HashSet of edges.
+     * @param vertices the Set of vertices for this simple graph.
      */
-    public SimpleGraph(Set<Vertex> vertices, Set<Edge> edges) {
+    public SimpleGraph(Set<Connectable<T>> vertices) {
+        this.vertices = vertices;
+        edges = new HashSet<>();
+    }
+
+    /**
+     * Creates a simple graph with a Set of vertices and edges.
+     * This complies with a graph condition: G(V, E).
+     * @param vertices the Set of vertices.
+     * @param edges the Set of edges.
+     */
+    public SimpleGraph(Set<Connectable<T>> vertices, Set<BinaryConnection> edges) {
         this.vertices = vertices;
         this.edges = edges;
     }
 
     /**
-     * Adds a new Vertex to this SimpleGraph.
-     * @param vertex the Vertex to be added
-     * @return true if the Vertex has not been added to this graph
+     * Adds a new connectable object to this simple graph.
+     * For convention, we call the connectable object a "vertex".
+     * @param vertex the new vertex to be added.
+     * @return true if the vertex hasn't been added to this graph.
      */
-    public boolean addVertex(Vertex vertex) {
-        return vertices.add(vertex);
+    public boolean addVertex(Connectable<T> vertex) { return vertices.add(vertex); }
+
+    /**
+     * Removes the connectable object from this simple graph.
+     * For convention, we call the connectable object a "vertex".
+     * @param vertex the vertex to be removed.
+     * @return true if the specified vertex exists in the collection of vertices in this graph.
+     */
+    public boolean removeVertex(Connectable<T> vertex) { return vertices.remove(vertex); }
+
+    /**
+     * Adds a new binary connection to this simple graph.
+     * @param connection the connection to be added.
+     * @return true if the connection hasn't been added to this graph.
+     */
+    public boolean addEdge(BinaryConnection connection) { return edges.add(connection); }
+
+    /**
+     * Removes the binary connection from this simple graph.
+     * @param connection the connection to be removed.
+     * @return true if the specified connection exists in this simple graph.
+     */
+    public boolean removeEdge(BinaryConnection connection) { return edges.remove(connection); }
+
+    /**
+     * @return the Set of all Vertices in this simple graph.
+     */
+    public Set<Connectable<T>> getVertices() {
+        return vertices;
     }
 
     /**
-     * Removes the specified Vertex from this SimpleGraph.
-     * @param vertex the specified Vertex to be removed.
-     * @return true if the specified Vertex has existed in this SimpleGraph.
+     * @return the Set of all edges in this simple graph.
      */
-    public boolean removeVertex(Vertex vertex) {
-        return vertices.remove(vertex);
+    public Set<BinaryConnection> getEdges() {
+        return edges;
     }
 
     /**
-     * Adds a new Edge to this SimpleGraph.
-     * @param edge the Edge to be added
-     * @return true if the new Edge has not been added to this graph
+     * Finds connected components in the graph using a depth-first
+     * traversal algorithm. This operation returns a set that contains
+     * vertices belong to different connected components.
+     * @return a collection of vertices represent its connected components.
      */
-    public boolean addEdge(Edge edge) {
-        return edges.add(edge);
-    }
-
-    /**
-     * Removes the specified Edge from this SimpleGraph.
-     * @param edge the specified Edge to be removed.
-     * @return true if the specified Edge has existed in this SimpleGraph.
-     */
-    public boolean removeEdge(Edge edge) {
-        return edges.remove(edge);
-    }
-
-    /**
-     * Finds all disconnected components in this SimpleGraph. This action
-     * helps save time in reading graphs. This method utilizes the
-     * depth-first-search (traversal) algorithm provided by the
-     * DefaultTraverser class.
-     * @return a Set of Vertices that are fully disconnected.
-     * @see DefaultTraverser
-     */
-    public Set<Vertex> findDisconnectedComponents() {
-        if (vertices.isEmpty()) { return vertices; }
-        Set<Vertex> disconnects = new HashSet<>();
-        Set<Connectable> visited = new HashSet<>();
-        vertices.forEach(vertex -> {
-            if (!visited.contains(vertex)) {
-                DefaultTraverser traverser = new DefaultTraverser(vertex);
+    private Set<Connectable<T>> separateComponents() {
+        Set<Connectable<T>> _visited = new HashSet<>();
+        Set<Connectable<T>> _separations = new HashSet<>();
+        vertices.forEach(candidate -> {
+            if (!_visited.contains(candidate)) {
+                DefaultTraverser<T> traverser = new DefaultTraverser<>(candidate);
                 traverser.run();
-                visited.addAll(traverser.getVisited());
-                disconnects.add(vertex);
+                _visited.addAll(traverser.getVisited());
+                _separations.add(candidate);
             }
-
         });
-        return disconnects;
+        return _separations;
     }
 
     @Override
@@ -111,6 +125,7 @@ public class SimpleGraph implements GraphStructure {
 
     @Override
     public void traverse(Consumer action) {
+
     }
 }
 

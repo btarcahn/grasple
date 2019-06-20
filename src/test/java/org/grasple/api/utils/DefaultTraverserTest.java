@@ -1,6 +1,7 @@
-package org.grasple.api.structures;
+package org.grasple.api.utils;
 
 import org.grasple.api.TestUtils;
+import org.grasple.api.utils.DefaultTraverser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

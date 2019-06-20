@@ -1,4 +1,4 @@
-package org.grasple.api.structures;
+package org.grasple.api.utils;
 
 import org.grasple.api.particles.Connectable;
 
@@ -10,20 +10,19 @@ import java.util.function.Consumer;
  * Contains the Depth First Traversal algorithm. The class
  * implements the Runnable interface.
  * @see Runnable
+ * @param <T> the datatype that the traverser will work on
  * @author Bach Tran
  */
 public final class DefaultTraverser<T> implements Runnable {
-    /** The vertex where the algorithm commences. */
     private Connectable<T> start;
     private Consumer<T> action;
-    /** A list of visited vertices */
     private Set<Connectable<T>> visited = new HashSet<>();
     /**
      * Creates a new DefaultTraverser contains the
      * depth-first traversal algorithm.
      * @param start the vertex where the algorithm commences.
      * */
-    public DefaultTraverser(Connectable start) { this.start = start; }
+    public DefaultTraverser(Connectable<T> start) { this.start = start; }
 
     /**
      * Creates a traverser object with a starting vertex and the action.
