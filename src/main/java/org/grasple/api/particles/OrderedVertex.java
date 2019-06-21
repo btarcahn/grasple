@@ -90,8 +90,11 @@ public class OrderedVertex<T extends Comparable<T>>
      * so user should be cautious of type-safety.
      * @param index the index of the connection.
      * @return the neighbor on the other side of the i-th connection.
+     * @throws ArrayIndexOutOfBoundsException if the supplied index is larger than
+     * the number of neighbors.
      */
-    public Connectable getNeighbor(int index) {
+    public Connectable getNeighbor(int index)
+            throws ArrayIndexOutOfBoundsException {
         return connections.get(index).divert(this);
     }
 }

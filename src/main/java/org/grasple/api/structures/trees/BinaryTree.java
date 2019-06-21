@@ -1,10 +1,8 @@
 package org.grasple.api.structures.trees;
 
-import org.grasple.api.particles.BinaryConnection;
 import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.OrderedVertex;
 
-import java.util.Set;
 
 /**
  * A binary tree has a root vertex, also known as the root of
@@ -19,11 +17,22 @@ public class BinaryTree<T extends Comparable<T>> extends Tree<T> {
 
     /**
      * Creates a connected graph with at least one root vertex.
-     * Creating a binary tree needs an ordered vertex.
+     * Only an ordered-vertex is accepted to construct this object.
+     * @see OrderedVertex
      * @param root the root vertex of the tree.
      */
     public BinaryTree(OrderedVertex<T> root) {
         super(root);
+    }
+
+    public boolean add(OrderedVertex<T> vertex) {
+
+        return false;
+    }
+
+    private boolean internalAdd(OrderedVertex<T> root, OrderedVertex<T> vertex) {
+
+        return false;
     }
 
     /**
