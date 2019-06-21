@@ -100,12 +100,13 @@ public class SimpleGraph<T> implements GraphStructure<T> {
     }
 
     /**
+     * <p>Exclusive to this class only.</p>
      * Finds connected components in the graph using a depth-first
      * traversal algorithm. This operation returns a set that contains
      * vertices belong to different connected components.
      * @return a collection of vertices represent its connected components.
      */
-    private Set<Connectable<T>> separateComponents() {
+    public Set<Connectable<T>> separateComponents() {
         Set<Connectable<T>> _visited = new HashSet<>();
         Set<Connectable<T>> _separations = new HashSet<>();
         vertices.forEach(candidate -> {
@@ -120,11 +121,22 @@ public class SimpleGraph<T> implements GraphStructure<T> {
     }
 
     @Override
+    public boolean addConnection(Connectable<T> connectable, BinaryConnection connection) {
+        return false;
+    }
+
+
+    @Override
+    public boolean removeConnection(Connectable<T> connectable, BinaryConnection connection) {
+        return false;
+    }
+
+    @Override
     public void traverse() {
     }
 
     @Override
-    public void traverse(Consumer action) {
+    public void traverse(Consumer<T> action) {
 
     }
 }
