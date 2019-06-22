@@ -133,16 +133,27 @@ public class IndexableVertex<T extends Comparable<T>>
 
     @Override
     public BinaryConnection connect(Connectable<T> other) {
-        return null;
+        BinaryConnection _connection = new Edge(this, other);
+        addConnection(_connection);
+        return _connection;
     }
 
     @Override
     public void disconnect(Connectable<T> other) {
-
+        for (int i = 0; i < connections.length; i++) {
+            if (connections[i].divert(this) == other) {
+                connections[i] = null;
+                return;
+            }
+        }
     }
 
     @Override
     public Collection<Connectable> getNeighbors() {
-        return null;
+        List<Connectable> _neighbors = new ArrayList<>();
+        for (BinaryConnection connection : connections) {
+            _neighbors.add(connection.divert(this));
+        }
+        return _neighbors;
     }
 }
