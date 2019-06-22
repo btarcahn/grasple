@@ -47,14 +47,17 @@ public class IndexableVertex<T extends Comparable<T>>
     /**
      * Creates an index-able vertex with a value, a maximum
      * number of neighbors this vertex can hold. This number
-     * cannot be larger than the biggest integer in Java.
+     * cannot be larger than the biggest integer in Java. If
+     * a negative integer is supplied, the method will create
+     * an array of the default value (256 elements).
      * @param value the value of the vertex.
      * @param neighbors the maximum number of neighbors that
      *                  this vertex can hold.
      */
     public IndexableVertex(T value, int neighbors) {
         this.value = value;
-        this.connections = new BinaryConnection[neighbors];
+        this.connections =
+                new BinaryConnection[neighbors > 0 ? neighbors : DEFAULT_LEN];
     }
 
     /**
@@ -99,8 +102,30 @@ public class IndexableVertex<T extends Comparable<T>>
         return _connections;
     }
 
+    /**
+     * <p>Exclusive to this class.</p>
+     * <p>This method adds the specified binary connection to the first available
+     * space found in the primitive array. If no space is available, an extra
+     * memory space of 256 elements will be automatically allocated to contain
+     * the new connection.</p>
+     * @param connection the connection to be added
+     * @return true if the connection has been added to this index-able vertex.
+     */
     @Override
     public boolean addConnection(BinaryConnection connection) {
+        allocateExtraMemory();
+        // add to the first (leftmost) available space
+        for (int i = 0; i < connections.length; i++) {
+            if (connections[i] == null) {
+                assert i + 1 < connections.length;
+                connections[i + 1] = connection;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void allocateExtraMemory() {
         // create extra memory to avoid saturation
         if (this.isSaturated()) {
             BinaryConnection[] _extended
@@ -109,15 +134,15 @@ public class IndexableVertex<T extends Comparable<T>>
                     _extended, 0, connections.length);
             connections = _extended;
         }
-        // add to the right-most available space
-        for (int i = connections.length - 1; i >=0; i--) {
-            if (connections[i] != null) {
-                assert i + 1 < connections.length;
-                connections[i + 1] = connection;
-                return true;
-            }
+    }
+
+    public boolean addConnection(BinaryConnection connection, int index)
+            throws ArrayIndexOutOfBoundsException, IndexSaturatedException {
+        if (connections[index] != null) {
+            throw new IndexSaturatedException();
         }
-        return false;
+        connections[index] = connection;
+        return true;
     }
 
     @Override
@@ -138,6 +163,16 @@ public class IndexableVertex<T extends Comparable<T>>
         return _connection;
     }
 
+    public boolean connect(Connectable<T> other, int index)
+            throws ArrayIndexOutOfBoundsException, IndexSaturatedException {
+        if (connections[index] != null) {
+            throw new IndexSaturatedException();
+        }
+        BinaryConnection _connection = new Edge(this, other);
+        addConnection(_connection, index);
+        return true;
+    }
+
     @Override
     public void disconnect(Connectable<T> other) {
         for (int i = 0; i < connections.length; i++) {
@@ -156,4 +191,14 @@ public class IndexableVertex<T extends Comparable<T>>
         }
         return _neighbors;
     }
+
+    public IndexableVertex<T> getNeighbor(int index)
+            throws ArrayIndexOutOfBoundsException, NullPointerException {
+        if (connections[index] == null) {
+            throw new NullPointerException("Item not available at index " +  index + ".");
+        }
+        // TODO ensure type safety here.
+        return (IndexableVertex<T>) connections[index].divert(this);
+    }
 }
+
