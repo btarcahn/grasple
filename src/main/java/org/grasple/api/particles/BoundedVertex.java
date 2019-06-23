@@ -1,9 +1,6 @@
 package org.grasple.api.particles;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class uses a <b>primitive array</b> to contain all
@@ -16,8 +13,8 @@ import java.util.List;
  * @since 1.0
  * @param <T> a datatype that must be comparable.
  */
-public class IndexableVertex<T extends Comparable<T>>
-        implements Connectable<T>, Comparable<IndexableVertex<T>> {
+public class BoundedVertex<T extends Comparable<T>>
+        implements IndexedConnectable<T>, Comparable<BoundedVertex<T>> {
     private static final short DEFAULT_LEN = 256;
     private T value;
     private BinaryConnection[] connections;
@@ -28,7 +25,7 @@ public class IndexableVertex<T extends Comparable<T>>
      * can hold is 256.
      * @param value the value of the vertex.
      */
-    public IndexableVertex(T value) {
+    public BoundedVertex(T value) {
         this.value = value;
         this.connections = new BinaryConnection[DEFAULT_LEN];
     }
@@ -39,7 +36,7 @@ public class IndexableVertex<T extends Comparable<T>>
      * @param value the value of the vertex.
      * @param connections the array of binary connections.
      */
-    public IndexableVertex(T value, BinaryConnection[] connections) {
+    public BoundedVertex(T value, BinaryConnection[] connections) {
         this.value = value;
         this.connections = connections;
     }
@@ -54,18 +51,13 @@ public class IndexableVertex<T extends Comparable<T>>
      * @param neighbors the maximum number of neighbors that
      *                  this vertex can hold.
      */
-    public IndexableVertex(T value, int neighbors) {
+    public BoundedVertex(T value, int neighbors) {
         this.value = value;
         this.connections =
                 new BinaryConnection[neighbors > 0 ? neighbors : DEFAULT_LEN];
     }
 
-    /**
-     * <p>An index-able vertex is saturated if the array of neighbors has
-     * no null spaces. This means all available space has been used up.</p>
-     * <p>This method checks whether this index-able vertex is saturated.</p>
-     * @return true if this vertex is saturated.
-     */
+    @Override
     public boolean isSaturated() {
         for (BinaryConnection connection : connections) {
             if (connection == null) {
@@ -76,7 +68,7 @@ public class IndexableVertex<T extends Comparable<T>>
     }
 
     @Override
-    public int compareTo(IndexableVertex<T> o) {
+    public int compareTo(BoundedVertex<T> o) {
         return value.compareTo(o.value);
     }
 
@@ -125,23 +117,22 @@ public class IndexableVertex<T extends Comparable<T>>
         return false;
     }
 
-    private void allocateExtraMemory() {
-        // create extra memory to avoid saturation
-        if (this.isSaturated()) {
-            BinaryConnection[] _extended
-                    = new BinaryConnection[connections.length + DEFAULT_LEN];
-            System.arraycopy(connections, 0,
-                    _extended, 0, connections.length);
-            connections = _extended;
-        }
-    }
-
-    public boolean addConnection(BinaryConnection connection, int index)
+    @Override
+    public boolean addConnection(int index, BinaryConnection connection)
             throws ArrayIndexOutOfBoundsException, IndexSaturatedException {
         if (connections[index] != null) {
             throw new IndexSaturatedException();
         }
         connections[index] = connection;
+        return true;
+    }
+
+    @Override
+    public boolean removeConnection(int index) {
+        if (connections[index] == null) {
+            return false;
+        }
+        connections[index] = null;
         return true;
     }
 
@@ -163,13 +154,14 @@ public class IndexableVertex<T extends Comparable<T>>
         return _connection;
     }
 
-    public boolean connect(Connectable<T> other, int index)
+    @Override
+    public boolean connect(int index, Connectable<T> other)
             throws ArrayIndexOutOfBoundsException, IndexSaturatedException {
         if (connections[index] != null) {
             throw new IndexSaturatedException();
         }
         BinaryConnection _connection = new Edge(this, other);
-        addConnection(_connection, index);
+        addConnection(index, _connection);
         return true;
     }
 
@@ -191,14 +183,25 @@ public class IndexableVertex<T extends Comparable<T>>
         }
         return _neighbors;
     }
-
-    public IndexableVertex<T> getNeighbor(int index)
+    @Override
+    public IndexedConnectable<T> getNeighbor(int index)
             throws ArrayIndexOutOfBoundsException, NullPointerException {
         if (connections[index] == null) {
             throw new NullPointerException("Item not available at index " +  index + ".");
         }
-        // TODO ensure type safety here.
-        return (IndexableVertex<T>) connections[index].divert(this);
+        return (IndexedConnectable<T>)
+                connections[index].divert(this);
+    }
+
+    private void allocateExtraMemory() {
+        // create extra memory to avoid saturation
+        if (this.isSaturated()) {
+            BinaryConnection[] _extended
+                    = new BinaryConnection[connections.length + DEFAULT_LEN];
+            System.arraycopy(connections, 0,
+                    _extended, 0, connections.length);
+            connections = _extended;
+        }
     }
 }
 

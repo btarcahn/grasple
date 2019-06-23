@@ -2,7 +2,7 @@ package org.grasple.api.structures.trees;
 
 import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.IndexSaturatedException;
-import org.grasple.api.particles.IndexableVertex;
+import org.grasple.api.particles.BoundedVertex;
 import org.grasple.api.particles.OrderedVertex;
 
 
@@ -21,20 +21,20 @@ public class BinaryTree<T extends Comparable<T>> extends Tree<T> {
     private static final short BIN_BOUND = 2;
 
     public BinaryTree(T value) {
-        super(new IndexableVertex<>(value, BIN_BOUND));
+        super(new BoundedVertex<>(value, BIN_BOUND));
     }
 
-    public BinaryTree(IndexableVertex<T> root) {
+    public BinaryTree(BoundedVertex<T> root) {
         super(root);
     }
 
     public boolean add(T value) {
-        assert this.getRoot() instanceof IndexableVertex;
-        _add((IndexableVertex<T>) getRoot(), value);
+        assert this.getRoot() instanceof BoundedVertex;
+        _add((BoundedVertex<T>) getRoot(), value);
         return false;
     }
 
-    private boolean _add(IndexableVertex<T> vertex, T value) {
+    private boolean _add(BoundedVertex<T> vertex, T value) {
         // TODO check the preconditions of vertex
         // add to this vertex
         if (value.compareTo(vertex.get()) < 0) {
@@ -56,8 +56,8 @@ public class BinaryTree<T extends Comparable<T>> extends Tree<T> {
         }
     }
 
-    private IndexableVertex<T> createBinVertex(T value) {
-        return new IndexableVertex<>(value, BIN_BOUND);
+    private BoundedVertex<T> createBinVertex(T value) {
+        return new BoundedVertex<>(value, BIN_BOUND);
     }
 
     /**
