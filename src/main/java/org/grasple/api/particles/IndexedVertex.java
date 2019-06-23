@@ -58,7 +58,8 @@ public class IndexedVertex<T> implements IndexedConnectable<T> {
 
     @Override
     public IndexedConnectable<T> getNeighbor(int index) {
-        return null;
+        return (IndexedConnectable<T>)
+                connections.get(index).divert(this);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class IndexedVertex<T> implements IndexedConnectable<T> {
 
     @Override
     public Collection<BinaryConnection> getConnections() {
-        return null;
+        return connections.values();
     }
 
     @Override
