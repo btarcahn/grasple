@@ -1,9 +1,6 @@
 package org.grasple.api.particles;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * <p>
@@ -17,30 +14,23 @@ import java.util.stream.Collectors;
  * @param <T> type that will not be considered of its comparability.
  */
 public class Vertex<T> implements Connectable<T> {
+
     private T value;
-    /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
-    private Set<UConnection<Connectable<T>>> connections = new HashSet<>();
+    private Set<Connectable<T>> neighbors;
+
 
     /**
      * Creates a Vertex given only a not-null value.
      * @param value the value of the vertex
      */
     public Vertex(T value) {
-        if (value == null) {
-            throw new IllegalArgumentException("The value of this Vertex cannot be null.");
-        }
         this.value = value;
-    }
-    public boolean addConnection(UConnection<Connectable<T>> connection) {
-        return connections.add(connection);
+        this.neighbors = new HashSet<>();
     }
 
     @Override
     public Collection<Connectable<T>> getNeighbors() {
-        return connections
-                .stream()
-                .map(connection -> connection.divert(this))
-                .collect(Collectors.toSet());
+        return neighbors;
     }
 
     @Override
@@ -49,56 +39,22 @@ public class Vertex<T> implements Connectable<T> {
     }
 
     @Override
+    public void set(T value) {
+        this.value = value;
+    }
+
+    @Override
     public boolean adjacent(Connectable<T> other) {
         return getNeighbors().contains(other);
     }
 
-    /**
-     * Gets all Connection of this Vertex.
-     * @return a Set of all BinaryConnections associated with this Vertex
-     */
-    public Collection<UConnection<Connectable<T>>> getConnections() {
-        return connections;
-    }
-
-    /**
-     * Modifies the value of this vertex. The new value must not be null.
-     * @param value the new, not-null value.
-     */
-    public void setValue(T value) {
-        if (value == null) {
-            throw new IllegalArgumentException("The value of this Vertex cannot be null.");
-        }
-        this.value = value;
-    }
-
-    /**
-     * Connects this vertex with other vertex, by creating
-     * a new, weightless edge. The other Vertex must be different
-     * from this Vertex.
-     * <b>Note:</b> the edge created will be added to both
-     * this vertex, and the other vertex it connects to.
-     * @param other the other vertex to be connected to this vertex.
-     * @return an Edge created to connect these two Vertices.
-     */
     @Override
-    public Connection connect(Connectable<T> other) {
-        UConnection<Connectable<T>> connection = new Edge<>(this, other);
-        this.addConnection(connection);
-        if (this != other) { other.addConnection(connection); }
-        return connection;
+    public boolean connect(Connectable<T> other) {
+        if (this == other) { return false; }
+        return this.neighbors.add(other);
     }
 
-    /**
-     * Disconnects the specified Vertex with this Vertex.
-     * All Connection between these two Vertices will be lost after the operation.
-     * This method uses the removeIf() method from the Collection interface, which is
-     * thread-safe.
-     * @see java.util.Collection
-     * @param other the vertex to be disconnected.
-     */
-    public void disconnect(Connectable<T> other) {
-        this.getConnections().removeIf(connection -> connection.divert(this) == other);
-        other.getConnections().removeIf(connection -> connection.divert(other) == this);
+    public boolean disconnect(Connectable<T> other) {
+        return this.neighbors.remove(other);
     }
 }

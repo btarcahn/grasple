@@ -21,23 +21,30 @@ public interface Connectable<T> {
     T get();
 
     /**
-     * <b><u>Adjacency:</b></u> two connectable objects are adjacent
-     * if there exists at least one connection within them, or one of them
-     * exists in the collection of neighbors of the others.
+     * Modifies the value of this object.
+     * @param value the new value of this object.
+     */
+    void set(T value);
+
+    /**
+     * Checks if these to objects are already connected (adjacent).
      * @param other the other connectable object to be checked for adjacency
-     * @return true if the two connectable objects are adjacent.
+     * @return true if these two objects are already connected.
      */
     boolean adjacent(Connectable<T> other);
 
     /**
-     * Connects to another connectable object using a
-     * Connection.
+     * Connects this object to the other of the same type.
      * @param other other connectable
-     * @return the binary connection used to connect these two objects.
+     * @return true if the connection has been established.
      */
-    Connection connect(Connectable<T> other);
+    boolean connect(Connectable<T> other);
 
-    void disconnect(Connectable<T> other);
+    /**
+     * Disconnects these two objects.
+     * @param other the other object to be disconnected.
+     */
+    boolean disconnect(Connectable<T> other);
 
     /**
      * Finds all connectable objects that is adjacent to this object.
