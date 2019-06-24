@@ -1,6 +1,6 @@
 package org.grasple.api.structures.graphs;
 
-import org.grasple.api.particles.BinaryConnection;
+import org.grasple.api.particles.Connection;
 import org.grasple.api.particles.Connectable;
 
 import java.util.function.Consumer;
@@ -17,7 +17,7 @@ public interface GraphStructure<T> {
      * @param connection the connection to be attached to the connectable object.
      * @return true if the connection has not yet attached to the connectable.
      */
-    boolean addConnection(Connectable<T> connectable, BinaryConnection connection);
+    boolean addConnection(Connectable<T> connectable, Connection connection);
 
     /**
      * Removes the connection from the connectable object.
@@ -25,7 +25,7 @@ public interface GraphStructure<T> {
      * @param connection the connection to be removed from the chosen connectable object.
      * @return true if the connection has existed in the connectable object before.
      */
-    boolean removeConnection(Connectable<T> connectable, BinaryConnection connection);
+    boolean removeConnection(Connectable<T> connectable, Connection connection);
 
     /**
      * Traverses to all vertices in the graph.

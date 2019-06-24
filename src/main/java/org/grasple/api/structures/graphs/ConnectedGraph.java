@@ -1,6 +1,6 @@
 package org.grasple.api.structures.graphs;
 
-import org.grasple.api.particles.BinaryConnection;
+import org.grasple.api.particles.Connection;
 import org.grasple.api.particles.Connectable;
 
 import java.util.HashSet;
@@ -40,12 +40,12 @@ public class ConnectedGraph<T> implements GraphStructure<T> {
     }
 
     @Override
-    public boolean addConnection(Connectable<T> connectable, BinaryConnection connection) {
+    public boolean addConnection(Connectable<T> connectable, Connection connection) {
         return connectable.addConnection(connection);
     }
 
     @Override
-    public boolean removeConnection(Connectable<T> connectable, BinaryConnection connection) {
+    public boolean removeConnection(Connectable<T> connectable, Connection connection) {
         return connectable.removeConnection(connection);
     }
 

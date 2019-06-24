@@ -7,7 +7,7 @@ public interface IndexedConnectable<T> extends Connectable<T> {
      * @return true if the object is saturated.
      */
     boolean isSaturated();
-    boolean addConnection(int index, BinaryConnection connection);
+    boolean addConnection(int index, Connection connection);
     boolean removeConnection(int index);
     boolean connect(int index, Connectable<T> other);
     IndexedConnectable<T> getNeighbor(int index);

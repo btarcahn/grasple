@@ -1,6 +1,6 @@
 package org.grasple.api.structures.graphs;
 
-import org.grasple.api.particles.BinaryConnection;
+import org.grasple.api.particles.Connection;
 import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.Edge;
 import org.grasple.api.particles.Vertex;
@@ -21,7 +21,7 @@ import java.util.function.Consumer;
  */
 public class SimpleGraph<T> implements GraphStructure<T> {
     private Set<Connectable<T>> vertices;
-    private Set<BinaryConnection> edges;
+    private Set<Connection> edges;
 
     /**
      * Creates a simple graph with at least one vertex.
@@ -50,7 +50,7 @@ public class SimpleGraph<T> implements GraphStructure<T> {
      * @param vertices the Set of vertices.
      * @param edges the Set of edges.
      */
-    public SimpleGraph(Set<Connectable<T>> vertices, Set<BinaryConnection> edges) {
+    public SimpleGraph(Set<Connectable<T>> vertices, Set<Connection> edges) {
         this.vertices = vertices;
         this.edges = edges;
     }
@@ -76,14 +76,14 @@ public class SimpleGraph<T> implements GraphStructure<T> {
      * @param connection the connection to be added.
      * @return true if the connection hasn't been added to this graph.
      */
-    public boolean addEdge(BinaryConnection connection) { return edges.add(connection); }
+    public boolean addEdge(Connection connection) { return edges.add(connection); }
 
     /**
      * Removes the binary connection from this simple graph.
      * @param connection the connection to be removed.
      * @return true if the specified connection exists in this simple graph.
      */
-    public boolean removeEdge(BinaryConnection connection) { return edges.remove(connection); }
+    public boolean removeEdge(Connection connection) { return edges.remove(connection); }
 
     /**
      * @return the Set of all Vertices in this simple graph.
@@ -95,7 +95,7 @@ public class SimpleGraph<T> implements GraphStructure<T> {
     /**
      * @return the Set of all edges in this simple graph.
      */
-    public Set<BinaryConnection> getEdges() {
+    public Set<Connection> getEdges() {
         return edges;
     }
 
@@ -121,13 +121,13 @@ public class SimpleGraph<T> implements GraphStructure<T> {
     }
 
     @Override
-    public boolean addConnection(Connectable<T> connectable, BinaryConnection connection) {
+    public boolean addConnection(Connectable<T> connectable, Connection connection) {
         return false;
     }
 
 
     @Override
-    public boolean removeConnection(Connectable<T> connectable, BinaryConnection connection) {
+    public boolean removeConnection(Connectable<T> connectable, Connection connection) {
         return false;
     }
 

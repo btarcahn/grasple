@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class IndexedVertex<T> implements IndexedConnectable<T> {
 
     private T value;
-    private Map<Integer, BinaryConnection> connections;
+    private Map<Integer, Connection> connections;
 
     /**
      * Creates an indexed vertex with an empty map of neighbors
@@ -34,7 +34,7 @@ public class IndexedVertex<T> implements IndexedConnectable<T> {
     }
 
     @Override
-    public boolean addConnection(int index, BinaryConnection connection) {
+    public boolean addConnection(int index, Connection connection) {
         if (connections.containsKey(index)) {
             return false;
         }
@@ -73,22 +73,22 @@ public class IndexedVertex<T> implements IndexedConnectable<T> {
     }
 
     @Override
-    public Collection<BinaryConnection> getConnections() {
+    public Collection<Connection> getConnections() {
         return connections.values();
     }
 
     @Override
-    public boolean addConnection(BinaryConnection connection) {
+    public boolean addConnection(Connection connection) {
         return false;
     }
 
     @Override
-    public boolean removeConnection(BinaryConnection connection) {
+    public boolean removeConnection(Connection connection) {
         return false;
     }
 
     @Override
-    public BinaryConnection connect(Connectable<T> other) {
+    public Connection connect(Connectable<T> other) {
         return null;
     }
 

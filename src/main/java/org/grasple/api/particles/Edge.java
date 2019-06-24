@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Bach Tran
  * @since 1.0
  */
-public class Edge implements BinaryConnection {
+public class Edge implements Connection {
     private int weight;
     private Connectable start;
     private Connectable end;

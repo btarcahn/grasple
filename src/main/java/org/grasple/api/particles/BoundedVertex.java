@@ -17,7 +17,7 @@ public class BoundedVertex<T extends Comparable<T>>
         implements IndexedConnectable<T>, Comparable<BoundedVertex<T>> {
     private static final short DEFAULT_LEN = 256;
     private T value;
-    private BinaryConnection[] connections;
+    private Connection[] connections;
 
     /**
      * Constructs an index-able vertex with a value.
@@ -27,7 +27,7 @@ public class BoundedVertex<T extends Comparable<T>>
      */
     public BoundedVertex(T value) {
         this.value = value;
-        this.connections = new BinaryConnection[DEFAULT_LEN];
+        this.connections = new Connection[DEFAULT_LEN];
     }
 
     /**
@@ -36,7 +36,7 @@ public class BoundedVertex<T extends Comparable<T>>
      * @param value the value of the vertex.
      * @param connections the array of binary connections.
      */
-    public BoundedVertex(T value, BinaryConnection[] connections) {
+    public BoundedVertex(T value, Connection[] connections) {
         this.value = value;
         this.connections = connections;
     }
@@ -54,12 +54,12 @@ public class BoundedVertex<T extends Comparable<T>>
     public BoundedVertex(T value, int neighbors) {
         this.value = value;
         this.connections =
-                new BinaryConnection[neighbors > 0 ? neighbors : DEFAULT_LEN];
+                new Connection[neighbors > 0 ? neighbors : DEFAULT_LEN];
     }
 
     @Override
     public boolean isSaturated() {
-        for (BinaryConnection connection : connections) {
+        for (Connection connection : connections) {
             if (connection == null) {
                 return false;
             }
@@ -79,7 +79,7 @@ public class BoundedVertex<T extends Comparable<T>>
 
     @Override
     public boolean adjacent(Connectable<T> other) {
-        for (BinaryConnection connection : connections) {
+        for (Connection connection : connections) {
             if (connection.divert(this) == other) {
                 return true;
             }
@@ -88,8 +88,8 @@ public class BoundedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public Collection<BinaryConnection> getConnections() {
-        List<BinaryConnection> _connections = new ArrayList<>();
+    public Collection<Connection> getConnections() {
+        List<Connection> _connections = new ArrayList<>();
         Collections.addAll(_connections, connections);
         return _connections;
     }
@@ -104,7 +104,7 @@ public class BoundedVertex<T extends Comparable<T>>
      * @return true if the connection has been added to this index-able vertex.
      */
     @Override
-    public boolean addConnection(BinaryConnection connection) {
+    public boolean addConnection(Connection connection) {
         allocateExtraMemory();
         // add to the first (leftmost) available space
         for (int i = 0; i < connections.length; i++) {
@@ -118,7 +118,7 @@ public class BoundedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public boolean addConnection(int index, BinaryConnection connection)
+    public boolean addConnection(int index, Connection connection)
             throws ArrayIndexOutOfBoundsException, IndexSaturatedException {
         if (connections[index] != null) {
             throw new IndexSaturatedException();
@@ -137,7 +137,7 @@ public class BoundedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public boolean removeConnection(BinaryConnection connection) {
+    public boolean removeConnection(Connection connection) {
         for (int i = 0; i < connections.length; i++) {
             if (connections[i] == connection) {
                 connections[i] = null;
@@ -148,8 +148,8 @@ public class BoundedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public BinaryConnection connect(Connectable<T> other) {
-        BinaryConnection _connection = new Edge(this, other);
+    public Connection connect(Connectable<T> other) {
+        Connection _connection = new Edge(this, other);
         addConnection(_connection);
         return _connection;
     }
@@ -160,7 +160,7 @@ public class BoundedVertex<T extends Comparable<T>>
         if (connections[index] != null) {
             throw new IndexSaturatedException();
         }
-        BinaryConnection _connection = new Edge(this, other);
+        Connection _connection = new Edge(this, other);
         addConnection(index, _connection);
         return true;
     }
@@ -178,7 +178,7 @@ public class BoundedVertex<T extends Comparable<T>>
     @Override
     public Collection<Connectable> getNeighbors() {
         List<Connectable> _neighbors = new ArrayList<>();
-        for (BinaryConnection connection : connections) {
+        for (Connection connection : connections) {
             _neighbors.add(connection.divert(this));
         }
         return _neighbors;
@@ -196,8 +196,8 @@ public class BoundedVertex<T extends Comparable<T>>
     private void allocateExtraMemory() {
         // create extra memory to avoid saturation
         if (this.isSaturated()) {
-            BinaryConnection[] _extended
-                    = new BinaryConnection[connections.length + DEFAULT_LEN];
+            Connection[] _extended
+                    = new Connection[connections.length + DEFAULT_LEN];
             System.arraycopy(connections, 0,
                     _extended, 0, connections.length);
             connections = _extended;

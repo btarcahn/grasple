@@ -5,7 +5,7 @@ package org.grasple.api.particles;
      An interface defines the methods that a binary connection should have.
      A binary connection has two points: (start, end),
      it connects two Connectable objects. This is similar to
-     a concept of a Relation (Discrete Mathematics). The BinaryConnection
+     a concept of a Relation (Discrete Mathematics). The Connection
      is bidirectional. An Edge is a concrete class implementing this interface.
  * </p>
  * <p>
@@ -14,9 +14,9 @@ package org.grasple.api.particles;
  *     utilization.
  * </p>
  * <p>
- *     A BinaryConnection has <b>TWO</b> endpoints: (start, end). When declaring
- *     a BinaryConnection, one must define both endpoints. A BinaryConnection must be defined
- *     when it should be a self-connection. When successfully declared, a BinaryConnection
+ *     A Connection has <b>TWO</b> endpoints: (start, end). When declaring
+ *     a Connection, one must define both endpoints. A Connection must be defined
+ *     when it should be a self-connection. When successfully declared, a Connection
  *     can takes one endpoint and direct the user to the other endpoint.
  * </p>
  * @author Bach Tran
@@ -24,7 +24,7 @@ package org.grasple.api.particles;
  * @see Connectable
  * @see Edge
  */
-public interface BinaryConnection {
+public interface Connection {
     /**
      * Retrieves the weight of the connection.
      * @return an integer determines the weight of the connection.

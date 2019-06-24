@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class OrderedVertex<T extends Comparable<T>>
                                 implements Comparable<OrderedVertex<T>>, Connectable<T> {
     private T value;
-    private List<BinaryConnection> connections;
+    private List<Connection> connections;
     public OrderedVertex(T value) {
         this.value = value;
         connections = new ArrayList<>();
@@ -41,12 +41,12 @@ public class OrderedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public List<BinaryConnection> getConnections() {
+    public List<Connection> getConnections() {
         return connections;
     }
 
     @Override
-    public boolean addConnection(BinaryConnection connection) {
+    public boolean addConnection(Connection connection) {
         if (!connections.contains(connection)) {
             return connections.add(connection);
         }
@@ -54,7 +54,7 @@ public class OrderedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public boolean removeConnection(BinaryConnection connection) {
+    public boolean removeConnection(Connection connection) {
         if (connections.contains(connection)) {
             return connections.remove(connection);
         }
@@ -62,8 +62,8 @@ public class OrderedVertex<T extends Comparable<T>>
     }
 
     @Override
-    public BinaryConnection connect(Connectable<T> other) {
-        BinaryConnection connection = new Edge(this, other);
+    public Connection connect(Connectable<T> other) {
+        Connection connection = new Edge(this, other);
         this.addConnection(connection);
         if (this != other) { other.addConnection(connection); }
         return connection;

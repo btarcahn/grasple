@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class Vertex<T> implements Connectable<T> {
     private T value;
     /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
-    private Set<BinaryConnection> connections = new HashSet<>();
+    private Set<Connection> connections = new HashSet<>();
 
     /**
      * Creates a Vertex given only a not-null value.
@@ -33,12 +33,12 @@ public class Vertex<T> implements Connectable<T> {
         this.value = value;
     }
     @Override
-    public boolean addConnection(BinaryConnection connection) {
+    public boolean addConnection(Connection connection) {
         return connections.add(connection);
     }
 
     /**
-     * Removes a specified BinaryConnection from this Vertex. <br/>
+     * Removes a specified Connection from this Vertex. <br/>
      * <b>Warning:</b> this method uses the .remove() method of the Set interface, such methods
      * are not thread-safe.
      * @param connection the connection to be removed
@@ -46,7 +46,7 @@ public class Vertex<T> implements Connectable<T> {
      * @see Set
      */
     @Override
-    public boolean removeConnection(BinaryConnection connection) {
+    public boolean removeConnection(Connection connection) {
         return connections.remove(connection);
     }
 
@@ -69,11 +69,11 @@ public class Vertex<T> implements Connectable<T> {
     }
 
     /**
-     * Gets all BinaryConnection of this Vertex.
+     * Gets all Connection of this Vertex.
      * @return a Set of all BinaryConnections associated with this Vertex
      */
     @Override
-    public Set<BinaryConnection> getConnections() {
+    public Set<Connection> getConnections() {
         return connections;
     }
 
@@ -98,7 +98,7 @@ public class Vertex<T> implements Connectable<T> {
      * @return an Edge created to connect these two Vertices.
      */
     @Override
-    public BinaryConnection connect(Connectable<T> other) {
+    public Connection connect(Connectable<T> other) {
         Edge connection = new Edge(this, other);
         this.addConnection(connection);
         if (this != other) { other.addConnection(connection); }
@@ -107,7 +107,7 @@ public class Vertex<T> implements Connectable<T> {
 
     /**
      * Disconnects the specified Vertex with this Vertex.
-     * All BinaryConnection between these two Vertices will be lost after the operation.
+     * All Connection between these two Vertices will be lost after the operation.
      * This method uses the removeIf() method from the Collection interface, which is
      * thread-safe.
      * @see java.util.Collection

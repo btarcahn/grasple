@@ -8,7 +8,7 @@ import java.util.Collection;
  * distinct binary connection, i.e. each connectable object can
  * only establish <b><u>one</u></b> connection to another connectable.
  * object.
- * @see BinaryConnection
+ * @see Connection
  * @since 1.0
  * @author Bach Tran
  */
@@ -33,30 +33,30 @@ public interface Connectable<T> {
      * connectable object.
      * @return a Collection of all binary connections.
      */
-    Collection<BinaryConnection> getConnections();
+    Collection<Connection> getConnections();
 
     /**
-     * Adds a new BinaryConnection to this Connectable.
+     * Adds a new Connection to this Connectable.
      * @param connection the connection to be added
      * @return true if the method was successful, false otherwise.
-     * @see BinaryConnection
+     * @see Connection
      */
-    boolean addConnection(BinaryConnection connection);
+    boolean addConnection(Connection connection);
 
     /**
-     * Removes the given BinaryConnection in this Connectable.
+     * Removes the given Connection in this Connectable.
      * @param connection the connection to be removed
      * @return true if the method was successful, false otherwise.
      */
-    boolean removeConnection(BinaryConnection connection);
+    boolean removeConnection(Connection connection);
 
     /**
      * Connects to another connectable object using a
-     * BinaryConnection.
+     * Connection.
      * @param other other connectable
      * @return the binary connection used to connect these two objects.
      */
-    BinaryConnection connect(Connectable<T> other);
+    Connection connect(Connectable<T> other);
 
     void disconnect(Connectable<T> other);
 
