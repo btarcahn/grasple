@@ -1,7 +1,6 @@
 package org.grasple.api.structures.graphs;
 
 import org.grasple.api.particles.Connectable;
-import org.grasple.api.particles.Connection;
 import org.grasple.api.particles.UConnection;
 
 import java.util.HashSet;
