@@ -1,5 +1,6 @@
 package org.grasple.api.particles;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,8 +12,6 @@ import java.util.stream.Collectors;
  * <b>unordered-</b>vertex. An unordered-vertex has a Set of
  * neighbors. Therefore will be randomized during traversals.
  * </p>
- * <p></p>
- * @see OrderedVertex
  * @author Bach Tran
  * @since 1.0
  * @param <T> type that will not be considered of its comparability.
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 public class Vertex<T> implements Connectable<T> {
     private T value;
     /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
-    private Set<Connection> connections = new HashSet<>();
+    private Set<UConnection<Connectable<T>>> connections = new HashSet<UConnection<Connectable<T>>>();
 
     /**
      * Creates a Vertex given only a not-null value.
@@ -33,7 +32,7 @@ public class Vertex<T> implements Connectable<T> {
         this.value = value;
     }
     @Override
-    public boolean addConnection(Connection connection) {
+    public boolean addConnection(UConnection<Connectable<T>> connection) {
         return connections.add(connection);
     }
 
@@ -46,12 +45,12 @@ public class Vertex<T> implements Connectable<T> {
      * @see Set
      */
     @Override
-    public boolean removeConnection(Connection connection) {
+    public boolean removeConnection(UConnection<Connectable<T>> connection) {
         return connections.remove(connection);
     }
 
     @Override
-    public Set<Connectable> getNeighbors() {
+    public Collection<Connectable<T>> getNeighbors() {
         return connections
                 .stream()
                 .map(connection -> connection.divert(this))
@@ -73,7 +72,7 @@ public class Vertex<T> implements Connectable<T> {
      * @return a Set of all BinaryConnections associated with this Vertex
      */
     @Override
-    public Set<Connection> getConnections() {
+    public Collection<UConnection<Connectable<T>>> getConnections() {
         return connections;
     }
 
@@ -99,7 +98,7 @@ public class Vertex<T> implements Connectable<T> {
      */
     @Override
     public Connection connect(Connectable<T> other) {
-        Edge connection = new Edge(this, other);
+        UConnection<Connectable<T>> connection = new Edge<>(this, other);
         this.addConnection(connection);
         if (this != other) { other.addConnection(connection); }
         return connection;

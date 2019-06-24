@@ -34,7 +34,7 @@ public interface Connectable<T> {
      * connectable object.
      * @return a Collection of all binary connections.
      */
-    Collection<Connection> getConnections();
+    Collection<UConnection<Connectable<T>>> getConnections();
 
     /**
      * Adds a new Connection to this Connectable.
@@ -42,14 +42,14 @@ public interface Connectable<T> {
      * @return true if the method was successful, false otherwise.
      * @see Connection
      */
-    boolean addConnection(Connection connection);
+    boolean addConnection(UConnection<Connectable<T>> connection);
 
     /**
      * Removes the given Connection in this Connectable.
      * @param connection the connection to be removed
      * @return true if the method was successful, false otherwise.
      */
-    boolean removeConnection(Connection connection);
+    boolean removeConnection(UConnection<Connectable<T>> connection);
 
     /**
      * Connects to another connectable object using a
@@ -67,5 +67,5 @@ public interface Connectable<T> {
      * held by this object.
      * @return a Set contains all neighbors of this Connectable object.
      */
-    Collection<Connectable> getNeighbors();
+    Collection<Connectable<T>> getNeighbors();
 }

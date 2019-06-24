@@ -41,12 +41,4 @@ public interface Connection<S, E> {
      * @param end the end component to be set.
      */
     void setEnd(E end);
-
-    /**
-     * Directs to the other endpoint giving one endpoint.
-     * @param connectable the current connectable
-     * @return the opposite Connectable object in this Connection.
-     * @deprecated not type-safe.
-     */
-    Connectable divert(Connectable connectable);
 }

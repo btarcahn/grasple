@@ -1,9 +1,6 @@
 package org.grasple.api.structures.graphs;
 
-import org.grasple.api.particles.Connection;
-import org.grasple.api.particles.Connectable;
-import org.grasple.api.particles.Edge;
-import org.grasple.api.particles.Vertex;
+import org.grasple.api.particles.*;
 import org.grasple.api.utils.DefaultTraverser;
 
 import java.util.HashSet;
@@ -121,7 +118,7 @@ public class SimpleGraph<T> implements GraphStructure<T> {
     }
 
     @Override
-    public boolean addConnection(Connectable<T> connectable, Connection connection) {
+    public boolean addConnection(Connectable<T> connectable, UConnection<Connectable<T>> connection) {
         return false;
     }
 

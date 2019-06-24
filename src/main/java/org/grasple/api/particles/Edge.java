@@ -11,17 +11,17 @@ import java.util.Objects;
  * @author Bach Tran
  * @since 1.0
  */
-public class Edge implements Connection {
+public class Edge<T> implements UConnection<T> {
     private int weight;
-    private Connectable start;
-    private Connectable end;
+    private T start;
+    private T end;
 
     /**
      * Creates a zero-weight, undirected edge.
      * @param start the starting vertex that the edge connects to.
      * @param end the ending vertex that the edge connects to.
      */
-    public Edge(Connectable start, Connectable end) {
+    public Edge(T start, T end) {
         weight = 0;
         this.start = start;
         this.end = end;
@@ -33,7 +33,7 @@ public class Edge implements Connection {
      * @param start the starting endpoint of the edge
      * @param end the ending endpoint of the edge
      */
-    public Edge(int weight, Connectable start, Connectable end) {
+    public Edge(int weight, T start, T end) {
         this.weight = weight;
         this.start = start;
         this.end = end;
@@ -58,33 +58,25 @@ public class Edge implements Connection {
     /**
      * @return one of the endpoints of the edge.
      */
-    public Connectable getStart() {
+    public T getStart() {
         return start;
     }
 
     /**
      * @return one of the endpoints of the edge.
      */
-    public Connectable getEnd() {
+    public T getEnd() {
         return end;
     }
 
     @Override
-    public void setStart(Object start) {
+    public void setStart(T start) {
         this.start = start;
     }
 
     @Override
-    public void setEnd(Object end) {
+    public void setEnd(T end) {
         this.end = end;
-    }
-
-    @Override
-    public Connectable divert(Connectable connectable) {
-        if (start != connectable && end != connectable) {
-            throw new IllegalArgumentException(("The Connectable object does not belong to this Edge."));
-        }
-        return connectable == start ? end : start;
     }
 
     @Override
@@ -99,5 +91,10 @@ public class Edge implements Connection {
     @Override
     public int hashCode() {
         return Objects.hash(start, end);
+    }
+
+    @Override
+    public T divert(T endpoint) {
+        return endpoint == start ? end : start;
     }
 }

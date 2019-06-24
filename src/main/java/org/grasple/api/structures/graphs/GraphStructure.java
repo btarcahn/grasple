@@ -1,7 +1,7 @@
 package org.grasple.api.structures.graphs;
 
 import org.grasple.api.particles.Connection;
-import org.grasple.api.particles.Connectable;
+import org.grasple.api.particles.UConnection;
 
 import java.util.function.Consumer;
 
@@ -17,7 +17,7 @@ public interface GraphStructure<T> {
      * @param connection the connection to be attached to the connectable object.
      * @return true if the connection has not yet attached to the connectable.
      */
-    boolean addConnection(Connectable<T> connectable, Connection connection);
+    boolean addConnection(Connectable<T> connectable, UConnection<Connectable<T>> connection);
 
     /**
      * Removes the connection from the connectable object.

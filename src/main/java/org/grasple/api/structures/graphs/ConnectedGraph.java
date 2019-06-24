@@ -1,7 +1,7 @@
 package org.grasple.api.structures.graphs;
 
 import org.grasple.api.particles.Connection;
-import org.grasple.api.particles.Connectable;
+import org.grasple.api.particles.UConnection;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +40,7 @@ public class ConnectedGraph<T> implements GraphStructure<T> {
     }
 
     @Override
-    public boolean addConnection(Connectable<T> connectable, Connection connection) {
+    public boolean addConnection(Connectable<T> connectable, UConnection<Connectable<T>> connection) {
         return connectable.addConnection(connection);
     }
 
