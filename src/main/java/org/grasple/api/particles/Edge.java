@@ -70,12 +70,12 @@ public class Edge implements Connection {
     }
 
     @Override
-    public void setStart(Connectable start) {
+    public void setStart(Object start) {
         this.start = start;
     }
 
     @Override
-    public void setEnd(Connectable end) {
+    public void setEnd(Object end) {
         this.end = end;
     }
 

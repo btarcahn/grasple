@@ -24,7 +24,7 @@ package org.grasple.api.particles;
  * @see Connectable
  * @see Edge
  */
-public interface Connection {
+public interface Connection<S, E> {
     /**
      * Retrieves the weight of the connection.
      * @return an integer determines the weight of the connection.
@@ -33,19 +33,20 @@ public interface Connection {
 
     /**
      * Sets the [start] component of the binary connection.
-     * @param connectable the start component to be set.
+     * @param start the start component to be set.
      */
-    void setStart(Connectable connectable);
+    void setStart(S start);
     /**
      * Sets the [end] component of the binary connection.
-     * @param connectable the end component to be set.
+     * @param end the end component to be set.
      */
-    void setEnd(Connectable connectable);
+    void setEnd(E end);
 
     /**
      * Directs to the other endpoint giving one endpoint.
      * @param connectable the current connectable
      * @return the opposite Connectable object in this Connection.
+     * @deprecated not type-safe.
      */
     Connectable divert(Connectable connectable);
 }

@@ -8,6 +8,7 @@ import java.util.Collection;
  * distinct binary connection, i.e. each connectable object can
  * only establish <b><u>one</u></b> connection to another connectable.
  * object.
+ * @param <T> the data-type that the Connectable contains.
  * @see Connection
  * @since 1.0
  * @author Bach Tran
