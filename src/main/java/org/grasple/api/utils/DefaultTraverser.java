@@ -1,5 +1,7 @@
 package org.grasple.api.utils;
 
+import org.grasple.api.particles.Connectable;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -50,7 +52,7 @@ public final class DefaultTraverser<T> implements Runnable {
      * the depth-first traversal algorithm.
      * @param vertex the starting vertex of the algorithm
      */
-    private Consumer<? super T> recursion(Connectable<T> vertex) {
+    private void recursion(Connectable<T> vertex) {
         if (action != null) { action.accept(vertex.get()); }
         visited.add(vertex);
         vertex.getNeighbors()

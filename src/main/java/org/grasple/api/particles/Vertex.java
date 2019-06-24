@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Vertex<T> implements Connectable<T> {
     private T value;
     /** The set of edges that this vertex has. Currently initialized to be an empty HashSet.*/
-    private Set<UConnection<Connectable<T>>> connections = new HashSet<UConnection<Connectable<T>>>();
+    private Set<UConnection<Connectable<T>>> connections = new HashSet<>();
 
     /**
      * Creates a Vertex given only a not-null value.
