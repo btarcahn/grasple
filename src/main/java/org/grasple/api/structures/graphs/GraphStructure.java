@@ -26,7 +26,7 @@ public interface GraphStructure<T> {
      * @param connection the connection to be removed from the chosen connectable object.
      * @return true if the connection has existed in the connectable object before.
      */
-    boolean removeConnection(Connectable<T> connectable, Connection connection);
+    boolean removeConnection(Connectable<T> connectable, UConnection<Connectable<T>> connection);
 
     /**
      * Traverses to all vertices in the graph.

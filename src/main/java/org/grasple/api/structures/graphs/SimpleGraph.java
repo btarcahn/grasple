@@ -124,7 +124,7 @@ public class SimpleGraph<T> implements GraphStructure<T> {
 
 
     @Override
-    public boolean removeConnection(Connectable<T> connectable, Connection connection) {
+    public boolean removeConnection(Connectable<T> connectable, UConnection<Connectable<T>> connection) {
         return false;
     }
 

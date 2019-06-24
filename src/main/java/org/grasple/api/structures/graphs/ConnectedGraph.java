@@ -1,5 +1,6 @@
 package org.grasple.api.structures.graphs;
 
+import org.grasple.api.particles.Connectable;
 import org.grasple.api.particles.Connection;
 import org.grasple.api.particles.UConnection;
 
@@ -45,7 +46,7 @@ public class ConnectedGraph<T> implements GraphStructure<T> {
     }
 
     @Override
-    public boolean removeConnection(Connectable<T> connectable, Connection connection) {
+    public boolean removeConnection(Connectable<T> connectable, UConnection<Connectable<T>> connection) {
         return connectable.removeConnection(connection);
     }
 
