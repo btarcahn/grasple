@@ -31,22 +31,8 @@ public class Vertex<T> implements Connectable<T> {
         }
         this.value = value;
     }
-    @Override
     public boolean addConnection(UConnection<Connectable<T>> connection) {
         return connections.add(connection);
-    }
-
-    /**
-     * Removes a specified Connection from this Vertex. <br/>
-     * <b>Warning:</b> this method uses the .remove() method of the Set interface, such methods
-     * are not thread-safe.
-     * @param connection the connection to be removed
-     * @return true if the specified connection exists in the Vertex's list of connections.
-     * @see Set
-     */
-    @Override
-    public boolean removeConnection(UConnection<Connectable<T>> connection) {
-        return connections.remove(connection);
     }
 
     @Override
@@ -71,7 +57,6 @@ public class Vertex<T> implements Connectable<T> {
      * Gets all Connection of this Vertex.
      * @return a Set of all BinaryConnections associated with this Vertex
      */
-    @Override
     public Collection<UConnection<Connectable<T>>> getConnections() {
         return connections;
     }

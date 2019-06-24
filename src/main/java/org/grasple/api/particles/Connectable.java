@@ -30,28 +30,6 @@ public interface Connectable<T> {
     boolean adjacent(Connectable<T> other);
 
     /**
-     * Retrieves all connections associated with this
-     * connectable object.
-     * @return a Collection of all binary connections.
-     */
-    Collection<UConnection<Connectable<T>>> getConnections();
-
-    /**
-     * Adds a new Connection to this Connectable.
-     * @param connection the connection to be added
-     * @return true if the method was successful, false otherwise.
-     * @see Connection
-     */
-    boolean addConnection(UConnection<Connectable<T>> connection);
-
-    /**
-     * Removes the given Connection in this Connectable.
-     * @param connection the connection to be removed
-     * @return true if the method was successful, false otherwise.
-     */
-    boolean removeConnection(UConnection<Connectable<T>> connection);
-
-    /**
      * Connects to another connectable object using a
      * Connection.
      * @param other other connectable
