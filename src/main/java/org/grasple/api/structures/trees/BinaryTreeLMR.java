@@ -4,6 +4,7 @@ import org.grasple.api.particles.NumberedVertex;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * Binary tree containing three branches: (left) "smaller than",
@@ -33,29 +34,29 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
      * @param vertex the new vertex to be added.
      */
     public void add(NumberedVertex<T> vertex) {
-        addTo(root, vertex);
+        recursiveAdd(root, vertex);
     }
 
     public void add(T value) {
-        addTo(root, new NumberedVertex<>(value));
+        recursiveAdd(root, new NumberedVertex<>(value));
     }
 
-    private void addTo(NumberedVertex<T> root, NumberedVertex<T> vertexToAdd) {
+    private void recursiveAdd(NumberedVertex<T> root, NumberedVertex<T> vertexToAdd) {
         if (root.compareTo(vertexToAdd) > 0) {
             if (root.occupied(LEFT)) {
-                addTo(root.jumpTo(LEFT), vertexToAdd);
+                recursiveAdd(root.jumpTo(LEFT), vertexToAdd);
             } else {
                 root.connect(LEFT, vertexToAdd);
             }
         } else if (root.compareTo(vertexToAdd) < 0) {
             if (root.occupied(RIGHT)) {
-                addTo(root.jumpTo(RIGHT), vertexToAdd);
+                recursiveAdd(root.jumpTo(RIGHT), vertexToAdd);
             } else {
                 root.connect(RIGHT, vertexToAdd);
             }
         } else {
             if (root.occupied(MIDDLE)) {
-                addTo(root.jumpTo(MIDDLE), vertexToAdd);
+                recursiveAdd(root.jumpTo(MIDDLE), vertexToAdd);
             } else {
                 root.connect(MIDDLE, vertexToAdd);
             }
@@ -90,7 +91,7 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         return false;
     }
 
-    public Set<NumberedVertex<T>> recursiveFindAll(T value) {
+    public Set<NumberedVertex<T>> findAll(T value) {
         Set<NumberedVertex<T>> results = new HashSet<>();
         recursiveFindAll(this.root, results, value);
         return results;
@@ -100,17 +101,40 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
                                   Set<NumberedVertex<T>> results,
                                   T value) {
 
-        // TODO check this logic
-        // TODO reduce parameters.
+        if (value.compareTo(root.get()) == 0 ) {
+            results.add(root);
+            if (root.occupied(MIDDLE)) {
+                recursiveFindAll(root.jumpTo(MIDDLE), results, value);
+            } else {
+                return;
+            }
+        }
+
         if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
             recursiveFindAll(root.jumpTo(LEFT), results, value);
         } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
             recursiveFindAll(root.jumpTo(RIGHT), results, value);
-        } else {
-            results.add(root);
-            if (root.occupied(MIDDLE)) {
-                recursiveFindAll(root.jumpTo(MIDDLE), results, value);
-            }
+        }
+    }
+
+    public void inorderTraversal(Consumer<T> action) {
+        recursiveInorderTraversal(root, action);
+    }
+
+    private void recursiveInorderTraversal(NumberedVertex<T> root, Consumer<T> action) {
+
+        if (root.occupied(LEFT)) {
+            recursiveInorderTraversal(root.jumpTo(LEFT), action);
+        }
+
+        action.accept(root.get());
+
+        if (root.occupied(MIDDLE)) {
+            recursiveInorderTraversal(root.jumpTo(MIDDLE), action);
+        }
+
+        if (root.occupied(RIGHT)) {
+            recursiveInorderTraversal(root.jumpTo(RIGHT), action);
         }
     }
 
