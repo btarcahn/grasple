@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Bach Tran
  * @since 1.0
  */
-public class Edge<T> implements UConnection<T> {
+public class Edge<T extends Connectable> implements UConnection<T> {
     private int weight;
     private T start;
     private T end;

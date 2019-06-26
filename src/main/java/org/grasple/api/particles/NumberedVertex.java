@@ -19,6 +19,10 @@ public class NumberedVertex<T extends Comparable<T>>
         this.neighbors = new HashMap<>();
     }
 
+    public T get() {
+        return value;
+    }
+
     public boolean connect(Integer index, NumberedVertex<T> other) {
 
         if (neighbors.containsValue(other)) {

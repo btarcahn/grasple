@@ -2,7 +2,7 @@ package org.grasple.api.structures.trees;
 
 import org.grasple.api.particles.NumberedVertex;
 
-import java.util.Optional;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -90,10 +90,29 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         return false;
     }
 
-
-    public Optional<Set<NumberedVertex<T>>> findAll(T value) {
-        // TODO write this algorithm
-        return Optional.empty();
+    public Set<NumberedVertex<T>> recursiveFindAll(T value) {
+        Set<NumberedVertex<T>> results = new HashSet<>();
+        recursiveFindAll(this.root, results, value);
+        return results;
     }
 
+    private void recursiveFindAll(NumberedVertex<T> root,
+                                  Set<NumberedVertex<T>> results,
+                                  T value) {
+
+        // TODO check this logic
+        // TODO reduce parameters.
+        if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
+            recursiveFindAll(root.jumpTo(LEFT), results, value);
+        } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
+            recursiveFindAll(root.jumpTo(RIGHT), results, value);
+        } else {
+            results.add(root);
+            if (root.occupied(MIDDLE)) {
+                recursiveFindAll(root.jumpTo(MIDDLE), results, value);
+            }
+        }
+    }
+
+    // TODO implement binary tree maintenance.
 }
