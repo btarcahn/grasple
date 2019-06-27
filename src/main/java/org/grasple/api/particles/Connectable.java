@@ -13,25 +13,7 @@ import java.util.Collection;
  * @since 1.0
  * @author Bach Tran
  */
-public interface Connectable<T> {
-    /**
-     * Unwraps the value that the object contains.
-     * @return the value that the object contains.
-     */
-    T get();
-
-    /**
-     * Modifies the value of this object.
-     * @param value the new value of this object.
-     */
-    void set(T value);
-
-    /**
-     * Checks if these to objects are already connected (adjacent).
-     * @param other the other connectable object to be checked for adjacency
-     * @return true if these two objects are already connected.
-     */
-    boolean adjacent(Connectable<T> other);
+public interface Connectable<T> extends Node<T> {
 
     /**
      * Connects this object to the other of the same type.
@@ -46,11 +28,6 @@ public interface Connectable<T> {
      */
     boolean disconnect(Connectable<T> other);
 
-    /**
-     * Finds all connectable objects that is adjacent to this object.
-     * This operation thereby drops the information on the connections
-     * held by this object.
-     * @return a Set contains all neighbors of this Connectable object.
-     */
+    @Override
     Collection<Connectable<T>> getNeighbors();
 }

@@ -1,5 +1,6 @@
 package org.grasple.api.structures.trees;
 
+import org.grasple.api.particles.NumberedConnectable;
 import org.grasple.api.particles.NumberedVertex;
 
 import java.util.HashSet;
@@ -8,7 +9,11 @@ import java.util.function.Consumer;
 
 /**
  * Binary tree containing three branches: (left) "smaller than",
- * (right) "greater than", and (middle) "equals to".
+ * (right) "greater than", and (middle) "equals to". This type
+ * of binary tree is an improved version of the classic binary
+ * tree. Performing algorithms on this type of tree, in many cases,
+ * are significantly faster.
+ * @since 1.0
  * @param <T> Comparable data type.
  * @author Bach Tran
  */
@@ -37,11 +42,16 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         recursiveAdd(root, vertex);
     }
 
+    /**
+     * Adds a new value to the binary tree. A new numbered vertex will be
+     * created, containing this new value.
+     * @param value the new value to be added to the tree.
+     */
     public void add(T value) {
         recursiveAdd(root, new NumberedVertex<>(value));
     }
 
-    private void recursiveAdd(NumberedVertex<T> root, NumberedVertex<T> vertexToAdd) {
+    private void recursiveAdd(NumberedConnectable<T> root, NumberedConnectable<T> vertexToAdd) {
         if (root.compareTo(vertexToAdd) > 0) {
             if (root.occupied(LEFT)) {
                 recursiveAdd(root.jumpTo(LEFT), vertexToAdd);
@@ -74,8 +84,8 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         return false;
     }
 
-    private boolean recursiveContains(NumberedVertex<T> root,
-                                      NumberedVertex<T> element) {
+    private boolean recursiveContains(NumberedConnectable<T> root,
+                                      NumberedConnectable<T> element) {
         if (root == element) {
             return true;
         }
@@ -91,14 +101,23 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         return false;
     }
 
-    public Set<NumberedVertex<T>> findAll(T value) {
-        Set<NumberedVertex<T>> results = new HashSet<>();
+    /**
+     * Searches for all vertices that have the specified value
+     * in the binary tree and returns them as a Set. If an
+     * empty Set is returned, there is no such value.
+     * This method utilizes the binary search algorithm.
+     * @param value the value to be searched for.
+     * @return a Set of all vertices containing the specified value,
+     * or an empty Set if there is no such value.
+     */
+    public Set<NumberedConnectable<T>> findAll(T value) {
+        Set<NumberedConnectable<T>> results = new HashSet<>();
         recursiveFindAll(this.root, results, value);
         return results;
     }
 
-    private void recursiveFindAll(NumberedVertex<T> root,
-                                  Set<NumberedVertex<T>> results,
+    private void recursiveFindAll(NumberedConnectable<T> root,
+                                  Set<NumberedConnectable<T>> results,
                                   T value) {
 
         if (value.compareTo(root.get()) == 0 ) {
@@ -117,11 +136,20 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         }
     }
 
+    // TODO merge with graph traversals
+
+    /**
+     * Performing an in-order traversal on the binary tree.
+     * The algorithm reaches the left vertex, the root vertex, then
+     * the right vertex. Each visit, it applies the action specified
+     * to the vertex.
+     * @param action the action to be specified.
+     */
     public void inorderTraversal(Consumer<T> action) {
         recursiveInorderTraversal(root, action);
     }
 
-    private void recursiveInorderTraversal(NumberedVertex<T> root, Consumer<T> action) {
+    private void recursiveInorderTraversal(NumberedConnectable<T> root, Consumer<T> action) {
 
         if (root.occupied(LEFT)) {
             recursiveInorderTraversal(root.jumpTo(LEFT), action);
@@ -136,6 +164,23 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         if (root.occupied(RIGHT)) {
             recursiveInorderTraversal(root.jumpTo(RIGHT), action);
         }
+    }
+
+    public void postorderTraversal(Consumer<T> action) {
+        recursivePostorderTraversal(root, action);
+    }
+
+    private void recursivePostorderTraversal(NumberedConnectable<T> root,
+                                             Consumer<T> action) {
+        if (root.occupied(LEFT)) {
+            recursivePostorderTraversal(root.jumpTo(LEFT), action);
+        }
+
+        if (root.occupied(RIGHT)) {
+            recursivePostorderTraversal(root.jumpTo(RIGHT), action);
+        }
+
+        action.accept(root.get());
     }
 
     // TODO implement binary tree maintenance.

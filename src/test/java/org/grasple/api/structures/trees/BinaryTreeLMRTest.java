@@ -1,10 +1,8 @@
 package org.grasple.api.structures.trees;
+import org.grasple.api.particles.NumberedVertex;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +30,7 @@ class BinaryTreeLMRTest {
     void inorderTraversal() {
         List<Integer> _list = new ArrayList<>();
         sampleTree.inorderTraversal(_list::add);
-        assertTrue(isSorted(_list));
+        assertTrue(isSorted(_list, Comparator.naturalOrder()));
     }
 
     @Test
@@ -41,10 +39,32 @@ class BinaryTreeLMRTest {
 
     @Test
     void contains() {
+
     }
 
-    private static <T extends Comparable<T>> boolean isSorted(List<T> list) {
-        // TODO implement here
+
+
+    @Test
+    void findAll() {
+    }
+
+
+    private static <T> boolean isSorted(List<T> list,
+                                        Comparator<T> comparator) {
+        if (list.isEmpty()) {
+            return true;
+        }
+
+        Iterator<T> _iterator = list.iterator();
+        T first = _iterator.next();
+        while (_iterator.hasNext()) {
+            T next = _iterator.next();
+            if (comparator.compare(next, first) < 0) {
+                return false;
+            }
+            first = next;
+        }
+
         return true;
     }
 }

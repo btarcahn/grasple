@@ -44,8 +44,12 @@ public class Vertex<T> implements Connectable<T> {
     }
 
     @Override
-    public boolean adjacent(Connectable<T> other) {
-        return getNeighbors().contains(other);
+    public boolean adjacent(Node<T> o) {
+        if (!(o instanceof Connectable)) {
+            return false;
+        }
+        Connectable<T> connectable = (Connectable<T>) o;
+        return neighbors.contains(connectable);
     }
 
     @Override
