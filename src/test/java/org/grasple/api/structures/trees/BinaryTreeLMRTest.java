@@ -1,5 +1,4 @@
 package org.grasple.api.structures.trees;
-import org.grasple.api.particles.NumberedVertex;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -27,10 +26,24 @@ class BinaryTreeLMRTest {
     }
 
     @Test
-    void inorderTraversal() {
-        List<Integer> _list = new ArrayList<>();
-        sampleTree.inorderTraversal(_list::add);
-        assertTrue(isSorted(_list, Comparator.naturalOrder()));
+    void traverse() {
+        List<Integer> _results = new ArrayList<>();
+        // INORDER test
+        sampleTree.traverse(TraversalOrder.INORDER, _results::add);
+        assertEquals(TEST_RANGE + 1, _results.size());
+        assertTrue(isSorted(_results, Comparator.naturalOrder()));
+        _results.clear();
+
+        // PREORDER test
+        sampleTree.traverse(TraversalOrder.PREORDER, _results::add);
+        assertEquals(TEST_RANGE + 1, _results.size());
+        _results.clear();
+
+        // POSTORDER test
+        sampleTree.traverse(TraversalOrder.POSTORDER, _results::add);
+        assertEquals(TEST_RANGE + 1, _results.size());
+        _results.clear();
+
     }
 
     @Test

@@ -12,8 +12,7 @@ import java.util.Map;
  * @param <T> a Comparable type.
  * @author Bach Tran
  */
-public class NumberedVertex<T extends Comparable<T>>
-        implements Comparable<NumberedVertex<T>>,
+public class NumberedVertex<T extends Comparable<T>> implements
         NumberedConnectable<T> {
 
     private T value;
@@ -61,13 +60,11 @@ public class NumberedVertex<T extends Comparable<T>>
 
     @Override
     public boolean disconnect(Integer index) {
-
-        if (neighbors.containsKey(index)) {
-            neighbors.remove(index);
-            return true;
+        if (!neighbors.containsKey(index)) {
+            return false;
         }
-
-        return false;
+        neighbors.remove(index);
+        return true;
     }
 
     @Override
@@ -80,8 +77,4 @@ public class NumberedVertex<T extends Comparable<T>>
         return neighbors.get(index);
     }
 
-    @Override
-    public int compareTo(NumberedVertex<T> o) {
-        return this.value.compareTo(o.value);
-    }
 }

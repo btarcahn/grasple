@@ -23,9 +23,9 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
     private static final int MIDDLE = 1;
     private static final int RIGHT = 2;
 
-    private NumberedVertex<T> root;
+    private NumberedConnectable<T> root;
 
-    public BinaryTreeLMR(NumberedVertex<T> root) {
+    public BinaryTreeLMR(NumberedConnectable<T> root) {
         this.root = root;
     }
 
@@ -38,7 +38,7 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
      * tree adding procedure.
      * @param vertex the new vertex to be added.
      */
-    public void add(NumberedVertex<T> vertex) {
+    public void add(NumberedConnectable<T> vertex) {
         recursiveAdd(root, vertex);
     }
 
@@ -52,13 +52,13 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
     }
 
     private void recursiveAdd(NumberedConnectable<T> root, NumberedConnectable<T> vertexToAdd) {
-        if (root.compareTo(vertexToAdd) > 0) {
+        if (root.get().compareTo(vertexToAdd.get()) > 0) {
             if (root.occupied(LEFT)) {
                 recursiveAdd(root.jumpTo(LEFT), vertexToAdd);
             } else {
                 root.connect(LEFT, vertexToAdd);
             }
-        } else if (root.compareTo(vertexToAdd) < 0) {
+        } else if (root.get().compareTo(vertexToAdd.get()) < 0) {
             if (root.occupied(RIGHT)) {
                 recursiveAdd(root.jumpTo(RIGHT), vertexToAdd);
             } else {
@@ -79,7 +79,7 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
      * @param element the element to be checked for containment.
      * @return true if the tree contains the element.
      */
-    public boolean contains(NumberedVertex<T> element) {
+    public boolean contains(NumberedConnectable<T> element) {
         recursiveContains(this.root, element);
         return false;
     }
@@ -90,9 +90,9 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
             return true;
         }
 
-        if (element.compareTo(root) < 0 && root.occupied(LEFT)) {
+        if (element.get().compareTo(root.get()) < 0 && root.occupied(LEFT)) {
             return recursiveContains(root.jumpTo(LEFT), element);
-        } else if (element.compareTo(root) > 0 && root.occupied(RIGHT)) {
+        } else if (element.get().compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
             return recursiveContains(root.jumpTo(RIGHT), element);
         } else if (root.occupied(MIDDLE)) {
             return recursiveContains(root.jumpTo(MIDDLE), element);
@@ -145,8 +145,22 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
      * to the vertex.
      * @param action the action to be specified.
      */
-    public void inorderTraversal(Consumer<T> action) {
+    public void traverse(Consumer<T> action) {
         recursiveInorderTraversal(root, action);
+    }
+
+    public void traverse(TraversalOrder order, Consumer<T> action) {
+        switch(order) {
+            case PREORDER:
+                recursivePreorderTraversal(root, action);
+                break;
+            case INORDER:
+                recursiveInorderTraversal(root, action);
+                break;
+            case POSTORDER:
+                recursivePostorderTraversal(root, action);
+                break;
+        }
     }
 
     private void recursiveInorderTraversal(NumberedConnectable<T> root, Consumer<T> action) {
@@ -166,8 +180,20 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         }
     }
 
-    public void postorderTraversal(Consumer<T> action) {
-        recursivePostorderTraversal(root, action);
+    private void recursivePreorderTraversal(NumberedConnectable<T> root,
+                                            Consumer<T> action) {
+        action.accept(root.get());
+
+        if (root.occupied(MIDDLE)) {
+            recursivePreorderTraversal(root.jumpTo(MIDDLE), action);
+        }
+
+        if (root.occupied(LEFT)) {
+            recursivePreorderTraversal(root.jumpTo(LEFT), action);
+        }
+        if (root.occupied(RIGHT)) {
+            recursivePreorderTraversal(root.jumpTo(RIGHT), action);
+        }
     }
 
     private void recursivePostorderTraversal(NumberedConnectable<T> root,
@@ -181,7 +207,13 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
         }
 
         action.accept(root.get());
+
+        if (root.occupied(MIDDLE)) {
+            recursivePostorderTraversal(root.jumpTo(MIDDLE), action);
+        }
     }
 
-    // TODO implement binary tree maintenance.
+    public void reconstruct() {
+        // TODO implement binary tree maintenance
+    }
 }

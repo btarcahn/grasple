@@ -2,8 +2,9 @@ package org.grasple.api.particles;
 
 import java.util.Collection;
 
-public interface NumberedConnectable<T extends Comparable<T>>
-        extends Node<T>, Comparable<NumberedConnectable<T>> {
+public interface NumberedConnectable<T>
+        extends Node<T> {
+
     boolean connect(Integer index, NumberedConnectable<T> other);
 
     boolean disconnect(Integer index);
