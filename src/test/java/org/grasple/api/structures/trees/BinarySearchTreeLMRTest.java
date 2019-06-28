@@ -5,11 +5,11 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BinaryTreeLMRTest {
+class BinarySearchTreeLMRTest {
 
     private static final int TEST_RANGE = 100;
     private static final Random random = new Random();
-    private static BinaryTreeLMR<Integer> sampleTree = new BinaryTreeLMR<>(random.nextInt(TEST_RANGE));
+    private static BinarySearchTreeLMR<Integer> sampleTree = new BinarySearchTreeLMR<>(random.nextInt(TEST_RANGE));
     private static final Integer[] sampleInts = new Integer[TEST_RANGE];
     static {
         for (int i = 0; i < TEST_RANGE; i++) {

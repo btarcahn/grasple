@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  * @param <T> Comparable data type.
  * @author Bach Tran
  */
-public class BinaryTreeLMR<T extends Comparable<T>> {
+public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
     private static final int LEFT = 0;
     private static final int MIDDLE = 1;
@@ -25,11 +25,11 @@ public class BinaryTreeLMR<T extends Comparable<T>> {
 
     private NumberedConnectable<T> root;
 
-    public BinaryTreeLMR(NumberedConnectable<T> root) {
+    public BinarySearchTreeLMR(NumberedConnectable<T> root) {
         this.root = root;
     }
 
-    public BinaryTreeLMR(T value) {
+    public BinarySearchTreeLMR(T value) {
         this.root = new NumberedVertex<>(value);
     }
 
