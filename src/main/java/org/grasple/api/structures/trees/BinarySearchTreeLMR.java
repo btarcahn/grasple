@@ -8,11 +8,16 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 /**
- * Binary tree containing three branches: (left) "smaller than",
- * (right) "greater than", and (middle) "equals to". This type
- * of binary tree is an improved version of the classic binary
- * tree. Performing algorithms on this type of tree, in many cases,
- * are significantly faster.
+ * An improved version of the 2-branch Binary
+ * Search Tree. Vertices of this tree have 3
+ * branches: left, middle, right. The left
+ * and right branches still contain bigger
+ * and smaller values, respectively, of the root,
+ * just like a 2-branch BST, while the middle branch
+ * contains values that equals to the root.
+ * In many cases, this data structure reduces time
+ * complexity, for its improvement in handling
+ * duplicates.
  * @since 1.0
  * @param <T> Comparable data type.
  * @author Bach Tran
@@ -149,7 +154,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         recursiveInorderTraversal(root, action);
     }
 
-    public void traverse(TraversalOrder order, Consumer<T> action) {
+    public void traverse(TreeTraversalOrder order, Consumer<T> action) {
         switch(order) {
             case PREORDER:
                 recursivePreorderTraversal(root, action);
@@ -215,5 +220,46 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
     public void reconstruct() {
         // TODO implement binary tree maintenance
+    }
+
+    /**
+     * Finds the max-depth (or commonly known as the
+     * tree's height).
+     * @return the height of the tree.
+     */
+    public int height() {
+        return height(root);
+    }
+
+    private int height(NumberedConnectable<T> root) {
+        int left_height = 1, right_height = 1,
+            middle_height = 1;
+
+        if (root.occupied(LEFT)) {
+            left_height += height(root.jumpTo(LEFT));
+        }
+
+        if (root.occupied(RIGHT)) {
+            right_height += height(root.jumpTo(RIGHT));
+
+        }
+
+        if (root.occupied(MIDDLE)) {
+            middle_height += height(root.jumpTo(MIDDLE));
+        }
+
+        return maxInt(left_height, right_height, middle_height);
+    }
+
+    private static int maxInt(int... ints)
+            throws ArrayIndexOutOfBoundsException {
+        if (ints.length < 1) {
+            throw new ArrayIndexOutOfBoundsException("No integer supplied.");
+        }
+
+        int max = ints[0];
+        for (int i : ints) if (max < i) max = i;
+
+        return max;
     }
 }

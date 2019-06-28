@@ -29,18 +29,18 @@ class BinarySearchTreeLMRTest {
     void traverse() {
         List<Integer> _results = new ArrayList<>();
         // INORDER test
-        sampleTree.traverse(TraversalOrder.INORDER, _results::add);
+        sampleTree.traverse(TreeTraversalOrder.INORDER, _results::add);
         assertEquals(TEST_RANGE + 1, _results.size());
         assertTrue(isSorted(_results, Comparator.naturalOrder()));
         _results.clear();
 
         // PREORDER test
-        sampleTree.traverse(TraversalOrder.PREORDER, _results::add);
+        sampleTree.traverse(TreeTraversalOrder.PREORDER, _results::add);
         assertEquals(TEST_RANGE + 1, _results.size());
         _results.clear();
 
         // POSTORDER test
-        sampleTree.traverse(TraversalOrder.POSTORDER, _results::add);
+        sampleTree.traverse(TreeTraversalOrder.POSTORDER, _results::add);
         assertEquals(TEST_RANGE + 1, _results.size());
         _results.clear();
 
@@ -59,6 +59,15 @@ class BinarySearchTreeLMRTest {
 
     @Test
     void findAll() {
+    }
+
+    @Test
+    void height() {
+        BinarySearchTreeLMR<Integer> _tree = new BinarySearchTreeLMR<>(0);
+        for (int i = 1; i <= TEST_RANGE; i++) {
+            _tree.add(i);
+        }
+        assertEquals(TEST_RANGE + 1, _tree.height());
     }
 
 

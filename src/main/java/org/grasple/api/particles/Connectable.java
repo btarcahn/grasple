@@ -9,7 +9,6 @@ import java.util.Collection;
  * only establish <b><u>one</u></b> connection to another connectable.
  * object.
  * @param <T> the data-type that the Connectable contains.
- * @see Connection
  * @since 1.0
  * @author Bach Tran
  */

@@ -6,6 +6,6 @@ package org.grasple.api.particles;
  * @author Bach Tran
  * @param <T> the type of the two objects.
  */
-public interface UConnection<T extends Connectable> extends Connection<T , T> {
+public interface UConnection<T extends Node<T>> extends Connection<T, T> {
     T divert(T endpoint);
 }

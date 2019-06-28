@@ -24,7 +24,7 @@ package org.grasple.api.particles;
  * @see Connectable
  * @see Edge
  */
-public interface Connection<S extends Connectable, E extends Connectable> {
+public interface Connection<S extends Node<S>, E extends Node<E>> {
     /**
      * Retrieves the weight of the connection.
      * @return an integer determines the weight of the connection.

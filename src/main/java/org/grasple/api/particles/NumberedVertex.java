@@ -48,7 +48,12 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public boolean connect(Integer index, NumberedConnectable<T> other) {
+    public boolean connect(Integer index, NumberedConnectable<T> other)
+            throws IllegalArgumentException {
+
+        if (this == other) {
+            throw new IllegalArgumentException("Immediate connection is not allowed.");
+        }
 
         if (neighbors.containsValue(other)) {
             return false;
@@ -73,7 +78,12 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public NumberedConnectable<T> jumpTo(Integer index) {
+    public NumberedConnectable<T> jumpTo(Integer index)
+            throws IllegalArgumentException {
+
+        if (!neighbors.containsKey(index))
+            throw new IllegalArgumentException("No vertex exists at index " + index);
+
         return neighbors.get(index);
     }
 
