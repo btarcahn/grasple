@@ -30,22 +30,11 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
     private NumberedConnectable<T> root;
 
-    public BinarySearchTreeLMR(NumberedConnectable<T> root) {
-        this.root = root;
-    }
 
     public BinarySearchTreeLMR(T value) {
         this.root = new NumberedVertex<>(value);
     }
 
-    /**
-     * Adds a new vertex to the tree using basic binary
-     * tree adding procedure.
-     * @param vertex the new vertex to be added.
-     */
-    public void add(NumberedConnectable<T> vertex) {
-        recursiveAdd(root, vertex);
-    }
 
     /**
      * Adds a new value to the binary tree. A new numbered vertex will be
