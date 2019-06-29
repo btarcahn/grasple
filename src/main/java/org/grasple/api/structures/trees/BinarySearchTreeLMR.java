@@ -30,7 +30,21 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
     private NumberedConnectable<T> root;
 
+    /**
+     * Creates a Binary Search Tree with a root.
+     * @param root the connectable object used as a root
+     *             of the tree.
+     */
+    public BinarySearchTreeLMR(NumberedConnectable<T> root) {
+        this.root = root;
+    }
 
+    /**
+     * Creates a new Binary Search Tree with a starting value.
+     * This value will be used to create a new numbered vertex,
+     * which then be used as a root of the tree.
+     * @param value the value of the root of the tree.
+     */
     public BinarySearchTreeLMR(T value) {
         this.root = new NumberedVertex<>(value);
     }
@@ -67,19 +81,39 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         }
     }
 
+    public void delete(T value) {
+        if (!this.contains(value)) {
+            return;
+        }
+
+    }
+
+
     /**
-     * Checks if the tree contain exactly the specified element,
+     * Checks if the tree contain exactly the specified object
      * referring to identical memory address.
      * @param element the element to be checked for containment.
      * @return true if the tree contains the element.
      */
     public boolean contains(NumberedConnectable<T> element) {
-        recursiveContains(this.root, element);
-        return false;
+        return recursiveContains(root, element);
+    }
+
+    /**
+     * Checks if the tree contain any value like the one specified.
+     * If there exist a vertex having the value specified, this
+     * operation returns true.
+     * @param value the value to be checked for containment.
+     * @return true if there exists a vertex having the specified
+     * value in this tree.
+     */
+    public boolean contains(T value) {
+        return recursiveContains(root, value);
     }
 
     private boolean recursiveContains(NumberedConnectable<T> root,
                                       NumberedConnectable<T> element) {
+        // We have found the exact object in this tree.
         if (root == element) {
             return true;
         }
@@ -90,6 +124,18 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
             return recursiveContains(root.jumpTo(RIGHT), element);
         } else if (root.occupied(MIDDLE)) {
             return recursiveContains(root.jumpTo(MIDDLE), element);
+        }
+
+        return false;
+    }
+
+    private boolean recursiveContains(NumberedConnectable<T> root, T value) {
+        if (root.get().compareTo(value) == 0) { return true; }
+
+        if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
+            return recursiveContains(root.jumpTo(LEFT), value);
+        } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
+            return recursiveContains(root.jumpTo(RIGHT), value);
         }
 
         return false;
@@ -129,8 +175,6 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
             recursiveFindAll(root.jumpTo(RIGHT), results, value);
         }
     }
-
-    // TODO merge with graph traversals
 
     /**
      * Performing an in-order traversal on the binary tree.
@@ -207,10 +251,6 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         }
     }
 
-    public void reconstruct() {
-        // TODO implement binary tree maintenance
-    }
-
     /**
      * Finds the max-depth (or commonly known as the
      * tree's height).
@@ -220,7 +260,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         return height(root);
     }
 
-    private int height(NumberedConnectable<T> root) {
+    private static int height(NumberedConnectable root) {
         int left_height = 1, right_height = 1,
             middle_height = 1;
 
