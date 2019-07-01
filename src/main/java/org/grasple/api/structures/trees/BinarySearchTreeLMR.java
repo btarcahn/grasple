@@ -100,9 +100,6 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      */
     public void delete(T value) {
 
-        // removing duplicates
-        findAll(value).forEach(elem -> elem.disconnect(MIDDLE));
-
     }
 
 
@@ -159,6 +156,32 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
     }
 
     /**
+     * Finds the vertex with the exact value specified in this BST.
+     * Note that the method returns the top vertex, which directly
+     * attaches to this BST, from this vertex. One may use this
+     * vertex to traverse to subsequent duplicates.
+     * @param value the value to be find.
+     * @return an Optional object wrapping the result.
+     */
+    public Optional<NumberedConnectable<T>> find(T value) {
+        return _find(root, value);
+    }
+
+    private Optional<NumberedConnectable<T>> _find(NumberedConnectable<T> root,
+                                                   T value) {
+        if (value.compareTo(root.get()) == 0) {
+            return Optional.of(root);
+        }
+
+        if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
+            return _find(root.jumpTo(LEFT), value);
+        } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
+            return _find(root.jumpTo(RIGHT), value);
+        }
+        return Optional.empty();
+    }
+
+    /**
      * Searches for all vertices that have the specified value
      * in the binary tree and returns them as a Set. If an
      * empty Set is returned, there is no such value.
@@ -177,7 +200,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
                                   List<NumberedConnectable<T>> results,
                                   T value) {
 
-        if (value.compareTo(root.get()) == 0 ) {
+        if (value.compareTo(root.get()) == 0) {
             results.add(root);
             if (root.occupied(MIDDLE)) {
                 recursiveFindAll(root.jumpTo(MIDDLE), results, value);
@@ -219,7 +242,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         }
     }
 
-    public void traverse(TreeTraversalOrder order,
+    private void traverse(TreeTraversalOrder order,
                          Consumer<T> action,
                          boolean allowDuplicates) {
         switch(order) {
@@ -310,11 +333,4 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
         return Math.max(left_height, right_height);
     }
-
-    public List<T> toList(TreeTraversalOrder order) {
-        List<T> _list = new ArrayList<>();
-        traverse(order, _list::add);
-        return _list;
-    }
-
 }

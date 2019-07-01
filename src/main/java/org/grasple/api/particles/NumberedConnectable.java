@@ -32,6 +32,8 @@ public interface NumberedConnectable<T>
 
     boolean disconnect(Integer index);
 
+    boolean disconnect(NumberedConnectable<T> other);
+
     /**
      * Checks if there exists a neighbor at this index.
      * @param index the index to be checked.

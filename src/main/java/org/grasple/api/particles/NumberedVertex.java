@@ -73,6 +73,14 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
+    public boolean disconnect(NumberedConnectable<T> other) {
+        if (!neighbors.containsValue(other)) {
+            return false;
+        }
+        return neighbors.keySet().removeIf(key -> neighbors.get(key) == other);
+    }
+
+    @Override
     public boolean occupied(Integer index) {
         return neighbors.containsKey(index);
     }
