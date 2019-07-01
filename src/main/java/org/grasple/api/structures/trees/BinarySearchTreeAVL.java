@@ -1,5 +1,13 @@
 package org.grasple.api.structures.trees;
 
+import org.grasple.api.particles.NumberedConnectable;
+
+/**
+ * Self-balanced Binary Search Tree, also known as AVL.
+ * @author Bach Tran
+ * @since 1.0
+ * @param <T> must be Comparable
+ */
 public class BinarySearchTreeAVL<T extends Comparable<T>> extends BinarySearchTreeLMR<T> {
 
     public BinarySearchTreeAVL(T value) {
@@ -9,6 +17,15 @@ public class BinarySearchTreeAVL<T extends Comparable<T>> extends BinarySearchTr
     @Override
     public void add(T value) {
         // TODO implementation while respecting AVL
+        super.add(value);
     }
 
+    public boolean AVLCondition() {
+        return heightDiff(getRoot()) <= 1;
+    }
+
+
+    private static int heightDiff(NumberedConnectable root) {
+            return height(root.jumpTo(LEFT)) - height(root.jumpTo(RIGHT));
+    }
 }

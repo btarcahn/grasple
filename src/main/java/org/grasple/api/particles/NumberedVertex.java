@@ -86,5 +86,4 @@ public class NumberedVertex<T extends Comparable<T>> implements
 
         return neighbors.get(index);
     }
-
 }

@@ -3,8 +3,7 @@ package org.grasple.api.structures.trees;
 import org.grasple.api.particles.NumberedConnectable;
 import org.grasple.api.particles.NumberedVertex;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -24,11 +23,13 @@ import java.util.function.Consumer;
  */
 public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
-    private static final int LEFT = 0;
-    private static final int MIDDLE = 1;
-    private static final int RIGHT = 2;
+    protected static final int LEFT = 0;
+    protected static final int MIDDLE = 1;
+    protected static final int RIGHT = 2;
 
     private NumberedConnectable<T> root;
+
+    NumberedConnectable<T> getRoot() { return this.root; }
 
     /**
      * Creates a Binary Search Tree with a root.
@@ -59,6 +60,15 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         recursiveAdd(root, new NumberedVertex<>(value));
     }
 
+    public void add(NumberedConnectable<T> vertexToAdd) {
+        recursiveAdd(root, vertexToAdd);
+    }
+
+    @SafeVarargs
+    public final void add(T... values) {
+        for (T val : values) this.add(val);
+    }
+
     private void recursiveAdd(NumberedConnectable<T> root, NumberedConnectable<T> vertexToAdd) {
         if (root.get().compareTo(vertexToAdd.get()) > 0) {
             if (root.occupied(LEFT)) {
@@ -81,10 +91,17 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Deletes all vertices in this tree that
+     * have the specified value. After this operation,
+     * the the value and all of its duplicates will
+     * not be found in the tree.
+     * @param value the value to be deleted.
+     */
     public void delete(T value) {
-        if (!this.contains(value)) {
-            return;
-        }
+
+        // removing duplicates
+        findAll(value).forEach(elem -> elem.disconnect(MIDDLE));
 
     }
 
@@ -150,14 +167,14 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * @return a Set of all vertices containing the specified value,
      * or an empty Set if there is no such value.
      */
-    public Set<NumberedConnectable<T>> findAll(T value) {
-        Set<NumberedConnectable<T>> results = new HashSet<>();
+    public List<NumberedConnectable<T>> findAll(T value) {
+        List<NumberedConnectable<T>> results = new ArrayList<>();
         recursiveFindAll(this.root, results, value);
         return results;
     }
 
     private void recursiveFindAll(NumberedConnectable<T> root,
-                                  Set<NumberedConnectable<T>> results,
+                                  List<NumberedConnectable<T>> results,
                                   T value) {
 
         if (value.compareTo(root.get()) == 0 ) {
@@ -184,85 +201,104 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * @param action the action to be specified.
      */
     public void traverse(Consumer<T> action) {
-        recursiveInorderTraversal(root, action);
+        recursiveInorderTraversal(root, action, true);
     }
 
-    public void traverse(TreeTraversalOrder order, Consumer<T> action) {
+    public void traverse(TreeTraversalOrder order,
+                         Consumer<T> action) {
         switch(order) {
             case PREORDER:
-                recursivePreorderTraversal(root, action);
+                recursivePreorderTraversal(root, action, true);
                 break;
             case INORDER:
-                recursiveInorderTraversal(root, action);
+                recursiveInorderTraversal(root, action, true);
                 break;
             case POSTORDER:
-                recursivePostorderTraversal(root, action);
+                recursivePostorderTraversal(root, action, true);
                 break;
         }
     }
 
-    private void recursiveInorderTraversal(NumberedConnectable<T> root, Consumer<T> action) {
+    public void traverse(TreeTraversalOrder order,
+                         Consumer<T> action,
+                         boolean allowDuplicates) {
+        switch(order) {
+            case PREORDER:
+                recursivePreorderTraversal(root, action, allowDuplicates);
+                break;
+            case INORDER:
+                recursiveInorderTraversal(root, action, allowDuplicates);
+                break;
+            case POSTORDER:
+                recursivePostorderTraversal(root, action, allowDuplicates);
+                break;
+        }
+    }
+
+    private void recursiveInorderTraversal(NumberedConnectable<T> root,
+                                           Consumer<T> action, boolean allowDuplicates) {
 
         if (root.occupied(LEFT)) {
-            recursiveInorderTraversal(root.jumpTo(LEFT), action);
+            recursiveInorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
         }
 
         action.accept(root.get());
 
-        if (root.occupied(MIDDLE)) {
-            recursiveInorderTraversal(root.jumpTo(MIDDLE), action);
+        if (allowDuplicates && root.occupied(MIDDLE)) {
+            recursiveInorderTraversal(root.jumpTo(MIDDLE), action, allowDuplicates);
         }
 
         if (root.occupied(RIGHT)) {
-            recursiveInorderTraversal(root.jumpTo(RIGHT), action);
+            recursiveInorderTraversal(root.jumpTo(RIGHT), action, allowDuplicates);
         }
     }
 
     private void recursivePreorderTraversal(NumberedConnectable<T> root,
-                                            Consumer<T> action) {
+                                            Consumer<T> action, boolean allowDuplicates) {
         action.accept(root.get());
 
-        if (root.occupied(MIDDLE)) {
-            recursivePreorderTraversal(root.jumpTo(MIDDLE), action);
+        if (allowDuplicates && root.occupied(MIDDLE)) {
+            recursivePreorderTraversal(root.jumpTo(MIDDLE), action, allowDuplicates);
         }
 
         if (root.occupied(LEFT)) {
-            recursivePreorderTraversal(root.jumpTo(LEFT), action);
+            recursivePreorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
         }
         if (root.occupied(RIGHT)) {
-            recursivePreorderTraversal(root.jumpTo(RIGHT), action);
+            recursivePreorderTraversal(root.jumpTo(RIGHT), action, allowDuplicates);
         }
     }
 
     private void recursivePostorderTraversal(NumberedConnectable<T> root,
-                                             Consumer<T> action) {
+                                             Consumer<T> action, boolean allowDuplicates) {
         if (root.occupied(LEFT)) {
-            recursivePostorderTraversal(root.jumpTo(LEFT), action);
+            recursivePostorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
         }
 
         if (root.occupied(RIGHT)) {
-            recursivePostorderTraversal(root.jumpTo(RIGHT), action);
+            recursivePostorderTraversal(root.jumpTo(RIGHT), action, allowDuplicates);
         }
 
         action.accept(root.get());
 
-        if (root.occupied(MIDDLE)) {
-            recursivePostorderTraversal(root.jumpTo(MIDDLE), action);
+        if (allowDuplicates && root.occupied(MIDDLE)) {
+            recursivePostorderTraversal(root.jumpTo(MIDDLE), action, allowDuplicates);
         }
     }
 
     /**
      * Finds the max-depth (or commonly known as the
-     * tree's height).
+     * tree's height). This operation ignores the
+     * depth of the middle branch, namely the branch
+     * containing duplicates.
      * @return the height of the tree.
      */
     public int height() {
         return height(root);
     }
 
-    private static int height(NumberedConnectable root) {
-        int left_height = 1, right_height = 1,
-            middle_height = 1;
+    protected static int height(NumberedConnectable root) {
+        int left_height = 1, right_height = 1;
 
         if (root.occupied(LEFT)) {
             left_height += height(root.jumpTo(LEFT));
@@ -270,25 +306,15 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
         if (root.occupied(RIGHT)) {
             right_height += height(root.jumpTo(RIGHT));
-
         }
 
-        if (root.occupied(MIDDLE)) {
-            middle_height += height(root.jumpTo(MIDDLE));
-        }
-
-        return maxInt(left_height, right_height, middle_height);
+        return Math.max(left_height, right_height);
     }
 
-    private static int maxInt(int... ints)
-            throws ArrayIndexOutOfBoundsException {
-        if (ints.length < 1) {
-            throw new ArrayIndexOutOfBoundsException("No integer supplied.");
-        }
-
-        int max = ints[0];
-        for (int i : ints) if (max < i) max = i;
-
-        return max;
+    public List<T> toList(TreeTraversalOrder order) {
+        List<T> _list = new ArrayList<>();
+        traverse(order, _list::add);
+        return _list;
     }
+
 }
