@@ -217,7 +217,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
     }
 
     /**
-     * Performing an in-order traversal on the binary tree.
+     * Performs an in-order traversal on the binary tree.
      * The algorithm reaches the left vertex, the root vertex, then
      * the right vertex. Each visit, it applies the action specified
      * to the vertex.
@@ -227,6 +227,17 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         recursiveInorderTraversal(root, action, true);
     }
 
+    /**
+     * Performs a traversal on the binary tree with a specified order,
+     * and applies the specified action on the inner data of each
+     * visited vertex.
+     * When finished, the traversal visits all vertices, including
+     * every duplicated value in the tree.
+     * @param order the order of the traversal, can be in-order,
+     *              pre-order, or post-order.
+     * @param action the action applied to the VALUE of each vertex
+     *               this traversal visits.
+     */
     public void traverse(TreeTraversalOrder order,
                          Consumer<T> action) {
         switch(order) {
@@ -320,6 +331,12 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         return height(root);
     }
 
+    /**
+     * Calculates the depth of the sub-tree.
+     * @param root the root of the sub-tree.
+     * @return the height respective to the root of the
+     * sub-tree.
+     */
     protected static int height(NumberedConnectable root) {
         int left_height = 1, right_height = 1;
 
