@@ -3,7 +3,7 @@ package org.grasple.api.particles;
 import java.util.Collection;
 
 /**
- * Shared properties of objects that can <b>connect</b> to others
+ * Shared properties of objects that can <b>allocate</b> to others
  * of the same class. One connectable object strictly has a
  * distinct binary connection, i.e. each connectable object can
  * only establish <b><u>one</u></b> connection to another connectable.

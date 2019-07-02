@@ -1,7 +1,7 @@
 package org.grasple.api.structures.trees;
 
 import org.grasple.api.particles.Allocatable;
-import org.grasple.api.particles.NumberedVertex;
+import org.grasple.api.particles.NumericalVertex;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -52,7 +52,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @param value the value of the root of the tree.
      */
     public BinarySearchTree(T value) {
-        this.root = new NumberedVertex<>(value);
+        this.root = new NumericalVertex<>(value);
     }
 
 
@@ -63,7 +63,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @param value the new value to be added to the tree.
      */
     public void add(T value) {
-        recursiveAdd(root, new NumberedVertex<>(value));
+        recursiveAdd(root, new NumericalVertex<>(value));
     }
 
     public void add(Allocatable<T> vertexToAdd) {
@@ -80,19 +80,19 @@ public class BinarySearchTree<T extends Comparable<T>>
             if (root.occupied(LEFT)) {
                 recursiveAdd(root.jumpTo(LEFT), vertexToAdd);
             } else {
-                root.connect(LEFT, vertexToAdd);
+                root.allocate(LEFT, vertexToAdd);
             }
         } else if (root.get().compareTo(vertexToAdd.get()) < 0) {
             if (root.occupied(RIGHT)) {
                 recursiveAdd(root.jumpTo(RIGHT), vertexToAdd);
             } else {
-                root.connect(RIGHT, vertexToAdd);
+                root.allocate(RIGHT, vertexToAdd);
             }
         } else {
             if (root.occupied(MIDDLE)) {
                 recursiveAdd(root.jumpTo(MIDDLE), vertexToAdd);
             } else {
-                root.connect(MIDDLE, vertexToAdd);
+                root.allocate(MIDDLE, vertexToAdd);
             }
         }
     }

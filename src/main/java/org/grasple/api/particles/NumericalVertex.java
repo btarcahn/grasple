@@ -5,20 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * RandomAccessVertex that can connect to others using a unique number.
+ * RandomAccessVertex that can allocate to others using a unique number.
  * This class is mutable.
  * The underlying neighbor collection is implemented using
  * a HashMap.
  * @param <T> a Comparable type.
  * @author Bach Tran
  */
-public class NumberedVertex<T extends Comparable<T>> implements
+public class NumericalVertex<T extends Comparable<T>> implements
         Allocatable<T> {
 
     private T value;
     private Map<Integer, Allocatable<T>> neighbors;
 
-    public NumberedVertex(T value) {
+    public NumericalVertex(T value) {
         this.value = value;
         this.neighbors = new HashMap<>();
     }
@@ -48,11 +48,11 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public boolean connect(Integer index, Allocatable<T> other)
-            throws IllegalArgumentException {
+    public boolean allocate(Integer index, Allocatable<T> other)
+            throws UnsupportedOperationException {
 
         if (this == other) {
-            throw new IllegalArgumentException("Immediate connection is not allowed.");
+            throw new UnsupportedOperationException("Immediate connection is not allowed.");
         }
 
         if (neighbors.containsValue(other)) {
@@ -64,7 +64,7 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public boolean disconnect(Integer index) {
+    public boolean deallocate(Integer index) {
         if (!neighbors.containsKey(index)) {
             return false;
         }

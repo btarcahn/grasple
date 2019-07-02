@@ -1,6 +1,6 @@
 package org.grasple.api.structures.trees;
 import org.grasple.api.particles.Allocatable;
-import org.grasple.api.particles.NumberedVertex;
+import org.grasple.api.particles.NumericalVertex;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -65,7 +65,7 @@ class BinarySearchTreeTest {
     @Test
     void handingDuplicates() {
         final String _SAMPLE_ = "SAMPLE";
-        final Allocatable<String> _SAMPLE_VERTEX_ = new NumberedVertex<>(_SAMPLE_);
+        final Allocatable<String> _SAMPLE_VERTEX_ = new NumericalVertex<>(_SAMPLE_);
         final BinarySearchTree<String> _SAMPLE_TREE_ = new BinarySearchTree<>(_SAMPLE_);
         // add 100 duplicated vertices
         for (int i = 0; i < TEST_RANGE; i++) {

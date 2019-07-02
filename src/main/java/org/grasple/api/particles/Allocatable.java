@@ -10,8 +10,7 @@ import java.util.Collection;
  * @since 1.0
  * @author Bach Tran
  */
-public interface Allocatable<T>
-        extends Node<T> {
+public interface Allocatable<T> extends Node<T> {
     /**
      * Adds another connectable object to become a
      * neighbor of this object, and assigns the
@@ -25,12 +24,11 @@ public interface Allocatable<T>
      * @param other another vertex to become the new neighbor.
      * @return true if the operation is successful.
      * @throws IllegalArgumentException if user attempts to
-     * connect the object to itself.
+     * allocate the object to itself.
      */
-    boolean connect(Integer index, Allocatable<T> other)
-            throws IllegalArgumentException;
+    boolean allocate(Integer index, Allocatable<T> other);
 
-    boolean disconnect(Integer index);
+    boolean deallocate(Integer index);
 
     boolean disconnect(Allocatable<T> other);
 
