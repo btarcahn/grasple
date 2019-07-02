@@ -10,7 +10,7 @@ import java.util.Collection;
  * @since 1.0
  * @author Bach Tran
  */
-public interface NumberedConnectable<T>
+public interface Allocatable<T>
         extends Node<T> {
     /**
      * Adds another connectable object to become a
@@ -27,12 +27,12 @@ public interface NumberedConnectable<T>
      * @throws IllegalArgumentException if user attempts to
      * connect the object to itself.
      */
-    boolean connect(Integer index, NumberedConnectable<T> other)
+    boolean connect(Integer index, Allocatable<T> other)
             throws IllegalArgumentException;
 
     boolean disconnect(Integer index);
 
-    boolean disconnect(NumberedConnectable<T> other);
+    boolean disconnect(Allocatable<T> other);
 
     /**
      * Checks if there exists a neighbor at this index.
@@ -47,9 +47,9 @@ public interface NumberedConnectable<T>
      * @return the neighbor object that has the specified index.
      * @throws IllegalArgumentException if no vertex is available at the specified index.
      */
-    NumberedConnectable<T> jumpTo(Integer index)
+    Allocatable<T> jumpTo(Integer index)
             throws IllegalArgumentException;
 
     @Override
-    Collection<NumberedConnectable<T>> next();
+    Collection<Allocatable<T>> next();
 }

@@ -1,6 +1,6 @@
 package org.grasple.api.structures.trees;
 
-import org.grasple.api.particles.NumberedConnectable;
+import org.grasple.api.particles.Allocatable;
 import org.grasple.api.particles.NumberedVertex;
 
 import java.util.*;
@@ -22,15 +22,15 @@ import java.util.function.Consumer;
  * @author Bach Tran
  */
 public class BinarySearchTree<T extends Comparable<T>>
-        implements Iterable<NumberedConnectable<T>> {
+        implements Iterable<Allocatable<T>> {
 
     protected static final int LEFT = 0;
     protected static final int MIDDLE = 1;
     protected static final int RIGHT = 2;
 
-    private NumberedConnectable<T> root;
+    private Allocatable<T> root;
 
-    NumberedConnectable<T> getRoot() {
+    Allocatable<T> getRoot() {
         return this.root;
     }
 
@@ -40,7 +40,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @param root the connectable object used as a root
      *             of the tree.
      */
-    public BinarySearchTree(NumberedConnectable<T> root) {
+    public BinarySearchTree(Allocatable<T> root) {
         this.root = root;
     }
 
@@ -66,7 +66,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         recursiveAdd(root, new NumberedVertex<>(value));
     }
 
-    public void add(NumberedConnectable<T> vertexToAdd) {
+    public void add(Allocatable<T> vertexToAdd) {
         recursiveAdd(root, vertexToAdd);
     }
 
@@ -75,7 +75,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         for (T val : values) this.add(val);
     }
 
-    private void recursiveAdd(NumberedConnectable<T> root, NumberedConnectable<T> vertexToAdd) {
+    private void recursiveAdd(Allocatable<T> root, Allocatable<T> vertexToAdd) {
         if (root.get().compareTo(vertexToAdd.get()) > 0) {
             if (root.occupied(LEFT)) {
                 recursiveAdd(root.jumpTo(LEFT), vertexToAdd);
@@ -117,7 +117,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @param element the element to be checked for containment.
      * @return true if the tree contains the element.
      */
-    public boolean contains(NumberedConnectable<T> element) {
+    public boolean contains(Allocatable<T> element) {
         return recursiveContains(root, element);
     }
 
@@ -134,8 +134,8 @@ public class BinarySearchTree<T extends Comparable<T>>
         return recursiveContains(root, value);
     }
 
-    private boolean recursiveContains(NumberedConnectable<T> root,
-                                      NumberedConnectable<T> element) {
+    private boolean recursiveContains(Allocatable<T> root,
+                                      Allocatable<T> element) {
         // We have found the exact object in this tree.
         if (root == element) {
             return true;
@@ -152,7 +152,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         return false;
     }
 
-    private boolean recursiveContains(NumberedConnectable<T> root, T value) {
+    private boolean recursiveContains(Allocatable<T> root, T value) {
         if (root.get().compareTo(value) == 0) {
             return true;
         }
@@ -175,12 +175,12 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @param value the value to be find.
      * @return an Optional object wrapping the result.
      */
-    public Optional<NumberedConnectable<T>> find(T value) {
+    public Optional<Allocatable<T>> find(T value) {
         return _find(root, value);
     }
 
-    private Optional<NumberedConnectable<T>> _find(NumberedConnectable<T> root,
-                                                   T value) {
+    private Optional<Allocatable<T>> _find(Allocatable<T> root,
+                                           T value) {
         if (value.compareTo(root.get()) == 0) {
             return Optional.of(root);
         }
@@ -203,14 +203,14 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @return a Set of all vertices containing the specified value,
      * or an empty Set if there is no such value.
      */
-    public List<NumberedConnectable<T>> findAll(T value) {
-        List<NumberedConnectable<T>> results = new ArrayList<>();
+    public List<Allocatable<T>> findAll(T value) {
+        List<Allocatable<T>> results = new ArrayList<>();
         recursiveFindAll(this.root, results, value);
         return results;
     }
 
-    private void recursiveFindAll(NumberedConnectable<T> root,
-                                  List<NumberedConnectable<T>> results,
+    private void recursiveFindAll(Allocatable<T> root,
+                                  List<Allocatable<T>> results,
                                   T value) {
 
         if (value.compareTo(root.get()) == 0) {
@@ -284,7 +284,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         }
     }
 
-    private void recursiveInorderTraversal(NumberedConnectable<T> root,
+    private void recursiveInorderTraversal(Allocatable<T> root,
                                            Consumer<T> action, boolean allowDuplicates) {
 
         if (root.occupied(LEFT)) {
@@ -302,7 +302,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         }
     }
 
-    private void recursivePreorderTraversal(NumberedConnectable<T> root,
+    private void recursivePreorderTraversal(Allocatable<T> root,
                                             Consumer<T> action, boolean allowDuplicates) {
         action.accept(root.get());
 
@@ -318,7 +318,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         }
     }
 
-    private void recursivePostorderTraversal(NumberedConnectable<T> root,
+    private void recursivePostorderTraversal(Allocatable<T> root,
                                              Consumer<T> action, boolean allowDuplicates) {
         if (root.occupied(LEFT)) {
             recursivePostorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
@@ -338,9 +338,9 @@ public class BinarySearchTree<T extends Comparable<T>>
     //----------------------------------- VERTEX TRAVERSAL ----------------------------------//
 
 
-    private List<NumberedConnectable<T>> _inorderTraversal(NumberedConnectable<T> root) {
+    private List<Allocatable<T>> _inorderTraversal(Allocatable<T> root) {
 
-        List<NumberedConnectable<T>> list = new ArrayList<>();
+        List<Allocatable<T>> list = new ArrayList<>();
 
         if (root.occupied(LEFT)) {
             list.addAll(_inorderTraversal(root.jumpTo(LEFT)));
@@ -356,15 +356,15 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     @Override
-    public Iterator<NumberedConnectable<T>> iterator() {
+    public Iterator<Allocatable<T>> iterator() {
         return _inorderTraversal(root).iterator();
     }
 
-    private Optional<NumberedConnectable<T>> inorderSuccessor(NumberedConnectable<T> current) {
+    private Optional<Allocatable<T>> inorderSuccessor(Allocatable<T> current) {
         // TODO strengthen this assertion
         assert _inorderTraversal(root).contains(current);
 
-        List<NumberedConnectable<T>> inorderList = _inorderTraversal(root);
+        List<Allocatable<T>> inorderList = _inorderTraversal(root);
 
 
         // TODO make it safer
@@ -393,7 +393,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @return the height respective to the root of the
      * sub-tree.
      */
-    protected static int height(NumberedConnectable root) {
+    protected static int height(Allocatable root) {
         int left_height = 1, right_height = 1;
 
         if (root.occupied(LEFT)) {

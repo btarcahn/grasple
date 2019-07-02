@@ -13,10 +13,10 @@ import java.util.Map;
  * @author Bach Tran
  */
 public class NumberedVertex<T extends Comparable<T>> implements
-        NumberedConnectable<T> {
+        Allocatable<T> {
 
     private T value;
-    private Map<Integer, NumberedConnectable<T>> neighbors;
+    private Map<Integer, Allocatable<T>> neighbors;
 
     public NumberedVertex(T value) {
         this.value = value;
@@ -35,20 +35,20 @@ public class NumberedVertex<T extends Comparable<T>> implements
 
     @Override
     public boolean adjacent(Node<T> o) {
-        if (!(o instanceof NumberedConnectable)) {
+        if (!(o instanceof Allocatable)) {
             return false;
         }
-        NumberedConnectable<T> connectable = (NumberedConnectable<T>) o;
+        Allocatable<T> connectable = (Allocatable<T>) o;
         return neighbors.containsValue(connectable);
     }
 
     @Override
-    public Collection<NumberedConnectable<T>> next() {
+    public Collection<Allocatable<T>> next() {
         return neighbors.values();
     }
 
     @Override
-    public boolean connect(Integer index, NumberedConnectable<T> other)
+    public boolean connect(Integer index, Allocatable<T> other)
             throws IllegalArgumentException {
 
         if (this == other) {
@@ -73,7 +73,7 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public boolean disconnect(NumberedConnectable<T> other) {
+    public boolean disconnect(Allocatable<T> other) {
         if (!neighbors.containsValue(other)) {
             return false;
         }
@@ -86,7 +86,7 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public NumberedConnectable<T> jumpTo(Integer index)
+    public Allocatable<T> jumpTo(Integer index)
             throws IllegalArgumentException {
 
         if (!neighbors.containsKey(index))

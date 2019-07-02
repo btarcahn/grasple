@@ -1,6 +1,6 @@
 package org.grasple.api.structures.trees;
 
-import org.grasple.api.particles.NumberedConnectable;
+import org.grasple.api.particles.Allocatable;
 
 /**
  * Self-balanced Binary Search Tree, also known as AVL.
@@ -25,7 +25,7 @@ public class BinarySearchTreeAVL<T extends Comparable<T>> extends BinarySearchTr
     }
 
 
-    private static int heightDiff(NumberedConnectable root) {
+    private static int heightDiff(Allocatable root) {
             return height(root.jumpTo(LEFT)) - height(root.jumpTo(RIGHT));
     }
 }

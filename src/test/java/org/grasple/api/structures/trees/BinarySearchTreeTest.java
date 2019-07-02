@@ -1,5 +1,5 @@
 package org.grasple.api.structures.trees;
-import org.grasple.api.particles.NumberedConnectable;
+import org.grasple.api.particles.Allocatable;
 import org.grasple.api.particles.NumberedVertex;
 import org.junit.jupiter.api.Test;
 
@@ -65,7 +65,7 @@ class BinarySearchTreeTest {
     @Test
     void handingDuplicates() {
         final String _SAMPLE_ = "SAMPLE";
-        final NumberedConnectable<String> _SAMPLE_VERTEX_ = new NumberedVertex<>(_SAMPLE_);
+        final Allocatable<String> _SAMPLE_VERTEX_ = new NumberedVertex<>(_SAMPLE_);
         final BinarySearchTree<String> _SAMPLE_TREE_ = new BinarySearchTree<>(_SAMPLE_);
         // add 100 duplicated vertices
         for (int i = 0; i < TEST_RANGE; i++) {
@@ -93,7 +93,7 @@ class BinarySearchTreeTest {
         assertEquals(TEST_RANGE + 2, _tree.findAll(REPEATED_VAL).size());
 
         // check sequence
-        List<NumberedConnectable<Integer>> _duplicates = _tree.findAll(REPEATED_VAL);
+        List<Allocatable<Integer>> _duplicates = _tree.findAll(REPEATED_VAL);
         assertFalse(_duplicates.get(_duplicates.size() - 1).occupied(MIDDLE));
         for (int i = 0; i < _duplicates.size() -1; i++) {
             assertTrue(_duplicates.get(i).occupied(MIDDLE));
