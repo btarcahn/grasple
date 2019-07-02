@@ -46,7 +46,7 @@ public interface Allocatable<T> extends Node<T> {
      * @throws IllegalArgumentException if no vertex is available at the specified index.
      */
     Allocatable<T> jumpTo(Integer index)
-            throws IllegalArgumentException;
+            throws NullPointerException;
 
     @Override
     Collection<Allocatable<T>> next();

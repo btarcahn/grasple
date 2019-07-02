@@ -52,7 +52,7 @@ public class NumericalVertex<T extends Comparable<T>> implements
             throws UnsupportedOperationException {
 
         if (this == other) {
-            throw new UnsupportedOperationException("Immediate connection is not allowed.");
+            throw new UnsupportedOperationException("Self-connection not supported.");
         }
 
         if (neighbors.containsValue(other)) {
@@ -87,10 +87,10 @@ public class NumericalVertex<T extends Comparable<T>> implements
 
     @Override
     public Allocatable<T> jumpTo(Integer index)
-            throws IllegalArgumentException {
+            throws NullPointerException {
 
         if (!neighbors.containsKey(index))
-            throw new IllegalArgumentException("No vertex exists at index " + index);
+            throw new NullPointerException("No vertex exists at index " + index);
 
         return neighbors.get(index);
     }
