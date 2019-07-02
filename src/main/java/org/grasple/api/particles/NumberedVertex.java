@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Vertex that can connect to others using a unique number.
+ * RandomAccessVertex that can connect to others using a unique number.
  * This class is mutable.
  * The underlying neighbor collection is implemented using
  * a HashMap.

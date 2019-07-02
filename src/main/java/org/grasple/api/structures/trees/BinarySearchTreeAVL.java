@@ -8,7 +8,7 @@ import org.grasple.api.particles.NumberedConnectable;
  * @since 1.0
  * @param <T> must be Comparable
  */
-public class BinarySearchTreeAVL<T extends Comparable<T>> extends BinarySearchTreeLMR<T> {
+public class BinarySearchTreeAVL<T extends Comparable<T>> extends BinarySearchTree<T> {
 
     public BinarySearchTreeAVL(T value) {
         super(value);
