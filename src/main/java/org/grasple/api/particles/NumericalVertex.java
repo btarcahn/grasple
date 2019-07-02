@@ -23,6 +23,8 @@ public class NumericalVertex<T> implements
         this.neighbors = new HashMap<>();
     }
 
+
+
     @Override
     public T get() {
         return value;
