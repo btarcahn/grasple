@@ -8,6 +8,8 @@ import java.util.Collection;
  */
 public interface Node<T> {
     /**
+     * Reads the internal value that the
+     * object contains.
      * @return the value of the node.
      */
     T get();
@@ -26,6 +28,9 @@ public interface Node<T> {
      */
     boolean adjacent(Node<T> o);
     /**
+     * Representing next nodes, which is similar to
+     * the entity *next commonly seen in many data
+     * structure programs.
      * @return all neighbors of this node.
      */
     Collection<? extends Node<T>> next();

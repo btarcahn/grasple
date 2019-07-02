@@ -12,7 +12,7 @@ import java.util.Map;
  * @param <T> a Comparable type.
  * @author Bach Tran
  */
-public class NumericalVertex<T extends Comparable<T>> implements
+public class NumericalVertex<T> implements
         Allocatable<T> {
 
     private T value;
