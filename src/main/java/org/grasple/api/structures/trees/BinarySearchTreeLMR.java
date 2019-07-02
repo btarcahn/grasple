@@ -21,7 +21,8 @@ import java.util.function.Consumer;
  * @param <T> Comparable data type.
  * @author Bach Tran
  */
-public class BinarySearchTreeLMR<T extends Comparable<T>> {
+public class BinarySearchTreeLMR<T extends Comparable<T>>
+        implements Iterable<NumberedConnectable<T>> {
 
     protected static final int LEFT = 0;
     protected static final int MIDDLE = 1;
@@ -29,10 +30,13 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
     private NumberedConnectable<T> root;
 
-    NumberedConnectable<T> getRoot() { return this.root; }
+    NumberedConnectable<T> getRoot() {
+        return this.root;
+    }
 
     /**
      * Creates a Binary Search Tree with a root.
+     *
      * @param root the connectable object used as a root
      *             of the tree.
      */
@@ -44,6 +48,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * Creates a new Binary Search Tree with a starting value.
      * This value will be used to create a new numbered vertex,
      * which then be used as a root of the tree.
+     *
      * @param value the value of the root of the tree.
      */
     public BinarySearchTreeLMR(T value) {
@@ -54,6 +59,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
     /**
      * Adds a new value to the binary tree. A new numbered vertex will be
      * created, containing this new value.
+     *
      * @param value the new value to be added to the tree.
      */
     public void add(T value) {
@@ -96,6 +102,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * have the specified value. After this operation,
      * the the value and all of its duplicates will
      * not be found in the tree.
+     *
      * @param value the value to be deleted.
      */
     public void delete(T value) {
@@ -106,6 +113,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
     /**
      * Checks if the tree contain exactly the specified object
      * referring to identical memory address.
+     *
      * @param element the element to be checked for containment.
      * @return true if the tree contains the element.
      */
@@ -117,6 +125,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * Checks if the tree contain any value like the one specified.
      * If there exist a vertex having the value specified, this
      * operation returns true.
+     *
      * @param value the value to be checked for containment.
      * @return true if there exists a vertex having the specified
      * value in this tree.
@@ -144,7 +153,9 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
     }
 
     private boolean recursiveContains(NumberedConnectable<T> root, T value) {
-        if (root.get().compareTo(value) == 0) { return true; }
+        if (root.get().compareTo(value) == 0) {
+            return true;
+        }
 
         if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
             return recursiveContains(root.jumpTo(LEFT), value);
@@ -160,6 +171,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * Note that the method returns the top vertex, which directly
      * attaches to this BST, from this vertex. One may use this
      * vertex to traverse to subsequent duplicates.
+     *
      * @param value the value to be find.
      * @return an Optional object wrapping the result.
      */
@@ -186,6 +198,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * in the binary tree and returns them as a Set. If an
      * empty Set is returned, there is no such value.
      * This method utilizes the binary search algorithm.
+     *
      * @param value the value to be searched for.
      * @return a Set of all vertices containing the specified value,
      * or an empty Set if there is no such value.
@@ -221,6 +234,7 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * The algorithm reaches the left vertex, the root vertex, then
      * the right vertex. Each visit, it applies the action specified
      * to the vertex.
+     *
      * @param action the action to be specified.
      */
     public void traverse(Consumer<T> action) {
@@ -233,14 +247,15 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
      * visited vertex.
      * When finished, the traversal visits all vertices, including
      * every duplicated value in the tree.
-     * @param order the order of the traversal, can be in-order,
-     *              pre-order, or post-order.
+     *
+     * @param order  the order of the traversal, can be in-order,
+     *               pre-order, or post-order.
      * @param action the action applied to the VALUE of each vertex
      *               this traversal visits.
      */
     public void traverse(TreeTraversalOrder order,
                          Consumer<T> action) {
-        switch(order) {
+        switch (order) {
             case PREORDER:
                 recursivePreorderTraversal(root, action, true);
                 break;
@@ -254,9 +269,9 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
     }
 
     private void traverse(TreeTraversalOrder order,
-                         Consumer<T> action,
-                         boolean allowDuplicates) {
-        switch(order) {
+                          Consumer<T> action,
+                          boolean allowDuplicates) {
+        switch (order) {
             case PREORDER:
                 recursivePreorderTraversal(root, action, allowDuplicates);
                 break;
@@ -320,6 +335,47 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
         }
     }
 
+    //----------------------------------- VERTEX TRAVERSAL ----------------------------------//
+
+
+    private List<NumberedConnectable<T>> _inorderTraversal(NumberedConnectable<T> root) {
+
+        List<NumberedConnectable<T>> list = new ArrayList<>();
+
+        if (root.occupied(LEFT)) {
+            list.addAll(_inorderTraversal(root.jumpTo(LEFT)));
+        }
+
+        list.add(root);
+
+        if (root.occupied(RIGHT)) {
+            list.addAll(_inorderTraversal(root.jumpTo(RIGHT)));
+        }
+
+        return list;
+    }
+
+    @Override
+    public Iterator<NumberedConnectable<T>> iterator() {
+        return _inorderTraversal(root).iterator();
+    }
+
+    private Optional<NumberedConnectable<T>> inorderSuccessor(NumberedConnectable<T> current) {
+        // TODO strengthen this assertion
+        assert _inorderTraversal(root).contains(current);
+
+        List<NumberedConnectable<T>> inorderList = _inorderTraversal(root);
+
+
+        // TODO make it safer
+        try {
+            return Optional.of(inorderList.get(inorderList.indexOf(current) + 1));
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            return Optional.empty();
+        }
+    }
+
+
     /**
      * Finds the max-depth (or commonly known as the
      * tree's height). This operation ignores the
@@ -350,4 +406,6 @@ public class BinarySearchTreeLMR<T extends Comparable<T>> {
 
         return Math.max(left_height, right_height);
     }
+
+
 }
