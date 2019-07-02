@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.grasple.api.structures.trees.BinarySearchTreeLMR.MIDDLE;
+import static org.grasple.api.structures.trees.BinarySearchTree.MIDDLE;
 import static org.junit.jupiter.api.Assertions.*;
 
-class BinarySearchTreeLMRTest {
+class BinarySearchTreeTest {
 
     private static final int TEST_RANGE = 100;
     private static final Random random = new Random();
-    private static BinarySearchTreeLMR<Integer> randomTree = new BinarySearchTreeLMR<>(random.nextInt(TEST_RANGE));
+    private static BinarySearchTree<Integer> randomTree = new BinarySearchTree<>(random.nextInt(TEST_RANGE));
     private static final Integer[] randomInts = new Integer[TEST_RANGE];
 
     private static final Integer[] balancedIntegerSet = {50, 40, 60, 30, 45, 55, 70};
@@ -54,7 +54,7 @@ class BinarySearchTreeLMRTest {
 
     @Test
     void add() {
-        BinarySearchTreeLMR<Integer> _balancedTree = new BinarySearchTreeLMR<>(balancedIntegerSet[0]);
+        BinarySearchTree<Integer> _balancedTree = new BinarySearchTree<>(balancedIntegerSet[0]);
         for (int i = 1; i < balancedIntegerSet.length; i++) {
             _balancedTree.add(balancedIntegerSet[i]);
             assertTrue(_balancedTree.contains(balancedIntegerSet[i]));
@@ -66,7 +66,7 @@ class BinarySearchTreeLMRTest {
     void handingDuplicates() {
         final String _SAMPLE_ = "SAMPLE";
         final NumberedConnectable<String> _SAMPLE_VERTEX_ = new NumberedVertex<>(_SAMPLE_);
-        final BinarySearchTreeLMR<String> _SAMPLE_TREE_ = new BinarySearchTreeLMR<>(_SAMPLE_);
+        final BinarySearchTree<String> _SAMPLE_TREE_ = new BinarySearchTree<>(_SAMPLE_);
         // add 100 duplicated vertices
         for (int i = 0; i < TEST_RANGE; i++) {
             _SAMPLE_TREE_.add(_SAMPLE_);
@@ -82,7 +82,7 @@ class BinarySearchTreeLMRTest {
     @Test
     void findAll() {
         final int REPEATED_VAL = 50;
-        BinarySearchTreeLMR<Integer> _tree = new BinarySearchTreeLMR<>(REPEATED_VAL);
+        BinarySearchTree<Integer> _tree = new BinarySearchTree<>(REPEATED_VAL);
         _tree.add(REPEATED_VAL - 1, REPEATED_VAL, REPEATED_VAL + 1);
 
         assertTrue(_tree.contains(REPEATED_VAL));
@@ -102,7 +102,7 @@ class BinarySearchTreeLMRTest {
 
     @Test
     void height() {
-        BinarySearchTreeLMR<Integer> _tree = new BinarySearchTreeLMR<>(0);
+        BinarySearchTree<Integer> _tree = new BinarySearchTree<>(0);
         for (int i = 1; i <= TEST_RANGE; i++) {
             _tree.add(i);
         }
