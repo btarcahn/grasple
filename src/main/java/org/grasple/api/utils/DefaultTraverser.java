@@ -55,7 +55,7 @@ public final class DefaultTraverser<T> implements Runnable {
     private void recursion(Connectable<T> vertex) {
         if (action != null) { action.accept(vertex.get()); }
         visited.add(vertex);
-        vertex.getNeighbors()
+        vertex.next()
                 .stream()
                 .filter(neighbor -> !visited.contains(neighbor))
                 .forEach(this::recursion);

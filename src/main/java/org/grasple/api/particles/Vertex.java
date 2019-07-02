@@ -29,7 +29,7 @@ public class Vertex<T> implements Connectable<T> {
     }
 
     @Override
-    public Collection<Connectable<T>> getNeighbors() {
+    public Collection<Connectable<T>> next() {
         return neighbors;
     }
 

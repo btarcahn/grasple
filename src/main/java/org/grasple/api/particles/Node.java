@@ -28,5 +28,5 @@ public interface Node<T> {
     /**
      * @return all neighbors of this node.
      */
-    Collection<? extends Node<T>> getNeighbors();
+    Collection<? extends Node<T>> next();
 }

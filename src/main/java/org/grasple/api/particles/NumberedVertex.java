@@ -43,7 +43,7 @@ public class NumberedVertex<T extends Comparable<T>> implements
     }
 
     @Override
-    public Collection<NumberedConnectable<T>> getNeighbors() {
+    public Collection<NumberedConnectable<T>> next() {
         return neighbors.values();
     }
 

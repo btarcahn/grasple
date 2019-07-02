@@ -28,5 +28,5 @@ public interface Connectable<T> extends Node<T> {
     boolean disconnect(Connectable<T> other);
 
     @Override
-    Collection<Connectable<T>> getNeighbors();
+    Collection<Connectable<T>> next();
 }

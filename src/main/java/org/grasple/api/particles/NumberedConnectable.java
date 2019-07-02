@@ -51,5 +51,5 @@ public interface NumberedConnectable<T>
             throws IllegalArgumentException;
 
     @Override
-    Collection<NumberedConnectable<T>> getNeighbors();
+    Collection<NumberedConnectable<T>> next();
 }
