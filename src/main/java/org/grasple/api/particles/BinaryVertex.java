@@ -20,14 +20,29 @@ final class BinaryVertex<T extends Comparable<T>> extends NumericalVertex<T> {
     public boolean adjacent(Node<T> o) {
         if (!(o instanceof BinaryVertex)) return false;
 
-        return super.adjacent(o);
+        return this.left() == o || this.right() == o ||
+                this.middle() == o;
     }
 
-    BinaryVertex<T> getParent() {
+    /**
+     * This vertex is connected to only one parent
+     * of the same type.
+     * @return the parent node of this binary vertex.
+     */
+    BinaryVertex<T> parent() {
+        assert parent != this;
         return parent;
     }
 
-    void setParent(BinaryVertex<T> parent) {
+    /**
+     * Modifies the parent node of this vertex
+     * @param parent the new parent of the vertex.
+     */
+    void setParent(BinaryVertex<T> parent)
+            throws UnsupportedOperationException {
+        if (parent == this) {
+            throw new UnsupportedOperationException("Self connection is not supported.");
+        }
         this.parent = parent;
     }
 
@@ -50,5 +65,41 @@ final class BinaryVertex<T extends Comparable<T>> extends NumericalVertex<T> {
             throw new NullPointerException("No object found on the right node");
         }
         return this.jumpTo(RIGHT);
+    }
+
+    BinaryVertex<T> middle() throws NullPointerException {
+        if (!this.occupied(MIDDLE)) {
+            throw new NullPointerException("No object found on the middle node.");
+        }
+        return this.jumpTo(MIDDLE);
+    }
+
+    /**
+     * Contains binary logical operations that does
+     * the comparison of the this vertex with the added
+     * vertex so that it shall put the added vertex to the
+     * right direction.
+     * @param o the new vertex to be conneted.
+     */
+    void connect(BinaryVertex<T> o) {
+        if (o.get().compareTo(this.get()) < 0) {
+            if (this.occupied(LEFT)) {
+                this.left().connect(o);
+            } else {
+                this.allocate(LEFT, o);
+            }
+        } else if (o.get().compareTo(this.get()) > 0) {
+            if (this.occupied(RIGHT)) {
+                this.right().connect(o);
+            } else {
+                this.allocate(RIGHT, o);
+            }
+        } else {
+            if (this.occupied(MIDDLE)) {
+                this.middle().connect(o);
+            } else {
+                this.allocate(MIDDLE, o);
+            }
+        }
     }
 }
