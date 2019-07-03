@@ -1,10 +1,8 @@
 package org.grasple.api.structures.trees;
 
-import org.grasple.api.particles.Allocatable;
-import org.grasple.api.particles.NumericalVertex;
+import org.grasple.api.particles.BinaryVertex;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 /**
  * An improved version of the 2-branch Binary
@@ -21,360 +19,53 @@ import java.util.function.Consumer;
  * @param <T> Comparable data type.
  * @author Bach Tran
  */
-public class BinarySearchTree<T extends Comparable<T>>
-        implements Iterable<Allocatable<T>> {
+public class BinarySearchTree<T extends Comparable<T>> {
 
-    protected static final int LEFT = 0;
-    protected static final int MIDDLE = 1;
-    protected static final int RIGHT = 2;
+    private BinaryVertex<T> root;
 
-    private Allocatable<T> root;
-
-    Allocatable<T> getRoot() {
-        return this.root;
+    public BinarySearchTree(T initialValue) {
+        this.root = new BinaryVertex<>(initialValue);
     }
 
-    /**
-     * Creates a Binary Search Tree with a root.
-     *
-     * @param root the connectable object used as a root
-     *             of the tree.
-     */
-    public BinarySearchTree(Allocatable<T> root) {
-        this.root = root;
-    }
-
-    /**
-     * Creates a new Binary Search Tree with a starting value.
-     * This value will be used to create a new numbered vertex,
-     * which then be used as a root of the tree.
-     *
-     * @param value the value of the root of the tree.
-     */
-    public BinarySearchTree(T value) {
-        this.root = new NumericalVertex<>(value);
-    }
-
-
-    /**
-     * Adds a new value to the binary tree. A new numbered vertex will be
-     * created, containing this new value.
-     *
-     * @param value the new value to be added to the tree.
-     */
     public void add(T value) {
-        recursiveAdd(root, new NumericalVertex<>(value));
+        this.root.connect(new BinaryVertex<>(value));
     }
 
-    public void add(Allocatable<T> vertexToAdd) {
-        recursiveAdd(root, vertexToAdd);
-    }
-
-    @SafeVarargs
-    public final void add(T... values) {
-        for (T val : values) this.add(val);
-    }
-
-    private void recursiveAdd(Allocatable<T> root, Allocatable<T> vertexToAdd) {
-        if (root.get().compareTo(vertexToAdd.get()) > 0) {
-            if (root.occupied(LEFT)) {
-                recursiveAdd(root.jumpTo(LEFT), vertexToAdd);
-            } else {
-                root.allocate(LEFT, vertexToAdd);
-            }
-        } else if (root.get().compareTo(vertexToAdd.get()) < 0) {
-            if (root.occupied(RIGHT)) {
-                recursiveAdd(root.jumpTo(RIGHT), vertexToAdd);
-            } else {
-                root.allocate(RIGHT, vertexToAdd);
-            }
-        } else {
-            if (root.occupied(MIDDLE)) {
-                recursiveAdd(root.jumpTo(MIDDLE), vertexToAdd);
-            } else {
-                root.allocate(MIDDLE, vertexToAdd);
-            }
-        }
-    }
-
-    /**
-     * Deletes all vertices in this tree that
-     * have the specified value. After this operation,
-     * the the value and all of its duplicates will
-     * not be found in the tree.
-     *
-     * @param value the value to be deleted.
-     */
     public void delete(T value) {
+        // TODO implement delete logic
 
-    }
-
-
-    /**
-     * Checks if the tree contain exactly the specified object
-     * referring to identical memory address.
-     *
-     * @param element the element to be checked for containment.
-     * @return true if the tree contains the element.
-     */
-    public boolean contains(Allocatable<T> element) {
-        return recursiveContains(root, element);
+        List<BinaryVertex<T>> candidates = objSearch(value);
+        
     }
 
     /**
-     * Checks if the tree contain any value like the one specified.
-     * If there exist a vertex having the value specified, this
-     * operation returns true.
-     *
-     * @param value the value to be checked for containment.
-     * @return true if there exists a vertex having the specified
-     * value in this tree.
+     * Searches for all objects in this tree having
+     * the specified value. The algorithm utilizes
+     * binary search and starts from the root vertex.
+     * @param value the value to be searched for
+     * @return a set of all objects having the specified
+     * value.
      */
-    public boolean contains(T value) {
-        return recursiveContains(root, value);
+    public List<BinaryVertex<T>> objSearch(T value) {
+        return objSearch(root, value);
     }
 
-    private boolean recursiveContains(Allocatable<T> root,
-                                      Allocatable<T> element) {
-        // We have found the exact object in this tree.
-        if (root == element) {
-            return true;
-        }
+    private List<BinaryVertex<T>> objSearch(BinaryVertex<T> start,
+                                            T value) {
+        List<BinaryVertex<T>> searchResults = new ArrayList<>();
 
-        if (element.get().compareTo(root.get()) < 0 && root.occupied(LEFT)) {
-            return recursiveContains(root.jumpTo(LEFT), element);
-        } else if (element.get().compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
-            return recursiveContains(root.jumpTo(RIGHT), element);
-        } else if (root.occupied(MIDDLE)) {
-            return recursiveContains(root.jumpTo(MIDDLE), element);
+        if (value.compareTo(start.get()) < 0 && start.leftOccupied()) {
+            searchResults.addAll(objSearch(start.left(), value));
+        } else if (value.compareTo(start.get()) > 0 && start.rightOccupied()) {
+            searchResults.addAll(objSearch(start.right(), value));
+        } else {
+            // object found, add the head first then add subsequent objects
+            searchResults.add(start);
+            if (start.middleOccupied())
+                searchResults.addAll(objSearch(start.middle(), value));
         }
-
-        return false;
+        return searchResults;
     }
-
-    private boolean recursiveContains(Allocatable<T> root, T value) {
-        if (root.get().compareTo(value) == 0) {
-            return true;
-        }
-
-        if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
-            return recursiveContains(root.jumpTo(LEFT), value);
-        } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
-            return recursiveContains(root.jumpTo(RIGHT), value);
-        }
-
-        return false;
-    }
-
-    /**
-     * Finds the vertex with the exact value specified in this BST.
-     * Note that the method returns the top vertex, which directly
-     * attaches to this BST, from this vertex. One may use this
-     * vertex to traverse to subsequent duplicates.
-     *
-     * @param value the value to be find.
-     * @return an Optional object wrapping the result.
-     */
-    public Optional<Allocatable<T>> find(T value) {
-        return _find(root, value);
-    }
-
-    private Optional<Allocatable<T>> _find(Allocatable<T> root,
-                                           T value) {
-        if (value.compareTo(root.get()) == 0) {
-            return Optional.of(root);
-        }
-
-        if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
-            return _find(root.jumpTo(LEFT), value);
-        } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
-            return _find(root.jumpTo(RIGHT), value);
-        }
-        return Optional.empty();
-    }
-
-    /**
-     * Searches for all vertices that have the specified value
-     * in the binary tree and returns them as a Set. If an
-     * empty Set is returned, there is no such value.
-     * This method utilizes the binary search algorithm.
-     *
-     * @param value the value to be searched for.
-     * @return a Set of all vertices containing the specified value,
-     * or an empty Set if there is no such value.
-     */
-    public List<Allocatable<T>> findAll(T value) {
-        List<Allocatable<T>> results = new ArrayList<>();
-        recursiveFindAll(this.root, results, value);
-        return results;
-    }
-
-    private void recursiveFindAll(Allocatable<T> root,
-                                  List<Allocatable<T>> results,
-                                  T value) {
-
-        if (value.compareTo(root.get()) == 0) {
-            results.add(root);
-            if (root.occupied(MIDDLE)) {
-                recursiveFindAll(root.jumpTo(MIDDLE), results, value);
-            } else {
-                return;
-            }
-        }
-
-        if (value.compareTo(root.get()) < 0 && root.occupied(LEFT)) {
-            recursiveFindAll(root.jumpTo(LEFT), results, value);
-        } else if (value.compareTo(root.get()) > 0 && root.occupied(RIGHT)) {
-            recursiveFindAll(root.jumpTo(RIGHT), results, value);
-        }
-    }
-
-    /**
-     * Performs an in-order traversal on the binary tree.
-     * The algorithm reaches the left vertex, the root vertex, then
-     * the right vertex. Each visit, it applies the action specified
-     * to the vertex.
-     *
-     * @param action the action to be specified.
-     */
-    public void traverse(Consumer<T> action) {
-        recursiveInorderTraversal(root, action, true);
-    }
-
-    /**
-     * Performs a traversal on the binary tree with a specified order,
-     * and applies the specified action on the inner data of each
-     * visited vertex.
-     * When finished, the traversal visits all vertices, including
-     * every duplicated value in the tree.
-     *
-     * @param order  the order of the traversal, can be in-order,
-     *               pre-order, or post-order.
-     * @param action the action applied to the VALUE of each vertex
-     *               this traversal visits.
-     */
-    public void traverse(TreeTraversalOrder order,
-                         Consumer<T> action) {
-        switch (order) {
-            case PREORDER:
-                recursivePreorderTraversal(root, action, true);
-                break;
-            case INORDER:
-                recursiveInorderTraversal(root, action, true);
-                break;
-            case POSTORDER:
-                recursivePostorderTraversal(root, action, true);
-                break;
-        }
-    }
-
-    private void traverse(TreeTraversalOrder order,
-                          Consumer<T> action,
-                          boolean allowDuplicates) {
-        switch (order) {
-            case PREORDER:
-                recursivePreorderTraversal(root, action, allowDuplicates);
-                break;
-            case INORDER:
-                recursiveInorderTraversal(root, action, allowDuplicates);
-                break;
-            case POSTORDER:
-                recursivePostorderTraversal(root, action, allowDuplicates);
-                break;
-        }
-    }
-
-    private void recursiveInorderTraversal(Allocatable<T> root,
-                                           Consumer<T> action, boolean allowDuplicates) {
-
-        if (root.occupied(LEFT)) {
-            recursiveInorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
-        }
-
-        action.accept(root.get());
-
-        if (allowDuplicates && root.occupied(MIDDLE)) {
-            recursiveInorderTraversal(root.jumpTo(MIDDLE), action, allowDuplicates);
-        }
-
-        if (root.occupied(RIGHT)) {
-            recursiveInorderTraversal(root.jumpTo(RIGHT), action, allowDuplicates);
-        }
-    }
-
-    private void recursivePreorderTraversal(Allocatable<T> root,
-                                            Consumer<T> action, boolean allowDuplicates) {
-        action.accept(root.get());
-
-        if (allowDuplicates && root.occupied(MIDDLE)) {
-            recursivePreorderTraversal(root.jumpTo(MIDDLE), action, allowDuplicates);
-        }
-
-        if (root.occupied(LEFT)) {
-            recursivePreorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
-        }
-        if (root.occupied(RIGHT)) {
-            recursivePreorderTraversal(root.jumpTo(RIGHT), action, allowDuplicates);
-        }
-    }
-
-    private void recursivePostorderTraversal(Allocatable<T> root,
-                                             Consumer<T> action, boolean allowDuplicates) {
-        if (root.occupied(LEFT)) {
-            recursivePostorderTraversal(root.jumpTo(LEFT), action, allowDuplicates);
-        }
-
-        if (root.occupied(RIGHT)) {
-            recursivePostorderTraversal(root.jumpTo(RIGHT), action, allowDuplicates);
-        }
-
-        action.accept(root.get());
-
-        if (allowDuplicates && root.occupied(MIDDLE)) {
-            recursivePostorderTraversal(root.jumpTo(MIDDLE), action, allowDuplicates);
-        }
-    }
-
-    //----------------------------------- VERTEX TRAVERSAL ----------------------------------//
-
-
-    private List<Allocatable<T>> _inorderTraversal(Allocatable<T> root) {
-
-        List<Allocatable<T>> list = new ArrayList<>();
-
-        if (root.occupied(LEFT)) {
-            list.addAll(_inorderTraversal(root.jumpTo(LEFT)));
-        }
-
-        list.add(root);
-
-        if (root.occupied(RIGHT)) {
-            list.addAll(_inorderTraversal(root.jumpTo(RIGHT)));
-        }
-
-        return list;
-    }
-
-    @Override
-    public Iterator<Allocatable<T>> iterator() {
-        return _inorderTraversal(root).iterator();
-    }
-
-    private Optional<Allocatable<T>> inorderSuccessor(Allocatable<T> current) {
-        // TODO strengthen this assertion
-        assert _inorderTraversal(root).contains(current);
-
-        List<Allocatable<T>> inorderList = _inorderTraversal(root);
-
-
-        // TODO make it safer
-        try {
-            return Optional.of(inorderList.get(inorderList.indexOf(current) + 1));
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
-    }
-
 
     /**
      * Finds the max-depth (or commonly known as the
@@ -393,15 +84,15 @@ public class BinarySearchTree<T extends Comparable<T>>
      * @return the height respective to the root of the
      * sub-tree.
      */
-    protected static int height(Allocatable root) {
+    public static int height(BinaryVertex root) {
         int left_height = 1, right_height = 1;
 
-        if (root.occupied(LEFT)) {
-            left_height += height(root.jumpTo(LEFT));
+        if (root.leftOccupied()) {
+            left_height += height(root.left());
         }
 
-        if (root.occupied(RIGHT)) {
-            right_height += height(root.jumpTo(RIGHT));
+        if (root.rightOccupied()) {
+            right_height += height(root.right());
         }
 
         return Math.max(left_height, right_height);
