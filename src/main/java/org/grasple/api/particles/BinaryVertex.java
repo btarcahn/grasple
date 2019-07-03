@@ -2,7 +2,10 @@ package org.grasple.api.particles;
 
 /**
  * Specific type of vertex to build binary tree.
+ * This vertex allows one parent.
  * @param <T>
+ * @author Bach Tran
+ * @since 1.0
  */
 final class BinaryVertex<T extends Comparable<T>> extends NumericalVertex<T> {
 
@@ -87,18 +90,21 @@ final class BinaryVertex<T extends Comparable<T>> extends NumericalVertex<T> {
                 this.left().connect(o);
             } else {
                 this.allocate(LEFT, o);
+                o.setParent(this);
             }
         } else if (o.get().compareTo(this.get()) > 0) {
             if (this.occupied(RIGHT)) {
                 this.right().connect(o);
             } else {
                 this.allocate(RIGHT, o);
+                o.setParent(this);
             }
         } else {
             if (this.occupied(MIDDLE)) {
                 this.middle().connect(o);
             } else {
                 this.allocate(MIDDLE, o);
+                o.setParent(this);
             }
         }
     }
