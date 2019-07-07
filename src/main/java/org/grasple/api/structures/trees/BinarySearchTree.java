@@ -23,10 +23,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private BinaryVertex<T> root;
 
+    /**
+     * Creates a Binary Search Tree with an initial value.
+     * The initial value will be used to create a vertex,
+     * which then be used as a root of this Binary Search
+     * Tree.
+     * @param initialValue the initial value of the tree.
+     */
     public BinarySearchTree(T initialValue) {
         this.root = new BinaryVertex<>(initialValue);
     }
 
+    /**
+     * Adds a new value to the Binary Search Tree. This procedure
+     * uses the typical binary adding algorithm.
+     * @param value
+     */
     public void add(T value) {
         this.root.connect(new BinaryVertex<>(value));
     }
@@ -34,8 +46,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
     public void delete(T value) {
         // TODO implement delete logic
 
-        List<BinaryVertex<T>> candidates = objSearch(value);
-        
+        // finding delete-ables
+        List<BinaryVertex<T>> deletables = objSearch(value);
+
+
     }
 
     /**
@@ -50,6 +64,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return objSearch(root, value);
     }
 
+    /**
+     * The controller of the Binary Search algorithm
+     * @param start the starting vertex
+     * @param value the value to be searched for
+     * @return a List of all found objects.
+     */
     private List<BinaryVertex<T>> objSearch(BinaryVertex<T> start,
                                             T value) {
         List<BinaryVertex<T>> searchResults = new ArrayList<>();
