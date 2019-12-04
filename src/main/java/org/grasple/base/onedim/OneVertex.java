@@ -3,27 +3,31 @@ package org.grasple.base.onedim;
 
 import org.grasple.base.atoms.Vertex;
 
-public class OneVertex<T> extends Vertex<T>
-            implements OneNode<T> {
+import java.util.Optional;
 
-    private OneVertex<T> nextVertex;
 
-    public void setNextVertex(OneVertex<T> nextVertex) {
-        this.nextVertex = nextVertex;
-    }
+public class OneVertex<E> extends Vertex<E>
+            implements OneNode<E> {
 
-    public OneVertex(T value) {
+    private OneNode<E> nextNode;
+
+    public OneVertex(E value) {
         super(value);
-        nextVertex = null;
+        nextNode = null;
     }
 
     @Override
-    public OneNode<T> next() {
-        return nextVertex;
+    public boolean attach(OneNode<E> node) {
+        // avoid self-attach, for now
+        if (this == node) {
+            return false;
+        }
+        nextNode = node;
+        return true;
     }
 
     @Override
-    public T extract() {
-        return super.extract();
+    public Optional<OneNode<E>> next() {
+        return Optional.ofNullable(nextNode);
     }
 }

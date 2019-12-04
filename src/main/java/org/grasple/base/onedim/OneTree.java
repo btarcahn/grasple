@@ -1,42 +1,51 @@
 package org.grasple.base.onedim;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-public class OneTree<T> implements List<T> {
+/**
+ * Similar to ArrayList provided by Java.
+ * @see java.util.ArrayList
+ * @param <E>
+ */
+public class OneTree<E> implements List<E> {
 
-    private OneVertex<T> start = null;
-
-    // TODO complete these methods to fulfill List<T>
+    private OneNode<E> head;
     @Override
     public int size() {
-        if (start == null) {
+        if (isEmpty()) {
             return 0;
         }
-
-        int count = 1;
-        OneNode<T> current = start;
-        while (current.next() != null) {
+        int count = 0;
+        for (OneNode<E> current = head;
+             current.next().isPresent();
+             current = current.next().get()) {
             count++;
-            current = current.next();
         }
         return count;
     }
 
     @Override
     public boolean isEmpty() {
-        return (start == null);
+        return (head == null);
     }
 
     @Override
     public boolean contains(Object o) {
+        if (isEmpty()) {
+            return false;
+        }
+        for (OneNode<E> current = head;
+             current.next().isPresent();
+             current = current.next().get()) {
+            if (current == o) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<E> iterator() {
         return null;
     }
 
@@ -51,21 +60,16 @@ public class OneTree<T> implements List<T> {
     }
 
     @Override
-    public boolean add(T t) {
-        // if initially the list is empty
-        if (start == null) {
-            start = new OneVertex<>(t);
+    public boolean add(E e) {
+        if (isEmpty()) {
+            head = new OneVertex<>(e);
             return true;
         }
-        // if the list is not empty, traverse
-        // to the end of list, with O(n) cost.
-        OneNode<T> current = start;
-        while (current.next() != null) {
-            current = current.next();
+        OneNode<E> tail = head;
+        while (tail.next().isPresent()) {
+            tail = tail.next().get();
         }
-        current = current.next();
-        current = new OneVertex<>(t);
-        return true;
+        return tail.next().get().attach(new OneVertex<>(e));
     }
 
     @Override
@@ -79,12 +83,12 @@ public class OneTree<T> implements List<T> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(Collection<? extends E> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends T> c) {
+    public boolean addAll(int index, Collection<? extends E> c) {
         return false;
     }
 
@@ -104,22 +108,25 @@ public class OneTree<T> implements List<T> {
     }
 
     @Override
-    public T get(int index) {
+    public E get(int index) {
+        if (isEmpty() || size() <= index) {
+            return null;
+        }
         return null;
     }
 
     @Override
-    public T set(int index, T element) {
+    public E set(int index, E element) {
         return null;
     }
 
     @Override
-    public void add(int index, T element) {
+    public void add(int index, E element) {
 
     }
 
     @Override
-    public T remove(int index) {
+    public E remove(int index) {
         return null;
     }
 
@@ -134,17 +141,17 @@ public class OneTree<T> implements List<T> {
     }
 
     @Override
-    public ListIterator<T> listIterator() {
+    public ListIterator<E> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator<T> listIterator(int index) {
+    public ListIterator<E> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List<T> subList(int fromIndex, int toIndex) {
+    public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
 }

@@ -2,6 +2,9 @@ package org.grasple.base.onedim;
 
 import org.grasple.base.atoms.Node;
 
-public interface OneNode<T> extends Node<T> {
-    OneNode<T> next();
+import java.util.Optional;
+
+public interface OneNode<E> extends Node<E> {
+    Optional<OneNode<E>> next();
+    boolean attach(OneNode<E> node);
 }

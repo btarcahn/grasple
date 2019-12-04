@@ -1,16 +1,16 @@
 package org.grasple.base.atoms;
 
-public class Edge<T extends Vertex> implements Relation<T> {
-    private T first;
-    private T second;
+public class Edge<E extends Vertex> implements Relation<E> {
+    private E first;
+    private E second;
 
     @Override
-    public T fst() {
+    public E fst() {
         return first;
     }
 
     @Override
-    public T snd() {
+    public E snd() {
         return second;
     }
 
