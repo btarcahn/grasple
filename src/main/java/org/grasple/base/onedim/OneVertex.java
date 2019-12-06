@@ -30,4 +30,5 @@ public class OneVertex<E> extends Vertex<E>
     public Optional<OneNode<E>> next() {
         return Optional.ofNullable(nextNode);
     }
+
 }

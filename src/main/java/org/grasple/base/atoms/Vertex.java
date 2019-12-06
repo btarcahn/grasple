@@ -13,4 +13,8 @@ public class Vertex<T> implements Node<T> {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }
