@@ -27,6 +27,15 @@ public class OneVertex<E> extends Vertex<E>
     }
 
     @Override
+    public boolean detach() {
+        if (nextNode == null) {
+            return false;
+        }
+        nextNode = null;
+        return true;
+    }
+
+    @Override
     public Optional<OneNode<E>> next() {
         return Optional.ofNullable(nextNode);
     }
