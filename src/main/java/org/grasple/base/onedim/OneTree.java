@@ -234,7 +234,22 @@ public class OneTree<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-
+        // TODO assert the movements is certain
+        OneNode<E> prev = null,
+                current = head;
+        for (int i = 0; i < index; i++) {
+            if (current.next().isPresent()) {
+                prev = current;
+                current = current.next().get();
+            } else {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+        }
+        OneNode<E> newNode = new OneVertex<>(element);
+        // TODO raise concern
+        assert prev != null;
+        prev.attach(newNode);
+        newNode.attach(current);
     }
 
     @Override
