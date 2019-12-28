@@ -3,6 +3,8 @@ package org.grasple.base.onedim;
 import java.util.*;
 
 /**
+ * A tree with one branch only, therefore,
+ * it may be treated as a list.
  * Similar to ArrayList provided by Java.
  * Most of the operations in this class
  * cost O(n) time and space complexity.
@@ -228,13 +230,13 @@ public class OneTree<E> implements List<E> {
         }
         // temporarily store the previous value
         E tempStorage = current.extract();
-        current = new OneVertex<>(element);
+        current.set(element);
         return tempStorage;
     }
 
     @Override
     public void add(int index, E element) {
-        // TODO assert the movements is certain
+        // search for the appropriate location
         OneNode<E> prev = null,
                 current = head;
         for (int i = 0; i < index; i++) {
@@ -245,11 +247,16 @@ public class OneTree<E> implements List<E> {
                 throw new ArrayIndexOutOfBoundsException();
             }
         }
+
+        // perform addition
         OneNode<E> newNode = new OneVertex<>(element);
-        // TODO raise concern
-        assert prev != null;
-        prev.attach(newNode);
-        newNode.attach(current);
+        if (prev == null) {
+            newNode.attach(head);
+            head = newNode;
+        } else {
+            prev.attach(newNode);
+            newNode.attach(current);
+        }
     }
 
     @Override
