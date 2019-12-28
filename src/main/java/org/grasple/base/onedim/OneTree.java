@@ -23,6 +23,8 @@ public class OneTree<E> implements List<E> {
     Do consider workarounds with your own understanding.
      */
 
+    // TODO an iterator may be helpful to get rid of for loops.
+
     private OneNode<E> head;
 
     /**
@@ -214,7 +216,20 @@ public class OneTree<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        return null;
+        OneNode<E> current = head;
+        // find the appropriate element based on the
+        // indicated index.
+        for (int i = 0; i < index; i++) {
+            if (current.next().isPresent()) {
+                current = current.next().get();
+            } else {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+        }
+        // temporarily store the previous value
+        E tempStorage = current.extract();
+        current = new OneVertex<>(element);
+        return tempStorage;
     }
 
     @Override
