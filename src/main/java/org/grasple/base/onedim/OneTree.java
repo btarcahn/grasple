@@ -261,12 +261,43 @@ public class OneTree<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        // singleton list
+        if (index == 0) {
+            E valueToReturn = head.extract();
+            head = head.next().orElse(null);
+            return valueToReturn;
+        }
+        // multiple elements
+        OneNode<E> prev = null,
+                current = head;
+        for (int i = 0; i < index; i++) {
+            if (current.next().isPresent()) {
+                prev = current;
+                current = current.next().get();
+            } else {
+                throw new IndexOutOfBoundsException();
+            }
+        }
+        // delete the current node by "skipping" it
+        assert prev != null;
+        prev.attach(current.next().orElse(null));
+        current.detach();
+        return current.extract();
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        int i = 0;
+        for (OneNode<E> current = head;
+             current.next().isPresent();
+             current = current.next().get()) {
+            if (current == o) {
+                return i;
+            } else {
+                i++;
+            }
+        }
+        return -1;
     }
 
     @Override
