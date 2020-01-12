@@ -43,7 +43,7 @@ class OneTreeTest {
         for (int i = 1; i <= 100; i++) {
             fishes.add("fish #" + i);
         }
-        assertEquals(fishes.size(), 100);
+        assertEquals(100, fishes.size());
         assertTrue(fishes.contains("fish #1"));
         assertTrue(fishes.contains("fish #50"));
         assertTrue(fishes.contains("fish #100"));
@@ -54,6 +54,14 @@ class OneTreeTest {
 
     @Test
     void toArray() {
+        OneTree<Integer> ints = new OneTree<>();
+        assertEquals(0, ints.size());
+        for (int i = 0; i < 150; i++) {
+            ints.add(i);
+        }
+        assertEquals(150, ints.size());
+        Object[] output = ints.toArray();
+        assertEquals(150, output.length);
     }
 
     @Test
